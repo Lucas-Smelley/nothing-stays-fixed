@@ -26,6 +26,9 @@ var ability_charges: int = 0
 @export var phase_time := 3.0
 @export var phase_wall_layer := 3
 
+var _grav_sign: int = 1 # 1 = normal, -1 inverted
+
+
 var _is_phasing := false
 var _phase_timer := 0.0
 var _saved_mask := 0
@@ -66,6 +69,8 @@ func _physics_process(delta: float) -> void:
 		_facing_dir = sign(input_dir)
 		interaction_area.position.x = _interact_offset_x * _facing_dir
 		#animated_sprite.flip_h = _facing_dir < 0
+		
+	var grounded := is_on_floor() if _grav_sign == 1 else is_on_ceiling()
 
 	# timers
 	_jump_buffer = maxf(_jump_buffer - delta, 0.0)
@@ -97,17 +102,17 @@ func _physics_process(delta: float) -> void:
 			_end_phase()
 	
 	# refresh coyote
-	if is_on_floor():
+	if grounded:
 		_coyote_timer = coyote_time
 		_air_jumped = false
 	
 
 	# gravity
-	if not is_on_floor() and not _is_dashing:
-		velocity.y += gravity * delta
+	if not grounded and not _is_dashing:
+		velocity.y += gravity * _grav_sign * delta
 
 	# wall info
-	var on_wall := is_on_wall() and not is_on_floor()
+	var on_wall := is_on_wall() and not grounded
 	if on_wall and not _was_on_wall:
 		_wall_stick_timer = wall_stick_time
 	var wall_normal := get_wall_normal() if on_wall else Vector2.ZERO
@@ -115,35 +120,36 @@ func _physics_process(delta: float) -> void:
 	if not on_wall:
 		_wall_stick_timer = 0.0
 
-
 	# instant horizontal 
 	if _wall_jump_lock <= 0.0 and not _is_dashing:
 		velocity.x = input_dir * move_speed
+		
+	var falling := velocity.y * _grav_sign > 0.0  # moving with gravity
 
 	# wall slide (press into wall)
-	if on_wall and velocity.y > 0.0:
+	if on_wall and falling:
 		if input_dir != 0 and signf(input_dir) == -signf(wall_normal.x):
 
 			if _wall_stick_timer > 0.0:
 				_wall_stick_timer -= delta
 				velocity.y = 0.0
 			else:
-				velocity.y = minf(velocity.y, wall_slide_speed)
-
+				velocity.y = _grav_sign * minf(absf(velocity.y), wall_slide_speed)
 
 	# buffered jump
 	if _jump_buffer > 0.0:
 		if _coyote_timer > 0.0:
-			velocity.y = -jump_speed
+			print("jump")
+			velocity.y += -jump_speed * _grav_sign
 			_jump_buffer = 0.0
 			_coyote_timer = 0.0
 		elif on_wall:
-			velocity.y = -wall_jump_y
+			velocity.y = -jump_speed * _grav_sign
 			velocity.x = wall_normal.x * wall_jump_x
 			_jump_buffer = 0.0
 			_wall_jump_lock = wall_jump_lock_time
 		elif equipped_ability == Ability.DOUBLE_JUMP and ability_charges > 0 and not _air_jumped:
-			velocity.y = -jump_speed
+			velocity.y += -jump_speed * _grav_sign
 			_air_jumped = true
 			_consume_charge()
 
@@ -232,4 +238,12 @@ func _end_phase() -> void:
 	mesh.modulate = Color("#a0afd3")
 	
 func _toggle_gravity() -> void:
-	print("gravity toggled")
+	_grav_sign *= -1
+
+	# optional: snap small vertical velocity to avoid weird float
+	# velocity.y = 0.0
+
+	# flip visuals (don’t flip the CharacterBody2D root)
+	animated_sprite.flip_v = (_grav_sign < 0)
+	# or if you're using a mesh:
+	# mesh.scale.y = abs(mesh.scale.y) * (_grav_sign)

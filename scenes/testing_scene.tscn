@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://db3q6yhudtg1n" path="res://scenes/interactables/dash_pickup.tscn" id="6_8msnd"]
 [ext_resource type="PackedScene" uid="uid://dajy3lb5a0abc" path="res://scenes/interactables/double_jump_pickup.tscn" id="6_srtiu"]
 [ext_resource type="PackedScene" uid="uid://bkbpfm4yld6ym" path="res://scenes/interactables/phase_pickup.tscn" id="8_ltgxd"]
+[ext_resource type="PackedScene" uid="uid://cxru7egdkmgyl" path="res://scenes/interactables/invert_gravity_pickup.tscn" id="10_nihl2"]
 
 [node name="TestingScene" type="Node2D" unique_id=1487507625]
 
@@ -63,13 +64,18 @@ position = Vector2(-47.999985, -143)
 rotation = 1.5707964
 scale = Vector2(0.119999655, 0.55999976)
 
-[node name="HorizontalWall10" parent="walls" unique_id=957997153 instance=ExtResource("4_dh6dg")]
-position = Vector2(-89, -143)
-scale = Vector2(0.10898284, 0.48334607)
-
 [node name="HorizontalWall11" parent="walls" unique_id=1758153865 instance=ExtResource("3_v6rby")]
 position = Vector2(-67.99999, -168)
 scale = Vector2(0.16000086, 0.56000024)
+
+[node name="HorizontalWall12" parent="walls" unique_id=1033795585 instance=ExtResource("3_v6rby")]
+position = Vector2(-209, -168)
+scale = Vector2(0.63999844, 0.56000024)
+
+[node name="PhaseWall2" parent="walls" unique_id=1619988058 instance=ExtResource("3_dh6dg")]
+position = Vector2(-89, -143.00002)
+rotation = 1.5707964
+scale = Vector2(0.12000081, 0.55999976)
 
 [node name="ChargePickups" type="Node2D" parent="." unique_id=1288542561]
 
@@ -85,9 +91,6 @@ position = Vector2(-14.999985, -135)
 [node name="ChargePickup4" parent="ChargePickups" unique_id=1274742863 instance=ExtResource("5_ejtda")]
 position = Vector2(-252, 125)
 
-[node name="DoubleJumpPickup" parent="ChargePickups" unique_id=1138159997 instance=ExtResource("6_srtiu")]
-position = Vector2(-273, 124)
-
 [node name="AbilityPickups" type="Node2D" parent="." unique_id=540311883]
 
 [node name="DashPickup" parent="AbilityPickups" unique_id=1084005197 instance=ExtResource("6_8msnd")]
@@ -98,3 +101,17 @@ position = Vector2(129, 25)
 
 [node name="PhasePickup" parent="AbilityPickups" unique_id=66904160 instance=ExtResource("8_ltgxd")]
 position = Vector2(23.000015, -136)
+
+[node name="InvertGravityPickup" parent="." unique_id=2011889934 instance=ExtResource("10_nihl2")]
+position = Vector2(-274, 124)
+
+[node name="HorizontalWall" parent="." unique_id=370279240 instance=ExtResource("4_dh6dg")]
+position = Vector2(-169, -83)
+scale = Vector2(0.31999904, 0.56000024)
+
+[node name="HorizontalWall2" parent="." unique_id=1019230198 instance=ExtResource("4_dh6dg")]
+position = Vector2(-216, -83)
+scale = Vector2(0.31999782, 0.56000024)
+
+[node name="ChargePickup" parent="." unique_id=567626835 instance=ExtResource("5_ejtda")]
+position = Vector2(-248, -153)
