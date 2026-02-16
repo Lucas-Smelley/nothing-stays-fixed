@@ -1,0 +1,26 @@
+# Godot 4
+.godot/
+.import/
+
+# Exports
+export.cfg
+export_presets.cfg
+
+# Mono / C#
+.mono/
+data_*/
+
+# Build folders
+build/
+bin/
+obj/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sln
+*.csproj
