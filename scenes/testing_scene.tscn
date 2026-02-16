@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cu6sajjou1loa"]
+
+[ext_resource type="PackedScene" uid="uid://cwgwajlo8nn4e" path="res://scenes/player.tscn" id="1_ifns1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_365ag"]
+size = Vector2(452, 20)
+
+[node name="TestingScene" type="Node2D" unique_id=1487507625]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2012200388]
+position = Vector2(0, -30)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1571674170]
+position = Vector2(-350, 283)
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=2129181266]
+offset_left = -226.0
+offset_top = -10.0
+offset_right = 226.0
+offset_bottom = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=183858381]
+shape = SubResource("RectangleShape2D_365ag")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1922688423]
+position = Vector2(-114, 162)
+rotation = 1.5707964
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2" unique_id=1170063790]
+offset_left = -226.0
+offset_top = -10.0
+offset_right = 226.0
+offset_bottom = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=2011146835]
+shape = SubResource("RectangleShape2D_365ag")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=9734681]
+position = Vector2(-199, 1)
+rotation = 1.5707964
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D3" unique_id=1539509780]
+offset_left = -226.0
+offset_top = -10.0
+offset_right = 226.0
+offset_bottom = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=780894098]
+shape = SubResource("RectangleShape2D_365ag")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=2145618]
+position = Vector2(122, -54)
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D4" unique_id=1503706469]
+offset_left = -226.0
+offset_top = -10.0
+offset_right = 226.0
+offset_bottom = 10.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=1799274986]
+shape = SubResource("RectangleShape2D_365ag")
+
+[node name="Player" parent="." unique_id=888317823 instance=ExtResource("1_ifns1")]
+position = Vector2(-350, 253)

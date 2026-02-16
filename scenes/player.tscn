@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cwgwajlo8nn4e"]
 
+[ext_resource type="Script" uid="uid://yk1gsaj21567" path="res://scripts/player/player.gd" id="1_3vyb7"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
 
 [sub_resource type="MeshTexture" id="MeshTexture_3vyb7"]
@@ -11,6 +13,7 @@ radius = 9.0
 size = Vector2(34, 32)
 
 [node name="Player" type="CharacterBody2D" unique_id=888317823]
+script = ExtResource("1_3vyb7")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2021076250]
 position = Vector2(4.7683716e-07, 1.9073486e-06)

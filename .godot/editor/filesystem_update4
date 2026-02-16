@@ -1,2 +1,3 @@
-res://lucas_scene.tscn
+res://scenes/testing_scene.tscn
 res://scenes/player.tscn
+res://scripts/player/player.gd

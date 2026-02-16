@@ -1,6 +1,11 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1771221222
+::res://::1771257544
 alex_scene.tscn::PackedScene::4375135491958842019::1771221191::0::1::::<><><>0<>0<><>::
 game.tscn::PackedScene::793404135106174393::1771221191::0::1::::<><><>0<>0<><>::uid://booeekr2qhpwl::::res://icon.svg
 icon.svg::CompressedTexture2D::3398216347072684299::1771221191::1771221222::1::::<><><>0<>0<>96f4f13aa33ae2937398d72181714458<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-lucas_scene.tscn::PackedScene::7482141168270633087::1771221191::0::1::::<><><>0<>0<><>::
+lucas_scene.tscn::PackedScene::7482141168270633087::1771221232::0::1::::<><><>0<>0<><>::
+::res://assets/::1771221303
+::res://scenes/::1771223273
+player.tscn::PackedScene::6330718458171857290::1771223273::0::1::::<><><>0<>0<><>::
+::res://scripts/::1771221324
+::res://scripts/player/::1771221324
