@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://cwgwajlo8nn4e" path="res://scenes/player.tscn" id="1_ifns1"]
 [ext_resource type="PackedScene" uid="uid://k58bh6t2maqu" path="res://scenes/UI/hud.tscn" id="2_2j2p2"]
-[ext_resource type="PackedScene" uid="uid://cb3mbkpwfoylq" path="res://scenes/world/wall.tscn" id="2_v6rby"]
 [ext_resource type="PackedScene" uid="uid://dqvkk5bewfg2s" path="res://scenes/world/phase_wall.tscn" id="3_dh6dg"]
+[ext_resource type="PackedScene" uid="uid://cb3mbkpwfoylq" path="res://scenes/world/horizontal_wall.tscn" id="3_v6rby"]
+[ext_resource type="PackedScene" uid="uid://yhkyrs55lftl" path="res://scenes/world/vertical_wall.tscn" id="4_dh6dg"]
 [ext_resource type="PackedScene" uid="uid://nqb7rn5s74oa" path="res://scenes/interactables/charge_pickup.tscn" id="5_ejtda"]
 [ext_resource type="PackedScene" uid="uid://db3q6yhudtg1n" path="res://scenes/interactables/dash_pickup.tscn" id="6_8msnd"]
 [ext_resource type="PackedScene" uid="uid://dajy3lb5a0abc" path="res://scenes/interactables/double_jump_pickup.tscn" id="6_srtiu"]
@@ -16,84 +17,84 @@
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2012200388]
 position = Vector2(0, -30)
 
-[node name="walls" type="Node2D" parent="." unique_id=1727811377]
-
-[node name="wall" parent="walls" unique_id=619768114 instance=ExtResource("2_v6rby")]
-position = Vector2(-464, 284)
-scale = Vector2(0.64, 1)
-
-[node name="wall2" parent="walls" unique_id=1925177263 instance=ExtResource("2_v6rby")]
-position = Vector2(-341, 202)
-rotation = 1.5707964
-scale = Vector2(0.5200012, 1)
-
-[node name="wall3" parent="walls" unique_id=2144369362 instance=ExtResource("2_v6rby")]
-position = Vector2(-424, 146)
-rotation = 1.5707964
-scale = Vector2(0.4400003, 1)
-
-[node name="wall4" parent="walls" unique_id=1360604934 instance=ExtResource("2_v6rby")]
-position = Vector2(-253.99998, 120)
-scale = Vector2(0.44000244, 1)
-
-[node name="wall5" parent="walls" unique_id=1741382384 instance=ExtResource("2_v6rby")]
-position = Vector2(95, 121)
-scale = Vector2(0.44000316, 1)
-
-[node name="wall6" parent="walls" unique_id=1669231811 instance=ExtResource("2_v6rby")]
-position = Vector2(210, 43)
-rotation = 1.5707964
-scale = Vector2(0.20000044, 1)
-
-[node name="wall7" parent="walls" unique_id=1986107900 instance=ExtResource("2_v6rby")]
-position = Vector2(125, -8)
-rotation = 1.5707964
-scale = Vector2(0.19999948, 1)
-
-[node name="wall8" parent="walls" unique_id=1324518093 instance=ExtResource("2_v6rby")]
-position = Vector2(210, -95)
-rotation = 1.5707964
-scale = Vector2(0.19999854, 1)
-
-[node name="wall9" parent="walls" unique_id=1362952013 instance=ExtResource("2_v6rby")]
-position = Vector2(-146, -189)
-
-[node name="PhaseWall" parent="walls" unique_id=1159833319 instance=ExtResource("3_dh6dg")]
-position = Vector2(-204, -251.99997)
-rotation = 1.5707964
-scale = Vector2(0.32, 1)
-
-[node name="wall10" parent="walls" unique_id=68912320 instance=ExtResource("2_v6rby")]
-position = Vector2(-257, -315)
-scale = Vector2(0.36000487, 1)
-
-[node name="wall11" parent="walls" unique_id=1757546807 instance=ExtResource("2_v6rby")]
-position = Vector2(-310, -252.99997)
-rotation = 1.5707964
-scale = Vector2(0.3200012, 1)
-
 [node name="Player" parent="." unique_id=888317823 instance=ExtResource("1_ifns1")]
 unique_name_in_owner = true
-position = Vector2(-523, 252)
+position = Vector2(-301, 122)
 
-[node name="ChargePickup" type="Node2D" parent="." unique_id=1592902951]
+[node name="walls" type="Node2D" parent="." unique_id=611536978]
 
-[node name="ChargePickup2" parent="ChargePickup" unique_id=1008324536 instance=ExtResource("5_ejtda")]
-position = Vector2(-254, 90)
+[node name="HorizontalWall" parent="walls" unique_id=619768114 instance=ExtResource("3_v6rby")]
+position = Vector2(-250, 144)
+scale = Vector2(0.39999843, 0.56000024)
 
-[node name="ChargePickup3" parent="ChargePickup" unique_id=1586619814 instance=ExtResource("5_ejtda")]
-position = Vector2(126, -166)
+[node name="HorizontalWall2" parent="walls" unique_id=1552059987 instance=ExtResource("4_dh6dg")]
+position = Vector2(-185, 89)
+scale = Vector2(0.27999783, 0.56000024)
 
-[node name="ChargePickup" parent="ChargePickup" unique_id=19352073 instance=ExtResource("5_ejtda")]
-position = Vector2(-48, -220)
+[node name="HorizontalWall3" parent="walls" unique_id=1297444107 instance=ExtResource("4_dh6dg")]
+position = Vector2(-237, 58)
+scale = Vector2(0.23999721, 0.56000024)
 
-[node name="AbilityPickups" type="Node2D" parent="." unique_id=1980524018]
+[node name="HorizontalWall4" parent="walls" unique_id=1194565396 instance=ExtResource("3_v6rby")]
+position = Vector2(-130, 45)
+scale = Vector2(0.27999967, 0.56000024)
 
-[node name="DashPickup" parent="AbilityPickups" unique_id=1515326729 instance=ExtResource("6_8msnd")]
-position = Vector2(-304, 92)
+[node name="HorizontalWall5" parent="walls" unique_id=1322647209 instance=ExtResource("3_v6rby")]
+position = Vector2(97, 44)
+scale = Vector2(0.2799966, 0.56000024)
 
-[node name="DoubleJumpPickup" parent="AbilityPickups" unique_id=1608784236 instance=ExtResource("6_srtiu")]
-position = Vector2(138, 91)
+[node name="HorizontalWall6" parent="walls" unique_id=1515197988 instance=ExtResource("4_dh6dg")]
+position = Vector2(163, -4.000001)
+scale = Vector2(0.11999805, 0.56000024)
 
-[node name="PhasePickup" parent="AbilityPickups" unique_id=919244034 instance=ExtResource("8_ltgxd")]
-position = Vector2(-141, -218)
+[node name="HorizontalWall7" parent="walls" unique_id=1842264874 instance=ExtResource("4_dh6dg")]
+position = Vector2(121, -39)
+scale = Vector2(0.11999781, 0.56000024)
+
+[node name="HorizontalWall8" parent="walls" unique_id=1311234958 instance=ExtResource("4_dh6dg")]
+position = Vector2(163.00002, -80)
+scale = Vector2(0.10935538, 0.56000024)
+
+[node name="HorizontalWall9" parent="walls" unique_id=1617164847 instance=ExtResource("3_v6rby")]
+position = Vector2(-2.9999847, -118)
+
+[node name="PhaseWall" parent="walls" unique_id=1159833319 instance=ExtResource("3_dh6dg")]
+position = Vector2(-47.999985, -143)
+rotation = 1.5707964
+scale = Vector2(0.119999655, 0.55999976)
+
+[node name="HorizontalWall10" parent="walls" unique_id=957997153 instance=ExtResource("4_dh6dg")]
+position = Vector2(-89, -143)
+scale = Vector2(0.10898284, 0.48334607)
+
+[node name="HorizontalWall11" parent="walls" unique_id=1758153865 instance=ExtResource("3_v6rby")]
+position = Vector2(-67.99999, -168)
+scale = Vector2(0.16000086, 0.56000024)
+
+[node name="ChargePickups" type="Node2D" parent="." unique_id=1288542561]
+
+[node name="ChargePickup" parent="ChargePickups" unique_id=19352073 instance=ExtResource("5_ejtda")]
+position = Vector2(-96, 26)
+
+[node name="ChargePickup2" parent="ChargePickups" unique_id=201544075 instance=ExtResource("5_ejtda")]
+position = Vector2(127, -110)
+
+[node name="ChargePickup3" parent="ChargePickups" unique_id=462750580 instance=ExtResource("5_ejtda")]
+position = Vector2(-14.999985, -135)
+
+[node name="ChargePickup4" parent="ChargePickups" unique_id=1274742863 instance=ExtResource("5_ejtda")]
+position = Vector2(-252, 125)
+
+[node name="DoubleJumpPickup" parent="ChargePickups" unique_id=1138159997 instance=ExtResource("6_srtiu")]
+position = Vector2(-273, 124)
+
+[node name="AbilityPickups" type="Node2D" parent="." unique_id=540311883]
+
+[node name="DashPickup" parent="AbilityPickups" unique_id=1084005197 instance=ExtResource("6_8msnd")]
+position = Vector2(-151, 25)
+
+[node name="DoubleJumpPickup" parent="AbilityPickups" unique_id=927086624 instance=ExtResource("6_srtiu")]
+position = Vector2(129, 25)
+
+[node name="PhasePickup" parent="AbilityPickups" unique_id=66904160 instance=ExtResource("8_ltgxd")]
+position = Vector2(23.000015, -136)

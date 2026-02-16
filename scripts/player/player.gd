@@ -2,16 +2,16 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var move_speed: float = 220.0
+@export var move_speed: float = 160.0
 
 @export var gravity: float = 1400.0
-@export var jump_speed: float = 420.0
+@export var jump_speed: float = 320.0
 
-@export var wall_slide_speed: float = 110.0
-@export var wall_jump_x: float = 260.0
-@export var wall_jump_y: float = 420.0
-@export var wall_jump_lock_time: float = 0.14 
-@export var wall_stick_time: float = 0.15
+@export var wall_slide_speed: float = 80.0
+@export var wall_jump_x: float = 120.0
+@export var wall_jump_y: float = 300.0
+@export var wall_jump_lock_time: float = 0.12
+@export var wall_stick_time: float = 0.12
 
 @export var coyote_time: float = 0.14
 @export var jump_buffer_time: float = 0.10
@@ -20,7 +20,7 @@ enum Ability { NONE, DOUBLE_JUMP, DASH, PHASE, INVERT_GRAVITY }
 var equipped_ability: Ability = Ability.NONE
 var ability_charges: int = 0
 
-@export var dash_speed := 450.0
+@export var dash_speed := 350.0
 @export var dash_time := 0.22
 
 @export var phase_time := 3.0
@@ -47,6 +47,7 @@ var _interact_offset_x: float = 12
 var nearby_interactables: Array[Node2D] = []
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var mesh: MeshInstance2D = $MeshInstance2D
 
 
 signal ability_changed(ability_name: String, charges: int)
@@ -217,6 +218,8 @@ func _start_dash() -> void:
 
 func _start_phase() -> void:
 	_is_phasing = true
+	var mat := mesh.material as CanvasItemMaterial
+	mesh.modulate = Color("b1a7dab4")
 	_phase_timer = phase_time
 
 	_saved_mask = collision_mask
@@ -225,6 +228,8 @@ func _start_phase() -> void:
 func _end_phase() -> void:
 	_is_phasing = false
 	collision_mask = _saved_mask
+	var mat := mesh.material as CanvasItemMaterial
+	mesh.modulate = Color("#a0afd3")
 	
 func _toggle_gravity() -> void:
 	print("gravity toggled")

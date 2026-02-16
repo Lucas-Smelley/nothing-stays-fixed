@@ -9,6 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7be2w"]
 
 [node name="ChargePickup" type="Area2D" unique_id=19352073]
+scale = Vector2(0.5042005, 0.4971758)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_pb4y4")

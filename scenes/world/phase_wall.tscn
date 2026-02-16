@@ -5,6 +5,7 @@ size = Vector2(330, 20)
 
 [node name="PhaseWall" type="StaticBody2D" unique_id=1159833319]
 modulate = Color(0.94702226, 0.6340698, 0.6310304, 1)
+scale = Vector2(0.51999843, 0.55999976)
 collision_layer = 4
 collision_mask = 0
 

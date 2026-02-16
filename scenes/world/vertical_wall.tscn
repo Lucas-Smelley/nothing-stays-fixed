@@ -1,9 +1,11 @@
-[gd_scene format=3 uid="uid://cb3mbkpwfoylq"]
+[gd_scene format=3 uid="uid://yhkyrs55lftl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvhfp"]
 size = Vector2(352, 20)
 
-[node name="wall" type="StaticBody2D" unique_id=619768114]
+[node name="HorizontalWall" type="StaticBody2D" unique_id=619768114]
+rotation = 1.5707964
+scale = Vector2(0.51999843, 0.56000024)
 collision_mask = 0
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=756715027]

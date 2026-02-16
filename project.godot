@@ -15,6 +15,12 @@ run/main_scene="uid://cu6sajjou1loa"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/stretch/mode="viewport"
+
 [global_group]
 
 player=""
@@ -65,4 +71,7 @@ interact={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+renderer/canvas_textures/default_texture_filter=1
+renderer/size/viewport_height=648
