@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://k58bh6t2maqu"]
+
+[ext_resource type="Script" uid="uid://b4ryx83r2tdh0" path="res://scripts/hud.gd" id="1_ahhtf"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1839315110]
+script = ExtResource("1_ahhtf")
+
+[node name="AbilityLabel" type="Label" parent="." unique_id=1730315417]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Ability: NONE"
+
+[node name="ChargesLabel" type="Label" parent="." unique_id=1684807219]
+offset_top = 19.0
+offset_right = 81.0
+offset_bottom = 42.0
+text = "Charges: 0"
