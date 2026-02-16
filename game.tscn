@@ -1,3 +1,5 @@
-[gd_scene format=3 uid="uid://okyi506ud7be"]
+[gd_scene format=3 uid="uid://lklirhmo1jt6"]
 
 [node name="game" type="Node2D" unique_id=1212089017]
+
+[node name="whatever you want" type="Node2D" parent="." unique_id=1222974559]
