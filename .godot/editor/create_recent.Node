@@ -1,9 +1,0 @@
-Camera2D
-StaticBody2D
-ColorRect
-CollisionShape2D
-Node2D
-MeshInstance2D
-Area2D
-AnimatedSprite2D
-CharacterBody2D
