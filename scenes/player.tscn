@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cwgwajlo8nn4e"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
+
+[sub_resource type="MeshTexture" id="MeshTexture_3vyb7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
+radius = 9.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
+size = Vector2(34, 32)
+
+[node name="Player" type="CharacterBody2D" unique_id=888317823]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2021076250]
+position = Vector2(4.7683716e-07, 1.9073486e-06)
+scale = Vector2(18, 15.000001)
+mesh = SubResource("CapsuleMesh_u8vuu")
+texture = SubResource("MeshTexture_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=470441549]
+shape = SubResource("CapsuleShape2D_u8vuu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=865309486]
+
+[node name="AbiilityManager" type="Node2D" parent="." unique_id=1921480997]
+
+[node name="CurrentAbility" type="Node2D" parent="AbiilityManager" unique_id=1554368480]
+
+[node name="Interaction" type="Area2D" parent="." unique_id=497968628]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction" unique_id=1972011320]
+shape = SubResource("RectangleShape2D_u8vuu")
