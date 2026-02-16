@@ -1,5 +1,38 @@
 [gd_scene format=3 uid="uid://lklirhmo1jt6"]
 
+[ext_resource type="Texture2D" uid="uid://booeekr2qhpwl" path="res://icon.svg" id="1_80nbo"]
+
 [node name="game" type="Node2D" unique_id=1212089017]
 
 [node name="whatever you want" type="Node2D" parent="." unique_id=1222974559]
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1348130993]
+position = Vector2(588, 533)
+scale = Vector2(5.542968, 0.8945315)
+texture = ExtResource("1_80nbo")
+
+[node name="Icon2" type="Sprite2D" parent="." unique_id=891267863]
+position = Vector2(318, 176)
+scale = Vector2(1.453125, 2.140625)
+texture = ExtResource("1_80nbo")
+
+[node name="Icon3" type="Sprite2D" parent="." unique_id=1799281188]
+position = Vector2(866.5, 171.5)
+scale = Vector2(1.6953125, 2.1640625)
+texture = ExtResource("1_80nbo")
+
+[node name="Icon4" type="Sprite2D" parent="." unique_id=1208081168]
+position = Vector2(258, 469)
+texture = ExtResource("1_80nbo")
+
+[node name="Icon5" type="Sprite2D" parent="." unique_id=157075987]
+position = Vector2(174, 394)
+texture = ExtResource("1_80nbo")
+
+[node name="Icon6" type="Sprite2D" parent="." unique_id=79364154]
+position = Vector2(943, 460)
+texture = ExtResource("1_80nbo")
+
+[node name="Icon7" type="Sprite2D" parent="." unique_id=934950749]
+position = Vector2(1037, 388)
+texture = ExtResource("1_80nbo")
