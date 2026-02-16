@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cxru7egdkmgyl"]
+[gd_scene format=3 uid="uid://db3q6yhudtg1n"]
 
-[ext_resource type="Script" uid="uid://d4d25ycu5ldth" path="res://scripts/invert_gravity_pickup.gd" id="1_oxutj"]
+[ext_resource type="Script" uid="uid://dtn66bhb644hd" path="res://scripts/pickups/dash_pickup.gd" id="1_r3eb4"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_jj0t4"]
 
@@ -8,13 +8,13 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7be2w"]
 
-[node name="InvertGravityPickup" type="Area2D" unique_id=19352073 groups=["interactable"]]
+[node name="DashPickup" type="Area2D" unique_id=19352073 groups=["interactable"]]
 collision_layer = 16
 collision_mask = 0
-script = ExtResource("1_oxutj")
+script = ExtResource("1_r3eb4")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1905048417]
-modulate = Color(0.75866765, 0.6076223, 0.97245353, 1)
+modulate = Color(0.81240726, 0.62205434, 0.7853838, 1)
 scale = Vector2(19.701899, 19.84419)
 mesh = SubResource("SphereMesh_jj0t4")
 texture = SubResource("MeshTexture_pb4y4")

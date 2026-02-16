@@ -43,7 +43,11 @@ var _is_dashing := false
 var _facing_dir: int = 1
 
 @onready var interaction_area: Area2D = $InteractionArea
+var _interact_offset_x: float = 12
 var nearby_interactables: Array[Node2D] = []
+
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 
 signal ability_changed(ability_name: String, charges: int)
 
@@ -52,12 +56,15 @@ func _ready() -> void:
 	_emit_ability_ui()
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_exited)
+	_interact_offset_x = interaction_area.position.x
 
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_axis("move_left", "move_right")
 	
 	if input_dir != 0:
 		_facing_dir = sign(input_dir)
+		interaction_area.position.x = _interact_offset_x * _facing_dir
+		#animated_sprite.flip_h = _facing_dir < 0
 
 	# timers
 	_jump_buffer = maxf(_jump_buffer - delta, 0.0)
