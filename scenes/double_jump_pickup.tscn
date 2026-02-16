@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dajy3lb5a0abc"]
+
+[ext_resource type="Script" uid="uid://2mel14ewhoei" path="res://scripts/double_jump_pickup.gd" id="1_1yg6x"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jj0t4"]
+
+[sub_resource type="MeshTexture" id="MeshTexture_pb4y4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7be2w"]
+
+[node name="DoubleJumpPickup" type="Area2D" unique_id=19352073 groups=["interactable"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_1yg6x")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1905048417]
+modulate = Color(0.78431374, 0.6627451, 0.62352943, 1)
+scale = Vector2(19.701899, 19.84419)
+mesh = SubResource("SphereMesh_jj0t4")
+texture = SubResource("MeshTexture_pb4y4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1017515982]
+shape = SubResource("CircleShape2D_7be2w")

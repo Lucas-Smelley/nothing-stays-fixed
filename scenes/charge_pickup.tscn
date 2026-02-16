@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://nqb7rn5s74oa"]
+
+[ext_resource type="Script" uid="uid://cwpvc64d746c0" path="res://scripts/charge_pickup.gd" id="1_pb4y4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jj0t4"]
+
+[sub_resource type="MeshTexture" id="MeshTexture_pb4y4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7be2w"]
+
+[node name="ChargePickup" type="Area2D" unique_id=19352073]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_pb4y4")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1905048417]
+modulate = Color(0.3137255, 0.6039216, 1, 1)
+scale = Vector2(19.701899, 19.84419)
+mesh = SubResource("SphereMesh_jj0t4")
+texture = SubResource("MeshTexture_pb4y4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1017515982]
+shape = SubResource("CircleShape2D_7be2w")

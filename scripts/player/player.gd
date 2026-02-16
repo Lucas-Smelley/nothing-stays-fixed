@@ -17,8 +17,8 @@ class_name Player
 @export var jump_buffer_time: float = 0.10
 
 enum Ability { NONE, DOUBLE_JUMP, DASH, PHASE, INVERT_GRAVITY }
-var equipped_ability: Ability = Ability.PHASE
-var ability_charges: int = 1
+var equipped_ability: Ability = Ability.NONE
+var ability_charges: int = 0
 
 @export var dash_speed := 450.0
 @export var dash_time := 0.22
@@ -42,11 +42,16 @@ var _is_dashing := false
 
 var _facing_dir: int = 1
 
+@onready var interaction_area: Area2D = $InteractionArea
+var nearby_interactables: Array[Node2D] = []
+
 signal ability_changed(ability_name: String, charges: int)
 
-
 func _ready() -> void:
+	
 	_emit_ability_ui()
+	interaction_area.area_entered.connect(_on_interaction_area_entered)
+	interaction_area.area_exited.connect(_on_interaction_area_exited)
 
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_axis("move_left", "move_right")
@@ -64,6 +69,11 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("use_ability"):
 		_handle_ability_pressed()
+		
+	if Input.is_action_just_pressed("interact"):
+		var target = _get_best_interactable()
+		if target:
+			target.interact(self)
 
 	if _is_dashing:
 		_dash_timer -= delta
@@ -127,24 +137,53 @@ func _physics_process(delta: float) -> void:
 		elif equipped_ability == Ability.DOUBLE_JUMP and ability_charges > 0 and not _air_jumped:
 			velocity.y = -jump_speed
 			_air_jumped = true
-			ability_charges -= 1
-			if ability_charges == 0:
-				equipped_ability = Ability.NONE
+			_consume_charge()
+
 	
 	_was_on_wall = on_wall
 
 	move_and_slide()
+
+
+func _on_interaction_area_entered(body: Node) -> void:
+	if body.is_in_group("interactable"):
+		nearby_interactables.append(body)
+
+func _on_interaction_area_exited(body: Node) -> void:
+	if body.is_in_group("interactable"):
+		nearby_interactables.erase(body)
+
+
+func _get_best_interactable() -> Node2D:
+	
+	var closest_interactble: Node2D = null
+	var closest_distance = INF
+	
+	for interactble in nearby_interactables:
+		var dist := global_position.distance_to(interactble.global_position)
+		
+		if dist < closest_distance:
+			closest_distance = dist
+			closest_interactble = interactble
+
+	return closest_interactble
+	
+func switch_ability(a: Ability) -> void:
+	equipped_ability = a
+	_emit_ability_ui()
+	
 	
 func _emit_ability_ui() -> void:
 	ability_changed.emit(Ability.keys()[equipped_ability], ability_charges)
 
+func add_charges(amount: int) -> void:
+	ability_charges += amount
+	_emit_ability_ui()
 
 func _consume_charge() -> bool:
 	if ability_charges <= 0:
 		return false
 	ability_charges -= 1
-	if ability_charges <= 0:
-		equipped_ability = Ability.NONE
 	_emit_ability_ui()
 	return true
 
