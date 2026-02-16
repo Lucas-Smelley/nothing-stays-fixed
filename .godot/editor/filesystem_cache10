@@ -1,3 +1,6 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1771213946
-icon.svg::CompressedTexture2D::3398216347072684299::1771213638::1771213946::1::::<><><>0<>0<>96f4f13aa33ae2937398d72181714458<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://::1771214719
+alex_scene.tscn::PackedScene::-1::1771214719::0::1::::<><><>0<>0<><>::
+game.tscn::PackedScene::-1::1771214572::0::1::::<><><>0<>0<><>::
+icon.svg::CompressedTexture2D::3398216347072684299::1771214155::1771214724::1::::<><><>0<>0<>96f4f13aa33ae2937398d72181714458<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+lucas_scene.tscn::PackedScene::-1::1771214719::0::1::::<><><>0<>0<><>::
