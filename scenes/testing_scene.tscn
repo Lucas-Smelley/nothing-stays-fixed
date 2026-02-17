@@ -1,18 +1,39 @@
-[gd_scene format=3 uid="uid://cu6sajjou1loa"]
+[gd_scene format=4 uid="uid://cu6sajjou1loa"]
 
 [ext_resource type="PackedScene" uid="uid://cwgwajlo8nn4e" path="res://scenes/player.tscn" id="1_ifns1"]
 [ext_resource type="Texture2D" uid="uid://g6c2kasx1aqi" path="res://assets/art/background/solid.png" id="1_tvk4s"]
 [ext_resource type="PackedScene" uid="uid://k58bh6t2maqu" path="res://scenes/UI/hud.tscn" id="2_2j2p2"]
 [ext_resource type="Texture2D" uid="uid://dw3mff7x7h5sb" path="res://assets/art/background/grid.png" id="2_glees"]
 [ext_resource type="Texture2D" uid="uid://bjvja6j74dw5p" path="res://assets/art/background/foreground.png" id="3_bwcr2"]
-[ext_resource type="PackedScene" uid="uid://dqvkk5bewfg2s" path="res://scenes/world/phase_wall.tscn" id="3_dh6dg"]
-[ext_resource type="PackedScene" uid="uid://cb3mbkpwfoylq" path="res://scenes/world/horizontal_wall.tscn" id="3_v6rby"]
-[ext_resource type="PackedScene" uid="uid://yhkyrs55lftl" path="res://scenes/world/vertical_wall.tscn" id="4_dh6dg"]
+[ext_resource type="Shader" uid="uid://b06htddi75yfn" path="res://shaders/color_changer.gdshader" id="3_ltgxd"]
 [ext_resource type="PackedScene" uid="uid://nqb7rn5s74oa" path="res://scenes/interactables/charge_pickup.tscn" id="5_ejtda"]
-[ext_resource type="PackedScene" uid="uid://db3q6yhudtg1n" path="res://scenes/interactables/dash_pickup.tscn" id="6_8msnd"]
+[ext_resource type="Texture2D" uid="uid://c1hwpqrh5ipro" path="res://assets/art/tilesets/MainTileset.png" id="5_tvk4s"]
 [ext_resource type="PackedScene" uid="uid://dajy3lb5a0abc" path="res://scenes/interactables/double_jump_pickup.tscn" id="6_srtiu"]
-[ext_resource type="PackedScene" uid="uid://bkbpfm4yld6ym" path="res://scenes/interactables/phase_pickup.tscn" id="8_ltgxd"]
-[ext_resource type="PackedScene" uid="uid://cxru7egdkmgyl" path="res://scenes/interactables/invert_gravity_pickup.tscn" id="10_nihl2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvk4s"]
+shader = ExtResource("3_ltgxd")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltgxd"]
+shader = ExtResource("3_ltgxd")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nihl2"]
+shader = ExtResource("3_ltgxd")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_65vkx"]
+texture = ExtResource("5_tvk4s")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_glees"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_65vkx")
 
 [node name="TestingScene" type="Node2D" unique_id=1487507625]
 
@@ -26,126 +47,43 @@ transform = Transform2D(1, 0, 0, 1, 320, 180)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/CanvasLayer" unique_id=1467450584]
 z_index = -100
+material = SubResource("ShaderMaterial_tvk4s")
 texture = ExtResource("1_tvk4s")
 
 [node name="Grid" type="Parallax2D" parent="Background" unique_id=177581882]
 z_index = -10
 repeat_size = Vector2(640, 360)
-autoscroll = Vector2(8, 8)
+autoscroll = Vector2(5, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Grid" unique_id=1733627284]
+material = SubResource("ShaderMaterial_ltgxd")
 texture = ExtResource("2_glees")
 
 [node name="Foreground" type="Parallax2D" parent="Background" unique_id=1751769566]
 z_index = -5
 repeat_size = Vector2(640, 360)
-autoscroll = Vector2(14, 14)
+autoscroll = Vector2(8, 8)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Foreground" unique_id=1900145175]
+material = SubResource("ShaderMaterial_nihl2")
 texture = ExtResource("3_bwcr2")
 
 [node name="HUD" parent="." unique_id=1839315110 instance=ExtResource("2_2j2p2")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1650132144]
+tile_map_data = PackedByteArray("AAAAAA8AAAAAAAAAAAABAA8AAAAAAAAAAAACAA8AAAAAAAAAAAADAA8AAAAAAAAAAAAEAA8AAAAAAAAAAAAEABAAAAAAAAAAAAADABAAAAAAAAAAAAACABAAAAAAAAAAAAABABAAAAAAAAAAAAAAABAAAAAAAAAAAAASABAAAAAAAAAAAAATABAAAAAAAAAAAAAUABAAAAAAAAAAAAAUABEAAAAAAAAAAAATABEAAAAAAAAAAAASABEAAAAAAAAAAAAnAA8AAAAAAAAAAAAmAA8AAAAAAAAAAAAlAA8AAAAAAAAAAAAkAA8AAAAAAAAAAAAjAA8AAAAAAAAAAAAjABAAAAAAAAAAAAAkABAAAAAAAAAAAAAlABAAAAAAAAAAAAAmABAAAAAAAAAAAAAnABAAAAAAAAAAAAAVABAAAAAAAAAAAAAVABEAAAAAAAAAAAAYAAYAAAAAAAAAAAAYAAcAAAAAAAAAAAAZAAYAAAAAAAAAAAAZAAcAAAAAAAAAAAAeAAYAAAAAAAAAAAAeAAcAAAAAAAAAAAAeAAsAAAAAAAAAAAAeAAwAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAcAAAAAAAAAAAAfAAsAAAAAAAAAAAAfAAwAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAcAAAAAAAAAAAAIAAsAAAAAAAAAAAAIAAwAAAAAAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAsAAAAAAAAAAAAJAAwAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_glees")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2012200388]
 position = Vector2(320, 180)
 
 [node name="Player" parent="." unique_id=888317823 instance=ExtResource("1_ifns1")]
 unique_name_in_owner = true
-position = Vector2(19, 332)
+position = Vector2(11, 225)
 
-[node name="walls" type="Node2D" parent="." unique_id=611536978]
-position = Vector2(320, 210)
+[node name="DoubleJumpPickup" parent="." unique_id=19352073 instance=ExtResource("6_srtiu")]
+position = Vector2(64, 226)
 
-[node name="HorizontalWall" parent="walls" unique_id=619768114 instance=ExtResource("3_v6rby")]
-position = Vector2(-250, 144)
-scale = Vector2(0.39999843, 0.56000024)
-
-[node name="HorizontalWall2" parent="walls" unique_id=1552059987 instance=ExtResource("4_dh6dg")]
-position = Vector2(-185, 89)
-scale = Vector2(0.27999783, 0.56000024)
-
-[node name="HorizontalWall3" parent="walls" unique_id=1297444107 instance=ExtResource("4_dh6dg")]
-position = Vector2(-237, 58)
-scale = Vector2(0.23999721, 0.56000024)
-
-[node name="HorizontalWall4" parent="walls" unique_id=1194565396 instance=ExtResource("3_v6rby")]
-position = Vector2(-130, 45)
-scale = Vector2(0.27999967, 0.56000024)
-
-[node name="HorizontalWall5" parent="walls" unique_id=1322647209 instance=ExtResource("3_v6rby")]
-position = Vector2(97, 44)
-scale = Vector2(0.2799966, 0.56000024)
-
-[node name="HorizontalWall6" parent="walls" unique_id=1515197988 instance=ExtResource("4_dh6dg")]
-position = Vector2(163, -4.000001)
-scale = Vector2(0.11999805, 0.56000024)
-
-[node name="HorizontalWall7" parent="walls" unique_id=1842264874 instance=ExtResource("4_dh6dg")]
-position = Vector2(121, -39)
-scale = Vector2(0.11999781, 0.56000024)
-
-[node name="HorizontalWall8" parent="walls" unique_id=1311234958 instance=ExtResource("4_dh6dg")]
-position = Vector2(163.00002, -80)
-scale = Vector2(0.10935538, 0.56000024)
-
-[node name="HorizontalWall9" parent="walls" unique_id=1617164847 instance=ExtResource("3_v6rby")]
-position = Vector2(-2.9999847, -118)
-
-[node name="PhaseWall" parent="walls" unique_id=1159833319 instance=ExtResource("3_dh6dg")]
-position = Vector2(-47.999985, -143)
-rotation = 1.5707964
-scale = Vector2(0.119999655, 0.55999976)
-
-[node name="HorizontalWall11" parent="walls" unique_id=1758153865 instance=ExtResource("3_v6rby")]
-position = Vector2(-67.99999, -168)
-scale = Vector2(0.16000086, 0.56000024)
-
-[node name="HorizontalWall12" parent="walls" unique_id=1033795585 instance=ExtResource("3_v6rby")]
-position = Vector2(-209, -168)
-scale = Vector2(0.63999844, 0.56000024)
-
-[node name="PhaseWall2" parent="walls" unique_id=1619988058 instance=ExtResource("3_dh6dg")]
-position = Vector2(-89, -143.00002)
-rotation = 1.5707964
-scale = Vector2(0.12000081, 0.55999976)
-
-[node name="ChargePickups" type="Node2D" parent="." unique_id=1288542561]
-position = Vector2(320, 210)
-
-[node name="ChargePickup" parent="ChargePickups" unique_id=19352073 instance=ExtResource("5_ejtda")]
-position = Vector2(-96, 26)
-
-[node name="ChargePickup2" parent="ChargePickups" unique_id=201544075 instance=ExtResource("5_ejtda")]
-position = Vector2(127, -110)
-
-[node name="ChargePickup3" parent="ChargePickups" unique_id=462750580 instance=ExtResource("5_ejtda")]
-position = Vector2(-14.999985, -135)
-
-[node name="ChargePickup4" parent="ChargePickups" unique_id=1274742863 instance=ExtResource("5_ejtda")]
-position = Vector2(-252, 125)
-
-[node name="AbilityPickups" type="Node2D" parent="." unique_id=540311883]
-position = Vector2(320, 210)
-
-[node name="DashPickup" parent="AbilityPickups" unique_id=1084005197 instance=ExtResource("6_8msnd")]
-position = Vector2(-151, 25)
-
-[node name="DoubleJumpPickup" parent="AbilityPickups" unique_id=927086624 instance=ExtResource("6_srtiu")]
-position = Vector2(129, 25)
-
-[node name="PhasePickup" parent="AbilityPickups" unique_id=66904160 instance=ExtResource("8_ltgxd")]
-position = Vector2(23.000015, -136)
-
-[node name="InvertGravityPickup" parent="." unique_id=2011889934 instance=ExtResource("10_nihl2")]
-position = Vector2(46, 334)
-
-[node name="HorizontalWall" parent="." unique_id=370279240 instance=ExtResource("4_dh6dg")]
-position = Vector2(151.00003, 127)
-scale = Vector2(0.31999904, 0.56000024)
-
-[node name="HorizontalWall2" parent="." unique_id=1019230198 instance=ExtResource("4_dh6dg")]
-position = Vector2(104, 126.999985)
-scale = Vector2(0.31999782, 0.56000024)
-
-[node name="ChargePickup" parent="." unique_id=567626835 instance=ExtResource("5_ejtda")]
-position = Vector2(72, 57)
+[node name="ChargePickup" parent="." unique_id=215809099 instance=ExtResource("5_ejtda")]
+position = Vector2(39, 227)
+amount = 10

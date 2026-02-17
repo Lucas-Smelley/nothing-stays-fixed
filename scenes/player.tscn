@@ -21,7 +21,6 @@ collision_mask = 5
 script = ExtResource("1_3vyb7")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2021076250 groups=["player"]]
-modulate = Color(0.6292928, 0.6871274, 0.8281433, 1)
 material = SubResource("CanvasItemMaterial_3vyb7")
 position = Vector2(4.7683716e-07, 1.9073486e-06)
 scale = Vector2(18, 15.000001)

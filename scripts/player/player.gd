@@ -4,7 +4,7 @@ class_name Player
 
 @export var move_speed: float = 160.0
 
-@export var gravity: float = 1200.0
+@export var gravity: float = 1000.0
 @export var max_fall_speed: float = 500
 @export var jump_speed: float = 300.0
 
@@ -122,6 +122,7 @@ func _physics_process(delta: float) -> void:
 	var on_wall := is_on_wall() and not grounded
 	if on_wall and not _was_on_wall:
 		_wall_stick_timer = wall_stick_time
+		_air_jumped = false
 	var wall_normal := get_wall_normal() if on_wall else Vector2.ZERO
 	
 	if not on_wall:
@@ -242,7 +243,7 @@ func _end_phase() -> void:
 	_is_phasing = false
 	collision_mask = _saved_mask
 	var mat := mesh.material as CanvasItemMaterial
-	mesh.modulate = Color("#a0afd3")
+	mesh.modulate = Color("ffffffff")
 	
 func _toggle_gravity() -> void:
 	_grav_sign *= -1

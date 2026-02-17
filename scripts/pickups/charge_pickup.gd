@@ -7,5 +7,5 @@ func _ready() -> void:
 	
 func _on_body_entered(body: Node) -> void:
 	if body is Player:
-		body.add_charges(1)
+		body.add_charges(amount)
 		queue_free()
