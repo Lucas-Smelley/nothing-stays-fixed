@@ -4,8 +4,9 @@ class_name Player
 
 @export var move_speed: float = 160.0
 
-@export var gravity: float = 1400.0
-@export var jump_speed: float = 320.0
+@export var gravity: float = 1200.0
+@export var max_fall_speed: float = 500
+@export var jump_speed: float = 300.0
 
 @export var wall_slide_speed: float = 80.0
 @export var wall_jump_x: float = 120.0
@@ -110,6 +111,12 @@ func _physics_process(delta: float) -> void:
 	# gravity
 	if not grounded and not _is_dashing:
 		velocity.y += gravity * _grav_sign * delta
+		
+		if _grav_sign > 0:
+			velocity.y = min(velocity.y, max_fall_speed)
+		else:
+			velocity.y = max(velocity.y, -max_fall_speed)
+
 
 	# wall info
 	var on_wall := is_on_wall() and not grounded
