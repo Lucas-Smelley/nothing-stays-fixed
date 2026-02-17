@@ -148,6 +148,7 @@ func _physics_process(delta: float) -> void:
 			_jump_buffer = 0.0
 			_wall_jump_lock = wall_jump_lock_time
 		elif equipped_ability == Ability.DOUBLE_JUMP and ability_charges > 0 and not _air_jumped:
+			velocity.y = 0.0
 			velocity.y += -jump_speed * _grav_sign
 			_air_jumped = true
 			_consume_charge()
