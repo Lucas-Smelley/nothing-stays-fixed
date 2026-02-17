@@ -139,7 +139,6 @@ func _physics_process(delta: float) -> void:
 	# buffered jump
 	if _jump_buffer > 0.0:
 		if _coyote_timer > 0.0:
-			print("jump")
 			velocity.y += -jump_speed * _grav_sign
 			_jump_buffer = 0.0
 			_coyote_timer = 0.0
