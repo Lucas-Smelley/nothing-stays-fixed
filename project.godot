@@ -11,9 +11,12 @@ config_version=5
 [application]
 
 config/name="nothing-stays-fixed"
-run/main_scene="uid://cu6sajjou1loa"
+run/main_scene="uid://cexy0ke8sldd3"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+
+[autoload]
+
+Transition="*uid://b1wpbw8fxhqg7"
 
 [display]
 
@@ -69,6 +72,7 @@ set_checkpoint={
 2d_physics/layer_3="PhaseWalls"
 2d_physics/layer_4="pickups"
 2d_physics/layer_5="interactables"
+2d_physics/layer_7="door"
 
 [physics]
 

@@ -1,0 +1,115 @@
+[gd_scene format=4 uid="uid://c44pg6l5f38r7"]
+
+[ext_resource type="Script" uid="uid://cg7kmobqfe02s" path="res://scripts/room.gd" id="1_q3yio"]
+[ext_resource type="Script" uid="uid://bptt0suqvdnlq" path="res://scripts/background_controller.gd" id="2_ucwnb"]
+[ext_resource type="Shader" uid="uid://b06htddi75yfn" path="res://shaders/color_changer.gdshader" id="3_vmtdg"]
+[ext_resource type="Texture2D" uid="uid://g6c2kasx1aqi" path="res://assets/art/background/solid.png" id="4_i2k1k"]
+[ext_resource type="Texture2D" uid="uid://dw3mff7x7h5sb" path="res://assets/art/background/grid.png" id="5_ygj2k"]
+[ext_resource type="Texture2D" uid="uid://bjvja6j74dw5p" path="res://assets/art/background/foreground.png" id="6_2yiks"]
+[ext_resource type="Texture2D" uid="uid://c1hwpqrh5ipro" path="res://assets/art/tilesets/MainTileset.png" id="7_1jl1u"]
+[ext_resource type="Script" uid="uid://dek0t53emao26" path="res://scripts/door.gd" id="8_b5txi"]
+[ext_resource type="PackedScene" uid="uid://cwgwajlo8nn4e" path="res://scenes/player.tscn" id="9_ucwnb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hsgew"]
+shader = ExtResource("3_vmtdg")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ckq88"]
+shader = ExtResource("3_vmtdg")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y3ud5"]
+shader = ExtResource("3_vmtdg")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xp0a8"]
+texture = ExtResource("7_1jl1u")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_oqu2o"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_xp0a8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhjnj"]
+size = Vector2(8, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xp0a8"]
+size = Vector2(9, 25.5)
+
+[node name="BaseRoom" type="Node2D" unique_id=920769205]
+script = ExtResource("1_q3yio")
+
+[node name="BackgroundAndController" type="Node2D" parent="." unique_id=439055544]
+position = Vector2(320, 180)
+script = ExtResource("2_ucwnb")
+static_sprite_path = NodePath("CanvasLayer/Sprite2D")
+mid_sprite_path = NodePath("Grid/Sprite2D")
+fore_sprite_path = NodePath("Foreground/Sprite2D")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="BackgroundAndController" unique_id=1731935106]
+layer = -100
+offset = Vector2(320, 180)
+transform = Transform2D(1, 0, 0, 1, 320, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundAndController/CanvasLayer" unique_id=43536528]
+z_index = -100
+material = SubResource("ShaderMaterial_hsgew")
+texture = ExtResource("4_i2k1k")
+
+[node name="Grid" type="Parallax2D" parent="BackgroundAndController" unique_id=202418574]
+z_index = -10
+repeat_size = Vector2(640, 360)
+autoscroll = Vector2(5, 5)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundAndController/Grid" unique_id=519419701]
+material = SubResource("ShaderMaterial_ckq88")
+texture = ExtResource("5_ygj2k")
+
+[node name="Foreground" type="Parallax2D" parent="BackgroundAndController" unique_id=1021367437]
+z_index = -5
+repeat_size = Vector2(640, 360)
+autoscroll = Vector2(8, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundAndController/Foreground" unique_id=2019583533]
+material = SubResource("ShaderMaterial_y3ud5")
+texture = ExtResource("6_2yiks")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=869236537]
+tile_map_data = PackedByteArray("AAAAABEAAAAAAAAAAAABABEAAAAAAAAAAAACABEAAAAAAAAAAAADABEAAAAAAAAAAAAnABEAAAAAAAAAAAAmABEAAAAAAAAAAAAlABEAAAAAAAAAAAAkABEAAAAAAAAAAAAEABEAAAAAAAAAAAAjABEAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_oqu2o")
+
+[node name="Doors" type="Node2D" parent="." unique_id=1137498891]
+
+[node name="LeftDoor" type="Area2D" parent="Doors" unique_id=723287147]
+position = Vector2(-5, 259)
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("8_b5txi")
+exit_side = "left"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/LeftDoor" unique_id=1188140453]
+shape = SubResource("RectangleShape2D_mhjnj")
+
+[node name="RightDoor" type="Area2D" parent="Doors" unique_id=616434566]
+position = Vector2(645, 259)
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("8_b5txi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/RightDoor" unique_id=196717002]
+shape = SubResource("RectangleShape2D_xp0a8")
+
+[node name="Spawn_Left" type="Marker2D" parent="." unique_id=643750624]
+position = Vector2(16, 258)
+
+[node name="Spawn_Right" type="Marker2D" parent="." unique_id=697782332]
+position = Vector2(625, 260)
+
+[node name="Player" parent="." unique_id=888317823 instance=ExtResource("9_ucwnb")]
+position = Vector2(51, 257)
+scale = Vector2(1, 1)
