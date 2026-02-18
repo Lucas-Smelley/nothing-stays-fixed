@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var move_speed: float = 160.0
+@export var move_speed: float = 140.0
 
 @export var gravity: float = 1000.0
 @export var max_fall_speed: float = 500
