@@ -82,25 +82,23 @@ texture = ExtResource("6_2yiks")
 tile_map_data = PackedByteArray("AAAAABEAAAAAAAAAAAABABEAAAAAAAAAAAACABEAAAAAAAAAAAADABEAAAAAAAAAAAAnABEAAAAAAAAAAAAmABEAAAAAAAAAAAAlABEAAAAAAAAAAAAkABEAAAAAAAAAAAAEABEAAAAAAAAAAAAjABEAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_oqu2o")
 
-[node name="Doors" type="Node2D" parent="." unique_id=1137498891]
-
-[node name="LeftDoor" type="Area2D" parent="Doors" unique_id=723287147]
+[node name="LeftDoor" type="Area2D" parent="." unique_id=723287147]
 position = Vector2(-5, 259)
 collision_layer = 64
 collision_mask = 2
 script = ExtResource("8_b5txi")
 exit_side = "left"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/LeftDoor" unique_id=1188140453]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftDoor" unique_id=1188140453]
 shape = SubResource("RectangleShape2D_mhjnj")
 
-[node name="RightDoor" type="Area2D" parent="Doors" unique_id=616434566]
+[node name="RightDoor" type="Area2D" parent="." unique_id=616434566]
 position = Vector2(645, 259)
 collision_layer = 64
 collision_mask = 2
 script = ExtResource("8_b5txi")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/RightDoor" unique_id=196717002]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightDoor" unique_id=196717002]
 shape = SubResource("RectangleShape2D_xp0a8")
 
 [node name="Spawn_Left" type="Marker2D" parent="." unique_id=643750624]
