@@ -1,24 +1,40 @@
 [gd_scene format=3 uid="uid://bkbpfm4yld6ym"]
 
 [ext_resource type="Script" uid="uid://2wfig4wiyru5" path="res://scripts/pickups/phase_pickup.gd" id="1_ol276"]
+[ext_resource type="Texture2D" uid="uid://bf4p0xgt4g5ye" path="res://assets/art/icons/icons-spritesheet.png" id="2_oq3r2"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_jj0t4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_coch4"]
+atlas = ExtResource("2_oq3r2")
+region = Rect2(96, 0, 16, 16)
 
-[sub_resource type="MeshTexture" id="MeshTexture_pb4y4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc8jx"]
+atlas = ExtResource("2_oq3r2")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7g8h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coch4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc8jx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7be2w"]
 
 [node name="PhasePickup" type="Area2D" unique_id=19352073 groups=["interactable"]]
-scale = Vector2(0.55986917, 0.5517375)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_ol276")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1905048417]
-modulate = Color(0.698951, 0.7114385, 0.51605874, 1)
-scale = Vector2(19.701899, 19.84419)
-mesh = SubResource("SphereMesh_jj0t4")
-texture = SubResource("MeshTexture_pb4y4")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1136612365]
+sprite_frames = SubResource("SpriteFrames_o7g8h")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1017515982]
 shape = SubResource("CircleShape2D_7be2w")
