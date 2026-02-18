@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtn66bhb644hd" path="res://scripts/pickups/dash_pickup.gd" id="1_r3eb4"]
 [ext_resource type="Texture2D" uid="uid://bf4p0xgt4g5ye" path="res://assets/art/icons/icons-spritesheet.png" id="2_nofom"]
+[ext_resource type="Script" uid="uid://bb6o20g635tu6" path="res://scripts/pickups/icon_movement.gd" id="3_ik813"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ik813"]
 atlas = ExtResource("2_nofom")
@@ -36,6 +37,7 @@ script = ExtResource("1_r3eb4")
 scale = Vector2(0.99999994, 1)
 sprite_frames = SubResource("SpriteFrames_j6i8w")
 autoplay = "default"
+script = ExtResource("3_ik813")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1017515982]
 shape = SubResource("CircleShape2D_7be2w")

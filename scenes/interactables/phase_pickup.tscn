@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2wfig4wiyru5" path="res://scripts/pickups/phase_pickup.gd" id="1_ol276"]
 [ext_resource type="Texture2D" uid="uid://bf4p0xgt4g5ye" path="res://assets/art/icons/icons-spritesheet.png" id="2_oq3r2"]
+[ext_resource type="Script" uid="uid://bb6o20g635tu6" path="res://scripts/pickups/icon_movement.gd" id="3_coch4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_coch4"]
 atlas = ExtResource("2_oq3r2")
@@ -35,6 +36,7 @@ script = ExtResource("1_ol276")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1136612365]
 sprite_frames = SubResource("SpriteFrames_o7g8h")
 autoplay = "default"
+script = ExtResource("3_coch4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1017515982]
 shape = SubResource("CircleShape2D_7be2w")
