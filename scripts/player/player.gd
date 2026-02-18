@@ -52,32 +52,35 @@ var _facing_dir: int = 1
 
 var checkpoint_position: Vector2 
 
-
 @onready var interaction_area: Area2D = $InteractionArea
 var _interact_offset_x: float = 12
 var nearby_interactables: Array[Node2D] = []
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var mesh: MeshInstance2D = $MeshInstance2D
-
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+var _anim_locked := false
+var _locked_anim := ""
+var _lock_interruptible := false
 
 signal ability_changed(ability_name: String, charges: int)
 
 func _ready() -> void:
+	sprite.animation_finished.connect(_on_anim_finished)
 	
 	_emit_ability_ui()
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_exited)
 	_interact_offset_x = interaction_area.position.x
 	checkpoint_position = global_position
+	
+
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_axis("move_left", "move_right")
 	
 	if input_dir != 0:
 		_facing_dir = sign(input_dir)
 		interaction_area.position.x = _interact_offset_x * _facing_dir
-		#animated_sprite.flip_h = _facing_dir < 0
-		
+		sprite.flip_h = _facing_dir < 0
+
 	var grounded := is_on_floor() if _grav_sign == 1 else is_on_ceiling()
 
 	# timers
@@ -167,6 +170,8 @@ func _physics_process(delta: float) -> void:
 			velocity.y += -jump_speed * _grav_sign
 			_air_jumped = true
 			_consume_charge()
+			
+			lock_anim("double_jump")
 	
 	#Set checkpoint 
 	if Input.is_action_just_pressed("set_checkpoint"):
@@ -175,6 +180,45 @@ func _physics_process(delta: float) -> void:
 	_was_on_wall = on_wall
 
 	move_and_slide()
+	
+	
+	if _is_dashing:
+		_play_anim("dash")
+	elif on_wall and falling and input_dir != 0 and signf(input_dir) == -signf(get_wall_normal().x):
+		_play_anim("wall_slide")
+	elif not grounded:
+		# optional: separate jump/fall if you want
+		_play_anim("jump")
+	elif absf(velocity.x) > 0.1:
+		_play_anim("run")
+	else:
+		_play_anim("idle")
+
+
+
+func _play_anim(name: String) -> void:
+	# If locked, only allow the locked animation to be played
+	if _anim_locked and name != _locked_anim:
+		return
+
+	if sprite.animation != name:
+		sprite.play(name)
+
+func _on_anim_finished() -> void:
+	# Only unlock if the thing that finished is the locked one
+	if _anim_locked and sprite.animation == _locked_anim:
+		_anim_locked = false
+		_locked_anim = ""
+
+
+func lock_anim(name: String, interruptible := false) -> void:
+	_anim_locked = true
+	_locked_anim = name
+	_lock_interruptible = interruptible
+
+	# Make sure it starts from frame 0
+	sprite.play(name)
+
 
 
 func _on_interaction_area_entered(body: Node) -> void:
@@ -242,8 +286,6 @@ func _start_dash() -> void:
 
 func _start_phase() -> void:
 	_is_phasing = true
-	var mat := mesh.material as CanvasItemMaterial
-	mesh.modulate = Color("b1a7dab4")
 	_phase_timer = phase_time
 
 	_saved_mask = collision_mask
@@ -252,17 +294,18 @@ func _start_phase() -> void:
 func _end_phase() -> void:
 	_is_phasing = false
 	collision_mask = _saved_mask
-	var mat := mesh.material as CanvasItemMaterial
-	mesh.modulate = Color("ffffffff")
+
 	
 func _toggle_gravity() -> void:
 	_grav_sign *= -1
+	
+	lock_anim("rotate")
 
 	# optional: snap small vertical velocity to avoid weird float
-	# velocity.y = 0.0
+	velocity.y = 0.0
 
 	# flip visuals (don’t flip the CharacterBody2D root)
-	animated_sprite.flip_v = (_grav_sign < 0)
+	sprite.flip_v = (_grav_sign < 0)
 	# or if you're using a mesh:
 	# mesh.scale.y = abs(mesh.scale.y) * (_grav_sign)
 	

@@ -9,6 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7be2w"]
 
 [node name="DoubleJumpPickup" type="Area2D" unique_id=19352073 groups=["interactable"]]
+scale = Vector2(0.5083478, 0.4823324)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_1yg6x")

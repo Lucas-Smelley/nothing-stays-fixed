@@ -9,6 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7be2w"]
 
 [node name="DashPickup" type="Area2D" unique_id=19352073 groups=["interactable"]]
+scale = Vector2(0.35891083, 0.35627285)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_r3eb4")
