@@ -27,6 +27,10 @@ var ability_charges: int = 0
 @export var phase_time := 3.0
 @export var phase_wall_layer := 3
 
+@export var checkpoint_scene: PackedScene 
+
+var checkpoint_instance: Node2D = null 
+
 var _grav_sign: int = 1 # 1 = normal, -1 inverted
 
 
@@ -46,6 +50,9 @@ var _is_dashing := false
 
 var _facing_dir: int = 1
 
+var checkpoint_position: Vector2 
+
+
 @onready var interaction_area: Area2D = $InteractionArea
 var _interact_offset_x: float = 12
 var nearby_interactables: Array[Node2D] = []
@@ -62,7 +69,7 @@ func _ready() -> void:
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_exited)
 	_interact_offset_x = interaction_area.position.x
-
+	checkpoint_position = global_position
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_axis("move_left", "move_right")
 	
@@ -160,8 +167,11 @@ func _physics_process(delta: float) -> void:
 			velocity.y += -jump_speed * _grav_sign
 			_air_jumped = true
 			_consume_charge()
-
 	
+	#Set checkpoint 
+	if Input.is_action_just_pressed("set_checkpoint"):
+		set_checkpoint()
+		
 	_was_on_wall = on_wall
 
 	move_and_slide()
@@ -255,3 +265,21 @@ func _toggle_gravity() -> void:
 	animated_sprite.flip_v = (_grav_sign < 0)
 	# or if you're using a mesh:
 	# mesh.scale.y = abs(mesh.scale.y) * (_grav_sign)
+	
+func set_checkpoint():
+	print("checkpoint set")
+	checkpoint_position = global_position
+	
+	if checkpoint_instance:
+		checkpoint_instance.queue_free() 
+		
+	if checkpoint_scene:
+		checkpoint_instance = checkpoint_scene.instantiate()
+		get_parent().add_child(checkpoint_instance)
+		checkpoint_instance.global_position = checkpoint_position
+
+func respawn():
+	global_position = checkpoint_position 
+	velocity = Vector2.ZERO
+	print("respawna")
+	

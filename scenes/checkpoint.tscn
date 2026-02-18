@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://32k6adbqwg0b"]
+
+[node name="checkpoint_marker" type="Node2D" unique_id=2090351401]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1423123818]
+offset_top = -11.0
+offset_right = 9.0
+offset_bottom = -2.0
