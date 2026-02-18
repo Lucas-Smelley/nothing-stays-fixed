@@ -1,0 +1,38 @@
+[gd_scene format=4 uid="uid://y7u5xj0xsmql"]
+
+[ext_resource type="PackedScene" uid="uid://c44pg6l5f38r7" path="res://scenes/base_room.tscn" id="1_1q7f0"]
+[ext_resource type="PackedScene" uid="uid://db3q6yhudtg1n" path="res://scenes/interactables/dash_pickup.tscn" id="2_5phkd"]
+[ext_resource type="PackedScene" uid="uid://dajy3lb5a0abc" path="res://scenes/interactables/double_jump_pickup.tscn" id="3_d1oky"]
+[ext_resource type="PackedScene" uid="uid://cxru7egdkmgyl" path="res://scenes/interactables/invert_gravity_pickup.tscn" id="4_ios0r"]
+[ext_resource type="PackedScene" uid="uid://bkbpfm4yld6ym" path="res://scenes/interactables/phase_pickup.tscn" id="5_nfquk"]
+[ext_resource type="PackedScene" uid="uid://nqb7rn5s74oa" path="res://scenes/interactables/charge_pickup.tscn" id="6_s0nb4"]
+
+[node name="BaseRoom" unique_id=920769205 instance=ExtResource("1_1q7f0")]
+
+[node name="TileMapLayer" parent="." index="1" unique_id=869236537]
+tile_map_data = PackedByteArray("AAAAABEAAAAAAAAAAAABABEAAAAAAAAAAAACABEAAAAAAAAAAAADABEAAAAAAAAAAAAnABEAAAAAAAAAAAAmABEAAAAAAAAAAAAlABEAAAAAAAAAAAAkABEAAAAAAAAAAAAEABEAAAAAAAAAAAAjABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAAKABEAAAAAAAAAAAALABEAAAAAAAAAAAAPABEAAAAAAAAAAAAQABEAAAAAAAAAAAARABEAAAAAAAAAAAASABEAAAAAAAAAAAAWABEAAAAAAAAAAAAXABEAAAAAAAAAAAAYABEAAAAAAAAAAAAZABEAAAAAAAAAAAAcABEAAAAAAAAAAAAdABEAAAAAAAAAAAAeABEAAAAAAAAAAAAfABEAAAAAAAAAAAA=")
+
+[node name="Player" parent="." index="5" unique_id=888317823]
+position = Vector2(17, 260)
+
+[node name="pickups" type="Node2D" parent="." index="6" unique_id=1877385699]
+
+[node name="DashPickup" parent="pickups" index="0" unique_id=19352073 instance=ExtResource("2_5phkd")]
+position = Vector2(157, 263)
+
+[node name="DoubleJumpPickup" parent="pickups" index="1" unique_id=1538972663 instance=ExtResource("3_d1oky")]
+position = Vector2(269, 264)
+
+[node name="InvertGravityPickup" parent="pickups" index="2" unique_id=969191023 instance=ExtResource("4_ios0r")]
+position = Vector2(385, 262)
+
+[node name="PhasePickup" parent="pickups" index="3" unique_id=690670127 instance=ExtResource("5_nfquk")]
+position = Vector2(477, 262)
+
+[node name="ChargePickup" parent="pickups" index="4" unique_id=610877799 instance=ExtResource("6_s0nb4")]
+position = Vector2(590, 262)
+amount = 5
+
+[node name="ChargePickup2" parent="pickups" index="5" unique_id=1257587986 instance=ExtResource("6_s0nb4")]
+position = Vector2(56, 264)
+amount = 5

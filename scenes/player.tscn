@@ -182,7 +182,6 @@ height = 20.588236
 size = Vector2(24.686867, 20.588236)
 
 [node name="Player" type="CharacterBody2D" unique_id=888317823 groups=["player"]]
-scale = Vector2(0.6886252, 0.67999995)
 collision_layer = 2
 collision_mask = 101
 script = ExtResource("1_3vyb7")

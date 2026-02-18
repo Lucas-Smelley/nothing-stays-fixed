@@ -49,7 +49,10 @@ func go_random(spawn_name: String) -> void:
 	var next_room = _pick_random_room()
 	
 	await _fade_to(1.0, 0.18)
-	get_tree().change_scene_to_file(next_room)
+	
+	var world := get_tree().current_scene
+	if world and world.has_method("_load_room"):
+		world.call("_load_room", next_room, target_spawn_name)
 	
 	await get_tree().process_frame
 	await _fade_to(0.0, 0.18)

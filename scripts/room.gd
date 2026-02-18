@@ -5,7 +5,7 @@ func _ready() -> void:
 	if player == null:
 		return
 		
-	var spawn_name := Transition.target_spawn_name
+	var spawn_name = Transition.target_spawn_name
 	if spawn_name == "":
 		return
 		

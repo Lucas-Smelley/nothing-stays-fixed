@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="nothing-stays-fixed"
-run/main_scene="uid://cexy0ke8sldd3"
+run/main_scene="uid://dq5sxkaylqy8n"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]
