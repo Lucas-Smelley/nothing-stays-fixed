@@ -196,13 +196,13 @@ func _physics_process(delta: float) -> void:
 
 
 
-func _play_anim(name: String) -> void:
+func _play_anim(anim_name: String) -> void:
 	# If locked, only allow the locked animation to be played
-	if _anim_locked and name != _locked_anim:
+	if _anim_locked and anim_name != _locked_anim:
 		return
 
-	if sprite.animation != name:
-		sprite.play(name)
+	if sprite.animation != anim_name:
+		sprite.play(anim_name)
 
 func _on_anim_finished() -> void:
 	# Only unlock if the thing that finished is the locked one
@@ -211,13 +211,13 @@ func _on_anim_finished() -> void:
 		_locked_anim = ""
 
 
-func lock_anim(name: String, interruptible := false) -> void:
+func lock_anim(anim_name: String, interruptible := false) -> void:
 	_anim_locked = true
-	_locked_anim = name
+	_locked_anim = anim_name
 	_lock_interruptible = interruptible
 
 	# Make sure it starts from frame 0
-	sprite.play(name)
+	sprite.play(anim_name)
 
 
 
@@ -301,8 +301,6 @@ func _toggle_gravity() -> void:
 	
 	lock_anim("rotate")
 
-	# optional: snap small vertical velocity to avoid weird float
-	velocity.y = 0.0
 
 	# flip visuals (don’t flip the CharacterBody2D root)
 	sprite.flip_v = (_grav_sign < 0)
