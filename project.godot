@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 [autoload]
 
 Transition="*uid://b1wpbw8fxhqg7"
+RoomContext="*uid://c6lopom5wunc8"
 
 [display]
 

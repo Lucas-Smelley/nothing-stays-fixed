@@ -1,6 +1,10 @@
 extends Node2D
 
+@onready var tile_map_layer: TileMapLayer = $TileMapLayer
+
 func _ready() -> void:
+	RoomContext.set_room(self, tile_map_layer)
+	
 	var player := get_tree().get_first_node_in_group("player")
 	if player == null:
 		return
