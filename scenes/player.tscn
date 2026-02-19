@@ -206,3 +206,6 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1972011320]
 position = Vector2(-5.46524, -3.5061558e-07)
 shape = SubResource("RectangleShape2D_u8vuu")
+
+[node name="WallCheck" type="RayCast2D" parent="." unique_id=93985003]
+target_position = Vector2(10, 0)

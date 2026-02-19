@@ -61,6 +61,8 @@ var _anim_locked := false
 var _locked_anim := ""
 var _lock_interruptible := false
 
+@onready var wall_check: RayCast2D = $WallCheck
+
 signal ability_changed(ability_name: String, charges: int)
 
 func _ready() -> void:
@@ -80,6 +82,11 @@ func _physics_process(delta: float) -> void:
 		_facing_dir = sign(input_dir)
 		interaction_area.position.x = _interact_offset_x * _facing_dir
 		sprite.flip_h = _facing_dir < 0
+		
+	if _facing_dir > 0:
+		wall_check.target_position = Vector2(10,0)
+	else:
+		wall_check.target_position = Vector2(-10,0)
 
 	var grounded := is_on_floor() if _grav_sign == 1 else is_on_ceiling()
 
@@ -116,7 +123,6 @@ func _physics_process(delta: float) -> void:
 	if grounded:
 		_coyote_timer = coyote_time
 		_air_jumped = false
-	
 
 	# gravity
 	if not grounded and not _is_dashing:
@@ -129,13 +135,15 @@ func _physics_process(delta: float) -> void:
 
 
 	# wall info
-	var on_wall := is_on_wall() and not grounded
-	if on_wall and not _was_on_wall:
+	var raw_on_wall := is_on_wall() and not grounded
+	var wall_normal := get_wall_normal() if raw_on_wall else Vector2.ZERO
+	var on_climb_wall := raw_on_wall and wall_is_climbable()
+	
+	if on_climb_wall and not _was_on_wall:
 		_wall_stick_timer = wall_stick_time
 		_air_jumped = false
-	var wall_normal := get_wall_normal() if on_wall else Vector2.ZERO
 	
-	if not on_wall:
+	if not on_climb_wall:
 		_wall_stick_timer = 0.0
 
 	# instant horizontal 
@@ -145,7 +153,7 @@ func _physics_process(delta: float) -> void:
 	var falling := velocity.y * _grav_sign > 0.0  # moving with gravity
 
 	# wall slide (press into wall)
-	if on_wall and falling:
+	if on_climb_wall and falling:
 		if input_dir != 0 and signf(input_dir) == -signf(wall_normal.x):
 
 			if _wall_stick_timer > 0.0:
@@ -160,7 +168,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y += -jump_speed * _grav_sign
 			_jump_buffer = 0.0
 			_coyote_timer = 0.0
-		elif on_wall:
+		elif on_climb_wall:
 			velocity.y = -jump_speed * _grav_sign
 			velocity.x = wall_normal.x * wall_jump_x
 			_jump_buffer = 0.0
@@ -177,22 +185,51 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("set_checkpoint"):
 		set_checkpoint()
 		
-	_was_on_wall = on_wall
+	_was_on_wall = on_climb_wall
 
 	move_and_slide()
 	
 	
 	if _is_dashing:
 		_play_anim("dash")
-	elif on_wall and falling and input_dir != 0 and signf(input_dir) == -signf(get_wall_normal().x):
+	elif on_climb_wall and falling and input_dir != 0 and signf(input_dir) == -signf(get_wall_normal().x):
 		_play_anim("wall_slide")
 	elif not grounded:
-		# optional: separate jump/fall if you want
 		_play_anim("jump")
 	elif absf(velocity.x) > 0.1:
 		_play_anim("run")
 	else:
 		_play_anim("idle")
+
+
+func wall_is_climbable() -> bool:
+	if not wall_check.is_colliding():
+		return false
+
+	var tilemap: TileMapLayer = RoomContext.current_tilemap
+	if tilemap == null:
+		return false
+
+	var collider = wall_check.get_collider()
+
+	var point: Vector2 = wall_check.get_collision_point()
+	var normal: Vector2 = wall_check.get_collision_normal()
+
+	# Nudge point slightly INTO the wall tile to avoid border rounding
+	point -= normal * 0.5
+
+	var local_point = tilemap.to_local(point)
+	var cell: Vector2i = tilemap.local_to_map(local_point)
+
+	var td: TileData = tilemap.get_cell_tile_data(cell)
+
+	if td == null:
+		return false
+
+	# List the value we get back
+	var val = td.get_custom_data("climbable")
+
+	return val == true
 
 
 
