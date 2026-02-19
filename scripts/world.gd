@@ -21,6 +21,8 @@ func _load_room(room_path: String, spawn_name: String) -> void:
 	var packed := load(room_path) as PackedScene
 	current_room = packed.instantiate()
 	room_container.add_child(current_room)
+	var tilemap := current_room.get_node_or_null("TileMapLayer")
+	RoomContext.set_room(current_room, tilemap)
 
 	# move player to spawn
 	var spawn := current_room.get_node_or_null(spawn_name)
@@ -29,18 +31,27 @@ func _load_room(room_path: String, spawn_name: String) -> void:
 	else:
 		push_warning("Missing spawn: %s in %s" % [spawn_name, room_path])
 
-func load_room_checkpoint(checkpoint: Node2D, checkpoint_scene: PackedScene) -> void:
+func _move_player_to(pos: Vector2) -> void:
+	player.global_position = pos
+	player.velocity = Vector2.ZERO
+
+
+func _load_room_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 	if current_room:
 		current_room.queue_free()
 		current_room = null
-	
-	var packed := checkpoint_scene
+
+	var packed: PackedScene = load(room_path)
 	current_room = packed.instantiate()
 	room_container.add_child(current_room)
-	
-	
-	if checkpoint:
-		player.global_position = checkpoint.global_position
-	else:
-		push_warning("Missing spawn: %s in %s" % [checkpoint_scene])
+
+	# update RoomContext (adjust tilemap node path/name if needed)
+	var tilemap := current_room.get_node_or_null("TileMapLayer")
+	RoomContext.set_room(current_room, tilemap)
+
+	player.global_position = spawn_pos
+	player.velocity = Vector2.ZERO
+
+
+
 	

@@ -75,3 +75,32 @@ func _fade_to(alpha: float, time: float) -> void:
 	var t := create_tween()
 	t.tween_property(fade, "color:a", alpha, time)
 	await t.finished
+	
+func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
+	if _busy:
+		return
+	_busy = true
+
+	await _fade_to(1.0, 0.18)
+
+	var world := get_tree().current_scene
+	if world:
+		# same room: DO NOT reload, just move player
+		if RoomContext.current_room_path == room_path:
+			if world.has_method("_move_player_to"):
+				await _fade_to(1.0, 0.18)
+				world.call("_move_player_to", spawn_pos)
+				await _fade_to(0.0, 0.18)
+			else:
+				push_warning("World missing _move_player_to(pos)")
+		else:
+			# different room: reload the checkpoint room
+			if world.has_method("_load_room_checkpoint"):
+				world.call("_load_room_checkpoint", room_path, spawn_pos)
+			else:
+				push_warning("World missing _load_room_checkpoint(room_path, pos)")
+
+	await get_tree().process_frame
+	await _fade_to(0.0, 0.18)
+
+	_busy = false

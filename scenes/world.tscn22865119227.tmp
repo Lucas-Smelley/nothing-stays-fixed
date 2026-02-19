@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dq5sxkaylqy8n"]
+
+[ext_resource type="PackedScene" uid="uid://cwgwajlo8nn4e" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://duvypw4ls7o5v" path="res://scripts/world.gd" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://k58bh6t2maqu" path="res://scenes/UI/hud.tscn" id="2_4wyf3"]
+
+[node name="World" type="Node2D" unique_id=2013145069]
+script = ExtResource("1_rwgxs")
+
+[node name="HUD" parent="." unique_id=1839315110 instance=ExtResource("2_4wyf3")]
+
+[node name="RoomContainer" type="Node2D" parent="." unique_id=1525670608]
+
+[node name="Player" parent="." unique_id=888317823 instance=ExtResource("1_nnsk1")]
+unique_name_in_owner = true
+move_speed = null
+gravity = null
+max_fall_speed = null
+jump_speed = null
+wall_slide_speed = null
+wall_jump_x = null
+wall_jump_y = null
+wall_jump_lock_time = null
+wall_stick_time = null
+coyote_time = null
+jump_buffer_time = null
+dash_speed = null
+dash_time = null
+phase_time = null
+phase_wall_layer = null

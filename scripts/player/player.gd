@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 class_name Player
 
+@onready var hurtbox: Area2D = $Hurtbox
+const HAZARD_LAYER := 6
+
 @export var move_speed: float = 140.0
 
 @export var gravity: float = 1000.0
@@ -27,9 +30,9 @@ var ability_charges: int = 0
 @export var phase_time := 3.0
 @export var phase_wall_layer := 3
 
-@export var checkpoint_scene: PackedScene 
-var checkpoint_instance: Node2D = null 
-var checkpoint_position: Vector2 
+var checkpoint_room_path: String = ""
+var checkpoint_position: Vector2 = Vector2.ZERO
+var has_checkpoint := false
 
 var _grav_sign: int = 1 # 1 = normal, -1 inverted
 
@@ -51,7 +54,6 @@ var _is_dashing := false
 var _facing_dir: int = 1
 
 
-
 @onready var interaction_area: Area2D = $InteractionArea
 var _interact_offset_x: float = 12
 var nearby_interactables: Array[Node2D] = []
@@ -66,6 +68,9 @@ var _lock_interruptible := false
 signal ability_changed(ability_name: String, charges: int)
 
 func _ready() -> void:
+	
+	hurtbox.body_entered.connect(_on_hurtbox_body_entered)
+	
 	sprite.animation_finished.connect(_on_anim_finished)
 	
 	_emit_ability_ui()
@@ -74,7 +79,9 @@ func _ready() -> void:
 	_interact_offset_x = interaction_area.position.x
 	checkpoint_position = global_position
 	
-
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	respawn()
+		
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_axis("move_left", "move_right")
 	
@@ -346,24 +353,17 @@ func _toggle_gravity() -> void:
 	
 func set_checkpoint():
 	print("checkpoint set")
-	checkpoint_scene = RoomContext.current_room
+
+	checkpoint_room_path = RoomContext.current_room_path
 	checkpoint_position = global_position
-	
-	if checkpoint_instance:
-		checkpoint_instance.queue_free() 
-		
-	if checkpoint_scene:
-		checkpoint_instance = checkpoint_scene.instantiate()
-		get_parent().add_child(checkpoint_instance)
-		checkpoint_instance.global_position = checkpoint_position
+	has_checkpoint = true
+
 
 func respawn():
-	if not checkpoint_scene == RoomContext.current_room:
-		var world := get_tree().current_scene
-		if world and world.has_method("load_room_checkpoint"):
-			world.call("load_room_checkpoint", checkpoint_instance, checkpoint_scene)
-	else: 		
-		global_position = checkpoint_position 
-		velocity = Vector2.ZERO 
-		print("respawn")
+	if not has_checkpoint:
+		return
+
+	Transition.respawn_to_checkpoint(checkpoint_room_path, checkpoint_position)
+
+
 	

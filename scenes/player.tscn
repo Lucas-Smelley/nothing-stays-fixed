@@ -181,9 +181,13 @@ height = 20.588236
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
 size = Vector2(24.686867, 20.588236)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 4.0
+height = 16.0
+
 [node name="Player" type="CharacterBody2D" unique_id=888317823 groups=["player"]]
 collision_layer = 2
-collision_mask = 101
+collision_mask = 69
 script = ExtResource("1_3vyb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=865309486]
@@ -209,3 +213,11 @@ shape = SubResource("RectangleShape2D_u8vuu")
 
 [node name="WallCheck" type="RayCast2D" parent="." unique_id=93985003]
 target_position = Vector2(10, 0)
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1299193990]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=247896263]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_g2els")
