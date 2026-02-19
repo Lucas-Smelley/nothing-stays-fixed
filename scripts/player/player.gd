@@ -58,6 +58,9 @@ var _facing_dir: int = 1
 var _interact_offset_x: float = 12
 var nearby_interactables: Array[Node2D] = []
 
+@onready var checkpoint_area: Area2D = $CheckpointArea
+var can_set_checkpoint := false
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 var _anim_locked := false
 var _locked_anim := ""
@@ -73,15 +76,18 @@ func _ready() -> void:
 	
 	hurtbox.body_entered.connect(_on_hurtbox_body_entered)
 	
+	checkpoint_area.body_entered.connect(_on_checkpoint_body_entered)
+	checkpoint_area.body_exited.connect(_on_checkpoint_body_exited)
+	
 	sprite.animation_finished.connect(_on_anim_finished)
 	
 	_emit_ability_ui()
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_exited)
 	_interact_offset_x = interaction_area.position.x
-	checkpoint_position = global_position
 	
-		
+
+
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_axis("move_left", "move_right")
 	
@@ -190,7 +196,8 @@ func _physics_process(delta: float) -> void:
 	
 	#Set checkpoint 
 	if Input.is_action_just_pressed("set_checkpoint"):
-		set_checkpoint()
+		if can_set_checkpoint:
+			set_checkpoint()
 		
 	_was_on_wall = on_climb_wall
 
@@ -209,6 +216,13 @@ func _physics_process(delta: float) -> void:
 		_play_anim("run")
 	else:
 		_play_anim("idle")
+
+
+func init_default_checkpoint() -> void:
+	checkpoint_position = global_position
+	checkpoint_room_path = RoomContext.current_room_path
+	has_checkpoint = true
+
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if _is_respawning:
@@ -277,7 +291,6 @@ func lock_anim(anim_name: String, interruptible := false) -> void:
 
 func play_locked_anim_and_wait(anim_name: String) -> void:
 	lock_anim(anim_name)
-	
 
 	await sprite.animation_finished
 
@@ -285,6 +298,11 @@ func play_locked_anim_and_wait(anim_name: String) -> void:
 	# while sprite.animation == anim_name:
 	#     await sprite.animation_finished
 
+func _on_checkpoint_body_entered(body: Node) -> void:
+	can_set_checkpoint = true
+		
+func _on_checkpoint_body_exited(body: Node) -> void:
+	can_set_checkpoint = false
 
 func _on_interaction_area_entered(body: Node) -> void:
 	if body.is_in_group("interactable"):
@@ -363,9 +381,8 @@ func _end_phase() -> void:
 	
 func _toggle_gravity() -> void:
 	_grav_sign *= -1
-	
-	lock_anim("rotate")
 
+	lock_anim("rotate")
 
 	# flip visuals (don’t flip the CharacterBody2D root)
 	sprite.flip_v = (_grav_sign < 0)
@@ -390,6 +407,7 @@ func _death_and_respawn() -> void:
 	await play_locked_anim_and_wait("die")
 	
 	# fade out, scene move/load, fade in
+	print(checkpoint_room_path)
 	await Transition.respawn_to_checkpoint(checkpoint_room_path, checkpoint_position)
 
 	# respawn animation

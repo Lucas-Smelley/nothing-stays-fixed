@@ -29,6 +29,7 @@ window/stretch/mode="viewport"
 
 player=""
 interactable=""
+SafeArea=""
 
 [input]
 
@@ -75,6 +76,7 @@ set_checkpoint={
 2d_physics/layer_5="interactables"
 2d_physics/layer_6="Hazard"
 2d_physics/layer_7="door"
+2d_physics/layer_8="SafeArea"
 
 [physics]
 

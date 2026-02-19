@@ -99,7 +99,7 @@ func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 			else:
 				push_warning("World missing _load_room_checkpoint(room_path, pos)")
 
-	# give one frame for transforms/scene changes to settle
+	# give one frame for transforms/scene changes to Ftle
 	await get_tree().process_frame
 
 	# fade in

@@ -258,6 +258,9 @@ size = Vector2(24.686867, 20.588236)
 radius = 4.0
 height = 16.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(8, 18)
+
 [node name="Player" type="CharacterBody2D" unique_id=888317823 groups=["player"]]
 collision_layer = 2
 collision_mask = 69
@@ -283,6 +286,7 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1972011320]
 position = Vector2(-5.46524, -3.5061558e-07)
 shape = SubResource("RectangleShape2D_u8vuu")
+debug_color = Color(0.83911747, 0.8559945, 0.61942136, 0.41960785)
 
 [node name="WallCheck" type="RayCast2D" parent="." unique_id=93985003]
 target_position = Vector2(10, 0)
@@ -294,3 +298,11 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=247896263]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_g2els")
+debug_color = Color(0.7192763, 0.43122566, 0.5696559, 0.41960785)
+
+[node name="CheckpointArea" type="Area2D" parent="." unique_id=1671633043]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointArea" unique_id=253650701]
+shape = SubResource("RectangleShape2D_g2els")
