@@ -63,10 +63,6 @@ region = Rect2(0, 40, 16, 20)
 atlas = ExtResource("2_g2els")
 region = Rect2(16, 40, 16, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
-atlas = ExtResource("2_g2els")
-region = Rect2(0, 160, 16, 20)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_31cv2"]
 atlas = ExtResource("2_g2els")
 region = Rect2(16, 160, 16, 20)
@@ -193,9 +189,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_31cv2")
 }, {
 "duration": 1.0,
@@ -272,7 +265,7 @@ script = ExtResource("1_3vyb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=865309486]
 sprite_frames = SubResource("SpriteFrames_fjrip")
-animation = &"idle"
+animation = &"respawn"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=470441549]

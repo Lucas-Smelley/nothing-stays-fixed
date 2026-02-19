@@ -62,6 +62,8 @@ var nearby_interactables: Array[Node2D] = []
 var _anim_locked := false
 var _locked_anim := ""
 var _lock_interruptible := false
+var _is_respawning := false
+var _is_dead := false
 
 @onready var wall_check: RayCast2D = $WallCheck
 
@@ -79,8 +81,6 @@ func _ready() -> void:
 	_interact_offset_x = interaction_area.position.x
 	checkpoint_position = global_position
 	
-func _on_hurtbox_body_entered(body: Node2D) -> void:
-	respawn()
 		
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_axis("move_left", "move_right")
@@ -196,7 +196,9 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	
+	if _is_dead or _is_respawning:
+		return
+		
 	if _is_dashing:
 		_play_anim("dash")
 	elif on_climb_wall and falling and input_dir != 0 and signf(input_dir) == -signf(get_wall_normal().x):
@@ -208,7 +210,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		_play_anim("idle")
 
-
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	if _is_respawning:
+		return
+		
+	_is_respawning = true
+	await _death_and_respawn()
+	_is_respawning = false
+	
 func wall_is_climbable() -> bool:
 	if not wall_check.is_colliding():
 		return false
@@ -238,6 +247,10 @@ func wall_is_climbable() -> bool:
 
 	return val == true
 
+func _update_animation():
+	if _is_dead or _is_respawning:
+		return
+	# ... your normal idle/run/jump anim selection ...
 
 
 func _play_anim(anim_name: String) -> void:
@@ -260,9 +273,17 @@ func lock_anim(anim_name: String, interruptible := false) -> void:
 	_locked_anim = anim_name
 	_lock_interruptible = interruptible
 
-	# Make sure it starts from frame 0
 	sprite.play(anim_name)
 
+func play_locked_anim_and_wait(anim_name: String) -> void:
+	lock_anim(anim_name)
+	
+
+	await sprite.animation_finished
+
+	# Safety: if you ever allow interruptions, you can enforce:
+	# while sprite.animation == anim_name:
+	#     await sprite.animation_finished
 
 
 func _on_interaction_area_entered(body: Node) -> void:
@@ -352,18 +373,31 @@ func _toggle_gravity() -> void:
 	# mesh.scale.y = abs(mesh.scale.y) * (_grav_sign)
 	
 func set_checkpoint():
-	print("checkpoint set")
-
 	checkpoint_room_path = RoomContext.current_room_path
 	checkpoint_position = global_position
 	has_checkpoint = true
 
 
-func respawn():
+func _death_and_respawn() -> void:
 	if not has_checkpoint:
 		return
+	_is_dead = true
 
-	Transition.respawn_to_checkpoint(checkpoint_room_path, checkpoint_position)
+	# stop movement
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+	# 1) death animation
+	await play_locked_anim_and_wait("die")
+	
+	# fade out, scene move/load, fade in
+	await Transition.respawn_to_checkpoint(checkpoint_room_path, checkpoint_position)
+
+	# respawn animation
+	await play_locked_anim_and_wait("respawn")
+
+	set_physics_process(true)
+	_is_dead = false
+	
 
 
 	

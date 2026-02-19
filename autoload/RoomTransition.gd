@@ -81,16 +81,15 @@ func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 		return
 	_busy = true
 
+	# fade out
 	await _fade_to(1.0, 0.18)
 
 	var world := get_tree().current_scene
 	if world:
-		# same room: DO NOT reload, just move player
 		if RoomContext.current_room_path == room_path:
+			# same room: DO NOT reload, just move player
 			if world.has_method("_move_player_to"):
-				await _fade_to(1.0, 0.18)
 				world.call("_move_player_to", spawn_pos)
-				await _fade_to(0.0, 0.18)
 			else:
 				push_warning("World missing _move_player_to(pos)")
 		else:
@@ -100,7 +99,10 @@ func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 			else:
 				push_warning("World missing _load_room_checkpoint(room_path, pos)")
 
+	# give one frame for transforms/scene changes to settle
 	await get_tree().process_frame
+
+	# fade in
 	await _fade_to(0.0, 0.18)
 
 	_busy = false
