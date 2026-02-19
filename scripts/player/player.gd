@@ -28,8 +28,8 @@ var ability_charges: int = 0
 @export var phase_wall_layer := 3
 
 @export var checkpoint_scene: PackedScene 
-
 var checkpoint_instance: Node2D = null 
+var checkpoint_position: Vector2 
 
 var _grav_sign: int = 1 # 1 = normal, -1 inverted
 
@@ -50,7 +50,7 @@ var _is_dashing := false
 
 var _facing_dir: int = 1
 
-var checkpoint_position: Vector2 
+
 
 @onready var interaction_area: Area2D = $InteractionArea
 var _interact_offset_x: float = 12
@@ -346,6 +346,7 @@ func _toggle_gravity() -> void:
 	
 func set_checkpoint():
 	print("checkpoint set")
+	checkpoint_scene = RoomContext.current_room
 	checkpoint_position = global_position
 	
 	if checkpoint_instance:
@@ -357,7 +358,12 @@ func set_checkpoint():
 		checkpoint_instance.global_position = checkpoint_position
 
 func respawn():
-	global_position = checkpoint_position 
-	velocity = Vector2.ZERO
-	print("respawna")
+	if not checkpoint_scene == RoomContext.current_room:
+		var world := get_tree().current_scene
+		if world and world.has_method("load_room_checkpoint"):
+			world.call("load_room_checkpoint", checkpoint_instance, checkpoint_scene)
+	else: 		
+		global_position = checkpoint_position 
+		velocity = Vector2.ZERO 
+		print("respawn")
 	

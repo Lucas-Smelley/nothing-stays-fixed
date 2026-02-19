@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cxru7egdkmgyl" path="res://scenes/interactables/invert_gravity_pickup.tscn" id="4_ios0r"]
 [ext_resource type="PackedScene" uid="uid://bkbpfm4yld6ym" path="res://scenes/interactables/phase_pickup.tscn" id="5_nfquk"]
 [ext_resource type="PackedScene" uid="uid://nqb7rn5s74oa" path="res://scenes/interactables/charge_pickup.tscn" id="6_s0nb4"]
+[ext_resource type="PackedScene" uid="uid://dnyv8ghbg1ykv" path="res://scenes/world/spike.tscn" id="7_d1oky"]
 
 [node name="BaseRoom" unique_id=920769205 instance=ExtResource("1_1q7f0")]
 
@@ -31,3 +32,6 @@ position = Vector2(383, 260)
 
 [node name="PhasePickup" parent="." index="11" unique_id=345658534 instance=ExtResource("5_nfquk")]
 position = Vector2(479, 258)
+
+[node name="Node2D" parent="." index="12" unique_id=1286982686 instance=ExtResource("7_d1oky")]
+position = Vector2(133, 271)

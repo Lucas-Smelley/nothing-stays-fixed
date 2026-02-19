@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func _load_room(room_path: String, spawn_name: String) -> void:
 	# remove old room
+	
 	if current_room:
 		current_room.queue_free()
 		current_room = null
@@ -27,3 +28,19 @@ func _load_room(room_path: String, spawn_name: String) -> void:
 		player.global_position = (spawn as Node2D).global_position
 	else:
 		push_warning("Missing spawn: %s in %s" % [spawn_name, room_path])
+
+func load_room_checkpoint(checkpoint: Node2D, checkpoint_scene: PackedScene) -> void:
+	if current_room:
+		current_room.queue_free()
+		current_room = null
+	
+	var packed := checkpoint_scene
+	current_room = packed.instantiate()
+	room_container.add_child(current_room)
+	
+	
+	if checkpoint:
+		player.global_position = checkpoint.global_position
+	else:
+		push_warning("Missing spawn: %s in %s" % [checkpoint_scene])
+	
