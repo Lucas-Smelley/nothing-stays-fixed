@@ -101,3 +101,16 @@ func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 	await _fade_to(0.0, 0.18)
 
 	_busy = false
+
+func go_to_end() -> void:
+	
+	await _fade_to(1.0, 0.18)
+	
+	var world := get_tree().current_scene
+	if world and world.has_method("_load_room"):
+		world.call("_load_room", "res://scenes/end_room.tscn", "spawn")
+	
+	await get_tree().process_frame
+	await _fade_to(0.0, 0.18)
+	
+	_busy = false

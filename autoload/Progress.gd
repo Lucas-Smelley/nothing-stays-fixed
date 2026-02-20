@@ -10,6 +10,13 @@ func unlock_door(door_id: String) -> void:
 		push_warning("Tried to unlock empty door_id")
 		return
 	unlocked_doors[door_id] = true
+	
+	if unlocked_doors.size() == 4:
+		print("done")
+		game_clear()
 
 func reset_run() -> void:
 	unlocked_doors.clear()
+	
+func game_clear() -> void:
+	Transition.go_to_end()

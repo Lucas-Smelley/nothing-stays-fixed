@@ -1,0 +1,236 @@
+[gd_scene format=4 uid="uid://kupjnp5mxgqa"]
+
+[ext_resource type="Script" uid="uid://cg7kmobqfe02s" path="res://scripts/room.gd" id="1_6dpej"]
+[ext_resource type="Script" uid="uid://bptt0suqvdnlq" path="res://scripts/background_controller.gd" id="2_4mjo1"]
+[ext_resource type="Shader" uid="uid://b06htddi75yfn" path="res://shaders/color_changer.gdshader" id="3_vt608"]
+[ext_resource type="Texture2D" uid="uid://g6c2kasx1aqi" path="res://assets/art/background/solid.png" id="4_pht4l"]
+[ext_resource type="Texture2D" uid="uid://dw3mff7x7h5sb" path="res://assets/art/background/grid.png" id="5_sipvd"]
+[ext_resource type="Texture2D" uid="uid://bjvja6j74dw5p" path="res://assets/art/background/foreground.png" id="6_fu4pc"]
+[ext_resource type="Texture2D" uid="uid://c1hwpqrh5ipro" path="res://assets/art/tilesets/MainTileset.png" id="7_4mjo1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jviei"]
+shader = ExtResource("3_vt608")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2m0m"]
+shader = ExtResource("3_vt608")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwk5j"]
+shader = ExtResource("3_vt608")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/strength = 1.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vt608"]
+texture = ExtResource("7_4mjo1")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/animation_columns = 7
+0:2/animation_speed = 8.0
+0:2/animation_frame_0/duration = 1.0
+0:2/animation_frame_1/duration = 1.0
+0:2/animation_frame_2/duration = 1.0
+0:2/animation_frame_3/duration = 1.0
+0:2/animation_frame_4/duration = 1.0
+0:2/animation_frame_5/duration = 1.0
+0:2/animation_frame_6/duration = 1.0
+0:2/0 = 0
+0:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 0, 8, 0.35971832, 8, 8, -8, 8)
+0:4/animation_columns = 7
+0:4/animation_speed = 8.0
+0:4/animation_frame_0/duration = 1.0
+0:4/animation_frame_1/duration = 1.0
+0:4/animation_frame_2/duration = 1.0
+0:4/animation_frame_3/duration = 1.0
+0:4/animation_frame_4/duration = 1.0
+0:4/animation_frame_5/duration = 1.0
+0:4/animation_frame_6/duration = 1.0
+0:4/0 = 0
+0:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-0.35971832, -8, 8, -8, 8, 8, -0.5395756, 8)
+7:2/0 = 0
+0:6/size_in_atlas = Vector2i(4, 2)
+0:6/animation_columns = 2
+0:6/animation_speed = 5.0
+0:6/animation_frame_0/duration = 1.0
+0:6/animation_frame_1/duration = 1.0
+0:6/0 = 0
+0:6/0/texture_origin = Vector2i(-24, -8)
+0:6/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 55.954178, -8.024209, 56.03246, 24.072626, -7.952423, 24.080257)
+0:8/size_in_atlas = Vector2i(1, 2)
+0:8/animation_columns = 8
+0:8/animation_speed = 12.0
+0:8/animation_frame_0/duration = 1.0
+0:8/animation_frame_1/duration = 1.0
+0:8/animation_frame_2/duration = 1.0
+0:8/animation_frame_3/duration = 1.0
+0:8/animation_frame_4/duration = 1.0
+0:8/animation_frame_5/duration = 1.0
+0:8/animation_frame_6/duration = 1.0
+0:8/animation_frame_7/duration = 1.0
+0:8/0 = 0
+0:8/0/texture_origin = Vector2i(0, -8)
+2:0/animation_columns = 3
+2:0/animation_speed = 15.0
+2:0/animation_frame_0/duration = 1.0
+2:0/animation_frame_1/duration = 1.0
+2:0/animation_frame_2/duration = 1.0
+2:0/0 = 0
+2:0/0/custom_data_1 = true
+6:0/animation_columns = 3
+6:0/animation_speed = 15.0
+6:0/animation_frame_0/duration = 1.0
+6:0/animation_frame_1/duration = 1.0
+6:0/animation_frame_2/duration = 1.0
+6:0/0 = 0
+6:0/0/custom_data_1 = true
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.4809704, -8, -2.579893)
+0:1/0/physics_layer_0/polygon_0/one_way = true
+
+[sub_resource type="TileSet" id="TileSet_pht4l"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+physics_layer_1/collision_layer = 32
+physics_layer_1/collision_mask = 0
+physics_layer_2/collision_layer = 128
+physics_layer_2/collision_mask = 0
+custom_data_layer_0/name = "climbable"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "laser"
+custom_data_layer_1/type = 1
+sources/0 = SubResource("TileSetAtlasSource_vt608")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mjo1"]
+texture = ExtResource("7_4mjo1")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/animation_columns = 7
+0:2/animation_speed = 8.0
+0:2/animation_frame_0/duration = 1.0
+0:2/animation_frame_1/duration = 1.0
+0:2/animation_frame_2/duration = 1.0
+0:2/animation_frame_3/duration = 1.0
+0:2/animation_frame_4/duration = 1.0
+0:2/animation_frame_5/duration = 1.0
+0:2/animation_frame_6/duration = 1.0
+0:2/0 = 0
+0:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, 0, 8, 0.35971832, 8, 8, -8, 8)
+0:4/animation_columns = 7
+0:4/animation_speed = 8.0
+0:4/animation_frame_0/duration = 1.0
+0:4/animation_frame_1/duration = 1.0
+0:4/animation_frame_2/duration = 1.0
+0:4/animation_frame_3/duration = 1.0
+0:4/animation_frame_4/duration = 1.0
+0:4/animation_frame_5/duration = 1.0
+0:4/animation_frame_6/duration = 1.0
+0:4/0 = 0
+0:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-0.35971832, -8, 8, -8, 8, 8, -0.5395756, 8)
+7:2/0 = 0
+0:6/size_in_atlas = Vector2i(4, 2)
+0:6/animation_columns = 2
+0:6/animation_speed = 5.0
+0:6/animation_frame_0/duration = 1.0
+0:6/animation_frame_1/duration = 1.0
+0:6/0 = 0
+0:6/0/texture_origin = Vector2i(-24, -8)
+0:6/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 55.954178, -8.024209, 56.03246, 24.072626, -7.952423, 24.080257)
+0:8/size_in_atlas = Vector2i(1, 2)
+0:8/animation_columns = 8
+0:8/animation_speed = 12.0
+0:8/animation_frame_0/duration = 1.0
+0:8/animation_frame_1/duration = 1.0
+0:8/animation_frame_2/duration = 1.0
+0:8/animation_frame_3/duration = 1.0
+0:8/animation_frame_4/duration = 1.0
+0:8/animation_frame_5/duration = 1.0
+0:8/animation_frame_6/duration = 1.0
+0:8/animation_frame_7/duration = 1.0
+0:8/0 = 0
+0:8/0/texture_origin = Vector2i(0, -8)
+2:0/animation_columns = 3
+2:0/animation_speed = 15.0
+2:0/animation_frame_0/duration = 1.0
+2:0/animation_frame_1/duration = 1.0
+2:0/animation_frame_2/duration = 1.0
+2:0/0 = 0
+2:0/0/custom_data_1 = true
+6:0/animation_columns = 3
+6:0/animation_speed = 15.0
+6:0/animation_frame_0/duration = 1.0
+6:0/animation_frame_1/duration = 1.0
+6:0/animation_frame_2/duration = 1.0
+6:0/0 = 0
+6:0/0/custom_data_1 = true
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.4809704, -8, -2.579893)
+0:1/0/physics_layer_0/polygon_0/one_way = true
+
+[sub_resource type="TileSet" id="TileSet_vt608"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+physics_layer_1/collision_layer = 32
+physics_layer_1/collision_mask = 0
+physics_layer_2/collision_layer = 128
+physics_layer_2/collision_mask = 0
+custom_data_layer_0/name = "climbable"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "laser"
+custom_data_layer_1/type = 1
+sources/0 = SubResource("TileSetAtlasSource_4mjo1")
+
+[node name="EndRoom" type="Node2D" unique_id=1768891166]
+script = ExtResource("1_6dpej")
+
+[node name="BackgroundAndController" type="Node2D" parent="." unique_id=1367323573]
+position = Vector2(320, 180)
+script = ExtResource("2_4mjo1")
+static_sprite_path = NodePath("CanvasLayer/Sprite2D")
+mid_sprite_path = NodePath("Grid/Sprite2D")
+fore_sprite_path = NodePath("Foreground/Sprite2D")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="BackgroundAndController" unique_id=1172202313]
+layer = -100
+offset = Vector2(320, 180)
+transform = Transform2D(1, 0, 0, 1, 320, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundAndController/CanvasLayer" unique_id=819600003]
+z_index = -100
+material = SubResource("ShaderMaterial_jviei")
+texture = ExtResource("4_pht4l")
+
+[node name="Grid" type="Parallax2D" parent="BackgroundAndController" unique_id=1096976126]
+z_index = -10
+repeat_size = Vector2(640, 360)
+autoscroll = Vector2(5, 5)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundAndController/Grid" unique_id=254607428]
+material = SubResource("ShaderMaterial_r2m0m")
+texture = ExtResource("5_sipvd")
+
+[node name="Foreground" type="Parallax2D" parent="BackgroundAndController" unique_id=1804544756]
+z_index = -5
+repeat_size = Vector2(640, 360)
+autoscroll = Vector2(8, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundAndController/Foreground" unique_id=1688316129]
+material = SubResource("ShaderMaterial_rwk5j")
+texture = ExtResource("6_fu4pc")
+
+[node name="TileMap_Base" type="TileMapLayer" parent="." unique_id=664997972]
+tile_map_data = PackedByteArray("AAAAAPP/AAAAAAIAAAABAPP/AAAAAAIAAAACAPP/AAAAAAIAAAADAPP/AAAAAAIAAAAEAPP/AAAAAAIAAAAFAPP/AAAAAAIAAAAGAPP/AAAAAAIAAAAHAPP/AAAAAAIAAAAIAPP/AAAAAAIAAAAJAPP/AAAAAAIAAAAKAPP/AAAAAAIAAAALAPP/AAAAAAIAAAAMAPP/AAAAAAIAAAANAPP/AAAAAAIAAAAOAPP/AAAAAAIAAAAPAPP/AAAAAAIAAAAQAPP/AAAAAAIAAAARAPP/AAAAAAIAAAASAPP/AAAAAAIAAAATAPP/AAAAAAIAAAAUAPP/AAAAAAIAAAAVAPP/AAAAAAIAAAAWAPP/AAAAAAIAAAAXAPP/AAAAAAIAAAAYAPP/AAAAAAIAAAAZAPP/AAAAAAIAAAAaAPP/AAAAAAIAAAAbAPP/AAAAAAIAAAAcAPP/AAAAAAIAAAAdAPP/AAAAAAIAAAAeAPP/AAAAAAIAAAAfAPP/AAAAAAIAAAAgAPP/AAAAAAIAAAAhAPP/AAAAAAIAAAAiAPP/AAAAAAIAAAAjAPP/AAAAAAIAAAAkAPP/AAAAAAIAAAAlAPP/AAAAAAIAAAAmAPP/AAAAAAIAAAAnAPP/AAAAAAIAAAAAACUAAAAAAAIAAAABACUAAAAAAAIAAAACACUAAAAAAAIAAAADACUAAAAAAAIAAAAEACUAAAAAAAIAAAAFACUAAAAAAAIAAAAGACUAAAAAAAIAAAAHACUAAAAAAAIAAAAIACUAAAAAAAIAAAAJACUAAAAAAAIAAAAKACUAAAAAAAIAAAALACUAAAAAAAIAAAAMACUAAAAAAAIAAAANACUAAAAAAAIAAAAOACUAAAAAAAIAAAAPACUAAAAAAAIAAAAQACUAAAAAAAIAAAARACUAAAAAAAIAAAASACUAAAAAAAIAAAATACUAAAAAAAIAAAAUACUAAAAAAAIAAAAVACUAAAAAAAIAAAAWACUAAAAAAAIAAAAXACUAAAAAAAIAAAAYACUAAAAAAAIAAAAZACUAAAAAAAIAAAAaACUAAAAAAAIAAAAbACUAAAAAAAIAAAAcACUAAAAAAAIAAAAdACUAAAAAAAIAAAAeACUAAAAAAAIAAAAfACUAAAAAAAIAAAAgACUAAAAAAAIAAAAhACUAAAAAAAIAAAAiACUAAAAAAAIAAAAjACUAAAAAAAIAAAAkACUAAAAAAAIAAAAlACUAAAAAAAIAAAAmACUAAAAAAAIAAAAnACUAAAAAAAIAAAAkABEAAAAAAAAAAAAlABEAAAAAAAAAAAAmABEAAAAAAAAAAAAnABEAAAAAAAAAAAD///T/AAABAAAAAAD///X/AAABAAAAAAD///b/AAABAAAAAAD///f/AAABAAAAAAD///j/AAABAAAAAAD///n/AAABAAAAAAD///r/AAABAAAAAAD///v/AAABAAAAAAD///z/AAABAAAAAAD///3/AAABAAAAAAD///7/AAABAAAAAAD/////AAABAAAAAAD//wAAAAABAAAAAAD//wEAAAABAAAAAAD//wIAAAABAAAAAAD//wMAAAABAAAAAAD//wQAAAABAAAAAAD//wUAAAABAAAAAAD//wYAAAABAAAAAAD//wcAAAABAAAAAAD//wgAAAABAAAAAAD//wkAAAABAAAAAAD//woAAAABAAAAAAD//wsAAAABAAAAAAD//wwAAAABAAAAAAD//w0AAAABAAAAAAD//w4AAAABAAAAAAAoAPT/AAABAAAAAAAoAPX/AAABAAAAAAAoAPb/AAABAAAAAAAoAPf/AAABAAAAAAAoAPj/AAABAAAAAAAoAPn/AAABAAAAAAAoAPr/AAABAAAAAAAoAPv/AAABAAAAAAAoAPz/AAABAAAAAAAoAP3/AAABAAAAAAAoAP7/AAABAAAAAAAoAP//AAABAAAAAAAoAAAAAAABAAAAAAAoAAEAAAABAAAAAAAoAAIAAAABAAAAAAAoAAMAAAABAAAAAAAoAAQAAAABAAAAAAAoAAUAAAABAAAAAAAoAAYAAAABAAAAAAAoAAcAAAABAAAAAAAoAAgAAAABAAAAAAAoAAkAAAABAAAAAAAoAAoAAAABAAAAAAAoAAsAAAABAAAAAAAoAAwAAAABAAAAAAAoAA0AAAABAAAAAAAoAA4AAAABAAAAAAD//xIAAAABAAAAAAD//xMAAAABAAAAAAD//xQAAAABAAAAAAD//xUAAAABAAAAAAD//xYAAAABAAAAAAD//xcAAAABAAAAAAD//xgAAAABAAAAAAD//xkAAAABAAAAAAD//xoAAAABAAAAAAD//xsAAAABAAAAAAD//xwAAAABAAAAAAD//x0AAAABAAAAAAD//x4AAAABAAAAAAD//x8AAAABAAAAAAD//yAAAAABAAAAAAD//yEAAAABAAAAAAD//yIAAAABAAAAAAD//yMAAAABAAAAAAD//yQAAAABAAAAAAAoABIAAAABAAAAAAAoABMAAAABAAAAAAAoABQAAAABAAAAAAAoABUAAAABAAAAAAAoABYAAAABAAAAAAAoABcAAAABAAAAAAAoABgAAAABAAAAAAAoABkAAAABAAAAAAAoABoAAAABAAAAAAAoABsAAAABAAAAAAAoABwAAAABAAAAAAAoAB0AAAABAAAAAAAoAB4AAAABAAAAAAAoAB8AAAABAAAAAAAoACAAAAABAAAAAAAoACEAAAABAAAAAAAoACIAAAABAAAAAAAoACMAAAABAAAAAAAoACQAAAABAAAAAAADABEAAAAAAAAAAAACABEAAAAAAAAAAAABABEAAAAAAAAAAAAAABEAAAAAAAAAAAD//w8AAAABAAAAAAD//xAAAAABAAAAAAD//xEAAAABAAAAAAAoAA8AAAABAAAAAAAoABAAAAABAAAAAAAoABEAAAABAAAAAAAiABEAAAAAAAAAAAAjABEAAAAAAAAAAAAhABEAAAAAAAAAAAAgABEAAAAAAAAAAAAfABEAAAAAAAAAAAAeABEAAAAAAAAAAAAdABEAAAAAAAAAAAAcABEAAAAAAAAAAAAbABEAAAAAAAAAAAAaABEAAAAAAAAAAAAZABEAAAAAAAAAAAAYABEAAAAAAAAAAAAXABEAAAAAAAAAAAAWABEAAAAAAAAAAAAVABEAAAAAAAAAAAAUABEAAAAAAAAAAAATABEAAAAAAAAAAAASABEAAAAAAAAAAAARABEAAAAAAAAAAAAQABEAAAAAAAAAAAAPABEAAAAAAAAAAAAOABEAAAAAAAAAAAANABEAAAAAAAAAAAAMABEAAAAAAAAAAAALABEAAAAAAAAAAAAKABEAAAAAAAAAAAAJABEAAAAAAAAAAAAIABEAAAAAAAAAAAAHABEAAAAAAAAAAAAGABEAAAAAAAAAAAAFABEAAAAAAAAAAAAEABEAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_pht4l")
+
+[node name="TileMap_Room" type="TileMapLayer" parent="." unique_id=224530137]
+tile_set = SubResource("TileSet_vt608")
+
+[node name="spawn" type="Marker2D" parent="." unique_id=1601370415]
+position = Vector2(311, 238)
