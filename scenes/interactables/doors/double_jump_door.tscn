@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://vlm0ue3sb2qr"]
+
+[ext_resource type="PackedScene" uid="uid://dfg6mj66w5sep" path="res://scenes/interactables/key_door.tscn" id="1_l5vr3"]
+[ext_resource type="Texture2D" uid="uid://djyqh2qbq5k56" path="res://assets/art/doors/double_jump_door.png" id="2_btq7b"]
+
+[node name="DoubleJumpDoor" unique_id=2002614816 instance=ExtResource("1_l5vr3")]
+required_key_id = "DOUBLE_JUMP_KEY"
+
+[node name="Sprite2D" parent="." index="0" unique_id=660292665]
+texture = ExtResource("2_btq7b")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1607898899]
+position = Vector2(0, 1)

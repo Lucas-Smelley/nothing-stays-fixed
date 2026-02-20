@@ -2,10 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://c44pg6l5f38r7" path="res://scenes/base_room.tscn" id="1_1q7f0"]
 [ext_resource type="PackedScene" uid="uid://nqb7rn5s74oa" path="res://scenes/interactables/charge_pickup.tscn" id="2_5phkd"]
-[ext_resource type="PackedScene" uid="uid://db3q6yhudtg1n" path="res://scenes/interactables/dash_pickup.tscn" id="3_d1oky"]
-[ext_resource type="PackedScene" uid="uid://dajy3lb5a0abc" path="res://scenes/interactables/double_jump_pickup.tscn" id="4_ios0r"]
-[ext_resource type="PackedScene" uid="uid://cxru7egdkmgyl" path="res://scenes/interactables/invert_gravity_pickup.tscn" id="5_nfquk"]
-[ext_resource type="PackedScene" uid="uid://bkbpfm4yld6ym" path="res://scenes/interactables/phase_pickup.tscn" id="6_s0nb4"]
+[ext_resource type="PackedScene" uid="uid://db3q6yhudtg1n" path="res://scenes/interactables/abilities/dash_pickup.tscn" id="3_d1oky"]
+[ext_resource type="PackedScene" uid="uid://dajy3lb5a0abc" path="res://scenes/interactables/abilities/double_jump_pickup.tscn" id="4_ios0r"]
+[ext_resource type="PackedScene" uid="uid://cxru7egdkmgyl" path="res://scenes/interactables/abilities/invert_gravity_pickup.tscn" id="5_nfquk"]
+[ext_resource type="PackedScene" uid="uid://bkbpfm4yld6ym" path="res://scenes/interactables/abilities/phase_pickup.tscn" id="6_s0nb4"]
+[ext_resource type="PackedScene" uid="uid://slxbbocu6t40" path="res://scenes/interactables/keys/double_jump_key.tscn" id="7_d1oky"]
+[ext_resource type="PackedScene" uid="uid://vlm0ue3sb2qr" path="res://scenes/interactables/doors/double_jump_door.tscn" id="8_ios0r"]
 
 [node name="BaseRoom" unique_id=920769205 instance=ExtResource("1_1q7f0")]
 
@@ -29,3 +31,13 @@ position = Vector2(382, 261)
 
 [node name="PhasePickup" parent="." index="12" unique_id=93309844 instance=ExtResource("6_s0nb4")]
 position = Vector2(487, 260)
+
+[node name="DoubleJumpKey" parent="." index="13" unique_id=1465092290 instance=ExtResource("7_d1oky")]
+position = Vector2(149, 232)
+collision_layer = 1
+collision_mask = 1
+
+[node name="DoubleJumpDoor" parent="." index="14" unique_id=2002614816 instance=ExtResource("8_ios0r")]
+position = Vector2(256, 231)
+collision_layer = 1
+collision_mask = 1

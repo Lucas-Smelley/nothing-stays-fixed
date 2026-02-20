@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bxkkscn24kotf"]
+
+[ext_resource type="PackedScene" uid="uid://bs7vsjsy4n5ek" path="res://scenes/interactables/key_pickup.tscn" id="1_1kukp"]
+[ext_resource type="Texture2D" uid="uid://dro2a1ptay2mr" path="res://assets/art/keys/phase_key.png" id="2_xda47"]
+
+[node name="PhaseKey" unique_id=1465092290 instance=ExtResource("1_1kukp")]
+key_id = "PHASE_KEY"
+
+[node name="Sprite2D" parent="." index="1" unique_id=113863934]
+texture = ExtResource("2_xda47")

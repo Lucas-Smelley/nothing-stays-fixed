@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cyg02j48fvdnc"]
+
+[ext_resource type="PackedScene" uid="uid://bs7vsjsy4n5ek" path="res://scenes/interactables/key_pickup.tscn" id="1_qqrdq"]
+[ext_resource type="Texture2D" uid="uid://lx2xq20iw5gx" path="res://assets/art/keys/dash_key.png" id="2_v2llk"]
+
+[node name="DashKey" unique_id=1465092290 instance=ExtResource("1_qqrdq")]
+key_id = "DASH_KEY"
+
+[node name="Sprite2D" parent="." index="1" unique_id=113863934]
+texture = ExtResource("2_v2llk")

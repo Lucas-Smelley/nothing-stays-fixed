@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cnyydjjv1xnod"]
+
+[ext_resource type="PackedScene" uid="uid://dfg6mj66w5sep" path="res://scenes/interactables/key_door.tscn" id="1_2f1i4"]
+[ext_resource type="Texture2D" uid="uid://bhmp4648f1mtj" path="res://assets/art/doors/phase_door.png" id="2_my0e8"]
+
+[node name="PhaseDoor" unique_id=2002614816 instance=ExtResource("1_2f1i4")]
+required_key_id = "PHASE_KEY"
+
+[node name="Sprite2D" parent="." index="0" unique_id=660292665]
+texture = ExtResource("2_my0e8")

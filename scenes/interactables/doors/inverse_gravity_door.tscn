@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b8pn02h7ii1gu"]
+
+[ext_resource type="PackedScene" uid="uid://dfg6mj66w5sep" path="res://scenes/interactables/key_door.tscn" id="1_2uedo"]
+[ext_resource type="Texture2D" uid="uid://dxueg1kqbrhwl" path="res://assets/art/doors/inverse_gravity_door.png" id="2_77183"]
+
+[node name="InverseGravityDoor" unique_id=2002614816 instance=ExtResource("1_2uedo")]
+required_key_id = "INVERSE_GRAVITY_KEY"
+
+[node name="Sprite2D" parent="." index="0" unique_id=660292665]
+texture = ExtResource("2_77183")

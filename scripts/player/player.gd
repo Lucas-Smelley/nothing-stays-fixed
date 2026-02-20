@@ -407,7 +407,6 @@ func _death_and_respawn() -> void:
 	await play_locked_anim_and_wait("die")
 	
 	# fade out, scene move/load, fade in
-	print(checkpoint_room_path)
 	await Transition.respawn_to_checkpoint(checkpoint_room_path, checkpoint_position)
 
 	# respawn animation

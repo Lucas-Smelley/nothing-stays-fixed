@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dfg6mj66w5sep"]
+
+[ext_resource type="Script" uid="uid://b74js5jcpekxc" path="res://scripts/pickups/key_door.gd" id="1_nnqql"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v71sr"]
+radius = 12.0415945
+
+[node name="KeyDoor" type="Area2D" unique_id=2002614816]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_nnqql")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=660292665]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1607898899]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_v71sr")

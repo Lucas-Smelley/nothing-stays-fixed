@@ -9,9 +9,9 @@
 [ext_resource type="Shader" uid="uid://b06htddi75yfn" path="res://shaders/color_changer.gdshader" id="3_ltgxd"]
 [ext_resource type="PackedScene" uid="uid://nqb7rn5s74oa" path="res://scenes/interactables/charge_pickup.tscn" id="5_ejtda"]
 [ext_resource type="Texture2D" uid="uid://c1hwpqrh5ipro" path="res://assets/art/tilesets/MainTileset.png" id="5_tvk4s"]
-[ext_resource type="PackedScene" uid="uid://dajy3lb5a0abc" path="res://scenes/interactables/double_jump_pickup.tscn" id="6_srtiu"]
-[ext_resource type="PackedScene" uid="uid://db3q6yhudtg1n" path="res://scenes/interactables/dash_pickup.tscn" id="11_tvk4s"]
-[ext_resource type="PackedScene" uid="uid://cxru7egdkmgyl" path="res://scenes/interactables/invert_gravity_pickup.tscn" id="12_65vkx"]
+[ext_resource type="PackedScene" uid="uid://dajy3lb5a0abc" path="res://scenes/interactables/abilities/double_jump_pickup.tscn" id="6_srtiu"]
+[ext_resource type="PackedScene" uid="uid://db3q6yhudtg1n" path="res://scenes/interactables/abilities/dash_pickup.tscn" id="11_tvk4s"]
+[ext_resource type="PackedScene" uid="uid://cxru7egdkmgyl" path="res://scenes/interactables/abilities/invert_gravity_pickup.tscn" id="12_65vkx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tvk4s"]
 shader = ExtResource("3_ltgxd")
