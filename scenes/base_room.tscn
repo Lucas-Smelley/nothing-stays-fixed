@@ -82,6 +82,13 @@ texture = ExtResource("7_1jl1u")
 2:0/animation_frame_2/duration = 1.0
 2:0/0 = 0
 2:0/0/custom_data_1 = true
+6:0/animation_columns = 3
+6:0/animation_speed = 15.0
+6:0/animation_frame_0/duration = 1.0
+6:0/animation_frame_1/duration = 1.0
+6:0/animation_frame_2/duration = 1.0
+6:0/0 = 0
+6:0/0/custom_data_1 = true
 
 [sub_resource type="TileSet" id="TileSet_ucwnb"]
 physics_layer_0/collision_layer = 1
