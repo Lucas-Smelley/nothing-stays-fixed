@@ -13,7 +13,7 @@ func _spawn_locked_doors() -> void:
 			push_warning("DoorSpawnPoint missing door_scene for door_id: " + sp.door_id)
 			continue
 
-		var unlocked := Progress.is_door_unlocked(sp.door_id)
+		var unlocked: bool = Progress.is_door_unlocked(sp.door_id)
 
 		# You asked: only spawn doors that haven't been cleared
 		if unlocked and not sp.spawn_when_unlocked:

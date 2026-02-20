@@ -89,6 +89,9 @@ texture = ExtResource("7_1jl1u")
 6:0/animation_frame_2/duration = 1.0
 6:0/0 = 0
 6:0/0/custom_data_1 = true
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.4809704, -8, -2.579893)
+0:1/0/physics_layer_0/polygon_0/one_way = true
 
 [sub_resource type="TileSet" id="TileSet_ucwnb"]
 physics_layer_0/collision_layer = 1

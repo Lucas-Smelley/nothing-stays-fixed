@@ -10,6 +10,8 @@ tile_map_data = PackedByteArray("AAAEABEAAAAAAAAAAAAjABEAAAAAAAAAAAAIABQAAAAAAAA
 
 [node name="ChargePickup" parent="." index="7" unique_id=19352073 instance=ExtResource("2_2pcl0")]
 position = Vector2(300, 114)
+amount = 10
 
 [node name="ChargePickup2" parent="." index="8" unique_id=2042174266 instance=ExtResource("2_2pcl0")]
 position = Vector2(335, 114)
+amount = 10
