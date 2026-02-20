@@ -27,7 +27,7 @@ var ability_charges: int = 0
 @export var dash_speed := 350.0
 @export var dash_time := 0.22
 
-@export var phase_time := 5.0
+@export var phase_time := 3.0
 @export var laser_layer := 3
 var _is_phasing := false
 var _phase_timer := 0.0
