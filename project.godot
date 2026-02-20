@@ -34,6 +34,10 @@ interactable=""
 SafeArea=""
 door_spawn_point=""
 
+[gui]
+
+theme/custom_font="uid://s4mt4ig8xhqq"
+
 [input]
 
 move_left={

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://yk1gsaj21567" path="res://scripts/player/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://bqcw61wg5wp5v" path="res://assets/art/player_spritesheet.png" id="2_g2els"]
-[ext_resource type="Shader" uid="uid://bxmhtqjvkv4am" path="res://shaders/player_fade.gdshader" id="2_qhqgy"]
+[ext_resource type="Shader" path="res://shaders/player_fade.gdshader" id="2_qhqgy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dqkch"]
 shader = ExtResource("2_qhqgy")
@@ -260,7 +260,7 @@ radius = 4.3565063
 height = 20.588236
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
-size = Vector2(24.686867, 20.588236)
+size = Vector2(37.878193, 20.588236)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 4.0
@@ -293,7 +293,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1972011320]
-position = Vector2(-5.46524, -3.5061558e-07)
+position = Vector2(-12.060904, -3.5061558e-07)
 shape = SubResource("RectangleShape2D_u8vuu")
 debug_color = Color(0.83911747, 0.8559945, 0.61942136, 0.41960785)
 

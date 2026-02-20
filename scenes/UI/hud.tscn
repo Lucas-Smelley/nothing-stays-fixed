@@ -1,17 +1,23 @@
 [gd_scene format=3 uid="uid://k58bh6t2maqu"]
 
 [ext_resource type="Script" uid="uid://b4ryx83r2tdh0" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="FontFile" uid="uid://s4mt4ig8xhqq" path="res://assets/fonts/Minecraft.ttf" id="2_rd3kb"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1839315110]
 script = ExtResource("1_ahhtf")
 
 [node name="AbilityLabel" type="Label" parent="." unique_id=1730315417]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 4.0
+offset_top = 7.0
+offset_right = 104.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_rd3kb")
 text = "Ability: NONE"
 
 [node name="ChargesLabel" type="Label" parent="." unique_id=1684807219]
-offset_top = 19.0
-offset_right = 81.0
-offset_bottom = 42.0
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 87.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("2_rd3kb")
 text = "Charges: 0"

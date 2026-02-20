@@ -38,5 +38,15 @@ sprite_frames = SubResource("SpriteFrames_o7g8h")
 autoplay = "default"
 script = ExtResource("3_coch4")
 
+[node name="Label" type="Label" parent="AnimatedSprite2D" unique_id=2133267209]
+offset_left = -34.0
+offset_top = -23.0
+offset_right = 34.0
+offset_bottom = -9.0
+theme_override_font_sizes/font_size = 12
+text = "phase"
+horizontal_alignment = 1
+uppercase = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1017515982]
 shape = SubResource("CircleShape2D_7be2w")

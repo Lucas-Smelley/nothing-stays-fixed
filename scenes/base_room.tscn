@@ -178,7 +178,7 @@ script = ExtResource("8_b5txi")
 shape = SubResource("RectangleShape2D_xp0a8")
 
 [node name="Spawn_Left" type="Marker2D" parent="." unique_id=643750624]
-position = Vector2(30, 257)
+position = Vector2(36, 257)
 
 [node name="Spawn_Right" type="Marker2D" parent="." unique_id=697782332]
-position = Vector2(609, 261)
+position = Vector2(603, 262)

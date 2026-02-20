@@ -39,5 +39,16 @@ sprite_frames = SubResource("SpriteFrames_6hq62")
 autoplay = "default"
 script = ExtResource("3_ko752")
 
+[node name="Label" type="Label" parent="AnimatedSprite2D" unique_id=1800642280]
+offset_left = -28.0
+offset_top = -35.999996
+offset_right = 28.0
+offset_bottom = -8.999996
+theme_override_font_sizes/font_size = 12
+text = "invert
+gravity"
+horizontal_alignment = 1
+uppercase = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1017515982]
 shape = SubResource("CircleShape2D_7be2w")

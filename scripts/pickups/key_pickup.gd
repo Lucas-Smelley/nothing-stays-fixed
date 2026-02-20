@@ -3,6 +3,9 @@ extends Area2D
 @export var key_id: String = "KEY"
 @export var follow_offset := Vector2(0, -22)
 
+@onready var label: RichTextLabel = $RichTextLabel
+
+
 var _collected := false
 var _pending_player: Node2D
 

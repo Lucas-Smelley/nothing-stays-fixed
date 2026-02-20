@@ -311,10 +311,14 @@ func _on_checkpoint_body_exited(body: Node) -> void:
 
 func _on_interaction_area_entered(body: Node) -> void:
 	if body.is_in_group("interactable"):
+		if body.has_method("set_label_visibility"):
+			body.set_label_visibility()
 		nearby_interactables.append(body)
 
 func _on_interaction_area_exited(body: Node) -> void:
 	if body.is_in_group("interactable"):
+		if body.has_method("set_label_visibility"):
+			body.set_label_visibility()
 		nearby_interactables.erase(body)
 
 

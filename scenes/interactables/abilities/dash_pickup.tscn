@@ -39,5 +39,16 @@ sprite_frames = SubResource("SpriteFrames_j6i8w")
 autoplay = "default"
 script = ExtResource("3_ik813")
 
+[node name="Label" type="Label" parent="AnimatedSprite2D" unique_id=1619141615]
+offset_left = -32.000004
+offset_top = -24.0
+offset_right = 31.999996
+offset_bottom = -12.0
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 12
+text = "dash"
+horizontal_alignment = 1
+uppercase = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1017515982]
 shape = SubResource("CircleShape2D_7be2w")
