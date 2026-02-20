@@ -1,0 +1,15 @@
+extends Node
+
+var unlocked_doors: Dictionary = {} # door_id -> true
+
+func is_door_unlocked(door_id: String) -> bool:
+	return unlocked_doors.get(door_id, false)
+
+func unlock_door(door_id: String) -> void:
+	if door_id == "":
+		push_warning("Tried to unlock empty door_id")
+		return
+	unlocked_doors[door_id] = true
+
+func reset_run() -> void:
+	unlocked_doors.clear()

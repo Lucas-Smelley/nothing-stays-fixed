@@ -1,4 +1,5 @@
 extends Node2D
+class_name Room
 
 @onready var tile_map_room: TileMapLayer = $TileMap_Room
 

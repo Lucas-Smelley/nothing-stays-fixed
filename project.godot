@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 Transition="*uid://b1wpbw8fxhqg7"
 RoomContext="*uid://c6lopom5wunc8"
 Inventory="*uid://dnu8h516uiosj"
+Progress="*uid://dmrmteyabp61j"
 
 [display]
 
@@ -31,6 +32,7 @@ window/stretch/mode="viewport"
 player=""
 interactable=""
 SafeArea=""
+door_spawn_point=""
 
 [input]
 

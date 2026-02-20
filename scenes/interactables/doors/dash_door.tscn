@@ -5,6 +5,7 @@
 
 [node name="DashDoor" unique_id=2002614816 instance=ExtResource("1_hicjk")]
 required_key_id = "DASH_KEY"
+door_id = "DASH_DOOR"
 
 [node name="Sprite2D" parent="." index="0" unique_id=660292665]
 texture = ExtResource("2_mvl78")

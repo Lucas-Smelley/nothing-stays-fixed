@@ -38,7 +38,7 @@ func _finish_collect() -> void:
 	reparent(_pending_player)
 	position = follow_offset
 
-	add_to_group("carried_key")
+	add_to_group("carried_key") # <--- add this
 	_start_bob()
 
 func _start_bob() -> void:

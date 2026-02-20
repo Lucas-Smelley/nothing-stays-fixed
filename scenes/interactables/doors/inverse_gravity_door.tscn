@@ -5,6 +5,7 @@
 
 [node name="InverseGravityDoor" unique_id=2002614816 instance=ExtResource("1_2uedo")]
 required_key_id = "INVERSE_GRAVITY_KEY"
+door_id = "DOUBLE_JUMP_DOOR"
 
 [node name="Sprite2D" parent="." index="0" unique_id=660292665]
 texture = ExtResource("2_77183")
