@@ -46,6 +46,8 @@ func go_random(spawn_name: String) -> void:
 		return
 	target_spawn_name = spawn_name
 	
+	_busy = true
+	
 	var next_room = _pick_random_room()
 	
 	await _fade_to(1.0, 0.18)
