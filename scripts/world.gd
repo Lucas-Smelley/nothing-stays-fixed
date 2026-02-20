@@ -35,10 +35,6 @@ func _load_room(room_path: String, spawn_name: String) -> void:
 	if player.has_method("init_default_checkpoint"):
 		player.call("init_default_checkpoint")
 
-func _move_player_to(pos: Vector2) -> void:
-	player.global_position = pos
-	player.velocity = Vector2.ZERO
-
 
 func _load_room_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 	if current_room:

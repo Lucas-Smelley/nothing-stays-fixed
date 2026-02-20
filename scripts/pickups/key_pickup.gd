@@ -30,16 +30,15 @@ func _finish_collect() -> void:
 		queue_free()
 		return
 
-	# Disable collisions safely (now we're not in the physics callback)
 	monitoring = false
 	monitorable = false
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.disabled = true
 
-	# Reparent to player so it follows them
 	reparent(_pending_player)
 	position = follow_offset
 
+	add_to_group("carried_key")
 	_start_bob()
 
 func _start_bob() -> void:

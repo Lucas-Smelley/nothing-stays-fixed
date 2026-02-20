@@ -418,6 +418,16 @@ func set_checkpoint():
 	checkpoint_room_path = RoomContext.current_room_path
 	checkpoint_position = global_position
 	has_checkpoint = true
+	
+
+func _clear_carried_keys_on_death() -> void:
+	# 1) clear inventory data
+	Inventory.clear_keys()
+
+	# 2) free any key nodes currently attached to the player
+	for c in get_children():
+		if c.is_in_group("carried_key"):
+			c.queue_free()
 
 
 func _death_and_respawn() -> void:
@@ -429,6 +439,12 @@ func _death_and_respawn() -> void:
 		_toggle_gravity()
 	if _is_phasing:
 		_end_phase()
+	
+	if _is_dashing:
+		_is_dashing = false
+		_dash_timer = 0.0
+		
+	_clear_carried_keys_on_death()
 
 	# stop movement
 	velocity = Vector2.ZERO

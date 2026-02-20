@@ -86,14 +86,7 @@ func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 
 	var world := get_tree().current_scene
 	if world:
-		if RoomContext.current_room_path == room_path:
-			# same room: DO NOT reload, just move player
-			if world.has_method("_move_player_to"):
-				world.call("_move_player_to", spawn_pos)
-			else:
-				push_warning("World missing _move_player_to(pos)")
-		else:
-			# different room: reload the checkpoint room
+			## different room: reload the checkpoint room
 			if world.has_method("_load_room_checkpoint"):
 				world.call("_load_room_checkpoint", room_path, spawn_pos)
 			else:
