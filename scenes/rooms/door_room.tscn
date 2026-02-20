@@ -1,0 +1,24 @@
+[gd_scene format=4 uid="uid://wtvsfj34f5du"]
+
+[ext_resource type="PackedScene" uid="uid://c44pg6l5f38r7" path="res://scenes/base_room.tscn" id="1_ru5ed"]
+[ext_resource type="PackedScene" uid="uid://bpcpk2g30i7xa" path="res://scenes/interactables/doors/dash_door.tscn" id="2_7c2d1"]
+[ext_resource type="PackedScene" uid="uid://vlm0ue3sb2qr" path="res://scenes/interactables/doors/double_jump_door.tscn" id="3_kjdpe"]
+[ext_resource type="PackedScene" uid="uid://b8pn02h7ii1gu" path="res://scenes/interactables/doors/inverse_gravity_door.tscn" id="4_14vip"]
+[ext_resource type="PackedScene" uid="uid://cnyydjjv1xnod" path="res://scenes/interactables/doors/phase_door.tscn" id="5_kna73"]
+
+[node name="BaseRoom" unique_id=920769205 instance=ExtResource("1_ru5ed")]
+
+[node name="TileMap_Room" parent="." index="2" unique_id=452897678]
+tile_map_data = PackedByteArray("AAAEABEAAAAAAAAAAAAjABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAAKABEAAAAAAAAAAAALABEAAAAAAAAAAAAMABEAAAAAAAAAAAANABEAAAAAAAAAAAAOABEAAAAAAAAAAAAPABEAAAAAAAAAAAAQABEAAAAAAAAAAAARABEAAAAAAAAAAAASABEAAAAAAAAAAAATABEAAAAAAAAAAAAUABEAAAAAAAAAAAAVABEAAAAAAAAAAAAWABEAAAAAAAAAAAAXABEAAAAAAAAAAAAYABEAAAAAAAAAAAAZABEAAAAAAAAAAAAaABEAAAAAAAAAAAAbABEAAAAAAAAAAAAcABEAAAAAAAAAAAAdABEAAAAAAAAAAAAeABEAAAAAAAAAAAAfABEAAAAAAAAAAAA=")
+
+[node name="DashDoor" parent="." index="7" unique_id=2002614816 instance=ExtResource("2_7c2d1")]
+position = Vector2(184, 252)
+
+[node name="DoubleJumpDoor" parent="." index="8" unique_id=1135098568 instance=ExtResource("3_kjdpe")]
+position = Vector2(265, 251)
+
+[node name="InverseGravityDoor" parent="." index="9" unique_id=742325408 instance=ExtResource("4_14vip")]
+position = Vector2(359, 251)
+
+[node name="PhaseDoor" parent="." index="10" unique_id=452434239 instance=ExtResource("5_kna73")]
+position = Vector2(438, 253)

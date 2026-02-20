@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://yk1gsaj21567" path="res://scripts/player/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://bqcw61wg5wp5v" path="res://assets/art/player_spritesheet.png" id="2_g2els"]
+[ext_resource type="Shader" uid="uid://bxmhtqjvkv4am" path="res://shaders/player_fade.gdshader" id="2_qhqgy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqkch"]
+shader = ExtResource("2_qhqgy")
+shader_parameter/fade_speed = 3.0
+shader_parameter/min_alpha = 0.3
+shader_parameter/max_alpha = 1.0
+shader_parameter/phase_active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
 atlas = ExtResource("2_g2els")
@@ -267,6 +275,7 @@ collision_mask = 69
 script = ExtResource("1_3vyb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=865309486]
+material = SubResource("ShaderMaterial_dqkch")
 sprite_frames = SubResource("SpriteFrames_fjrip")
 animation = &"respawn"
 autoplay = "idle"

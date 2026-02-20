@@ -27,7 +27,7 @@ var ability_charges: int = 0
 @export var dash_speed := 350.0
 @export var dash_time := 0.22
 
-@export var phase_time := 3.0
+@export var phase_time := 5.0
 @export var phase_wall_layer := 3
 
 var checkpoint_room_path: String = ""
@@ -368,6 +368,8 @@ func _start_dash() -> void:
 	velocity.y = 0.0
 
 func _start_phase() -> void:
+	set_phase_enabled(true)
+	
 	_is_phasing = true
 	_phase_timer = phase_time
 
@@ -375,6 +377,8 @@ func _start_phase() -> void:
 	collision_mask &= ~(1 << (phase_wall_layer - 1)) # remove that bit
 	
 func _end_phase() -> void:
+	set_phase_enabled(false)
+	
 	_is_phasing = false
 	collision_mask = _saved_mask
 
@@ -388,6 +392,11 @@ func _toggle_gravity() -> void:
 	sprite.flip_v = (_grav_sign < 0)
 	# or if you're using a mesh:
 	# mesh.scale.y = abs(mesh.scale.y) * (_grav_sign)
+	
+func set_phase_enabled(enabled: bool):
+	var mat := sprite.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("phase_active", enabled)
 	
 func set_checkpoint():
 	checkpoint_room_path = RoomContext.current_room_path
