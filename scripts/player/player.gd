@@ -28,7 +28,10 @@ var ability_charges: int = 0
 @export var dash_time := 0.22
 
 @export var phase_time := 5.0
-@export var phase_wall_layer := 3
+@export var laser_layer := 3
+var _is_phasing := false
+var _phase_timer := 0.0
+var _saved_mask := 0
 
 var checkpoint_room_path: String = ""
 var checkpoint_position: Vector2 = Vector2.ZERO
@@ -36,10 +39,6 @@ var has_checkpoint := false
 
 var _grav_sign: int = 1 # 1 = normal, -1 inverted
 
-
-var _is_phasing := false
-var _phase_timer := 0.0
-var _saved_mask := 0
 
 var _coyote_timer := 0.0
 var _jump_buffer := 0.0
@@ -206,6 +205,12 @@ func _physics_process(delta: float) -> void:
 	if _is_dead or _is_respawning:
 		return
 		
+	if not _is_phasing and player_touching_laser():
+		_is_respawning = true
+		await _death_and_respawn()
+		_is_respawning = false
+		return
+		
 	if _is_dashing:
 		_play_anim("dash")
 	elif on_climb_wall and falling and input_dir != 0 and signf(input_dir) == -signf(get_wall_normal().x):
@@ -224,10 +229,10 @@ func init_default_checkpoint() -> void:
 	has_checkpoint = true
 
 
-func _on_hurtbox_body_entered(body: Node2D) -> void:
+func _on_hurtbox_body_entered(body: Node) -> void:
 	if _is_respawning:
 		return
-		
+			
 	_is_respawning = true
 	await _death_and_respawn()
 	_is_respawning = false
@@ -373,30 +378,41 @@ func _start_phase() -> void:
 	_is_phasing = true
 	_phase_timer = phase_time
 
+	print("Before:", collision_mask)
 	_saved_mask = collision_mask
-	collision_mask &= ~(1 << (phase_wall_layer - 1)) # remove that bit
+	collision_mask &= ~(1 << (laser_layer - 1))
+	print("After:", collision_mask)
 	
 func _end_phase() -> void:
 	set_phase_enabled(false)
 	
 	_is_phasing = false
 	collision_mask = _saved_mask
-
 	
+func player_touching_laser() -> bool:
+	var tilemap: TileMapLayer = RoomContext.current_tilemap
+	if tilemap == null:
+		return false
+
+	var p := tilemap.local_to_map(tilemap.to_local(global_position))
+	var td := tilemap.get_cell_tile_data(p)
+
+	return td != null and td.get_custom_data("laser") == true
+
+func set_phase_enabled(enabled: bool):
+	var mat := sprite.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("phase_active", enabled)
+
+
 func _toggle_gravity() -> void:
 	_grav_sign *= -1
 
 	lock_anim("rotate")
 
-	# flip visuals (don’t flip the CharacterBody2D root)
 	sprite.flip_v = (_grav_sign < 0)
-	# or if you're using a mesh:
-	# mesh.scale.y = abs(mesh.scale.y) * (_grav_sign)
+
 	
-func set_phase_enabled(enabled: bool):
-	var mat := sprite.material as ShaderMaterial
-	if mat:
-		mat.set_shader_parameter("phase_active", enabled)
 	
 func set_checkpoint():
 	checkpoint_room_path = RoomContext.current_room_path
@@ -408,6 +424,11 @@ func _death_and_respawn() -> void:
 	if not has_checkpoint:
 		return
 	_is_dead = true
+	
+	if _grav_sign == -1:
+		_toggle_gravity()
+	if _is_phasing:
+		_end_phase()
 
 	# stop movement
 	velocity = Vector2.ZERO
