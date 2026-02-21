@@ -31,7 +31,6 @@ var ability_charges: int = 0
 @export var laser_layer := 3
 var _is_phasing := false
 var _phase_timer := 0.0
-var _saved_mask := 0
 
 var checkpoint_room_path: String = ""
 var checkpoint_position: Vector2 = Vector2.ZERO
@@ -382,16 +381,11 @@ func _start_phase() -> void:
 	_is_phasing = true
 	_phase_timer = phase_time
 
-	print("Before:", collision_mask)
-	_saved_mask = collision_mask
-	collision_mask &= ~(1 << (laser_layer - 1))
-	print("After:", collision_mask)
 	
 func _end_phase() -> void:
 	set_phase_enabled(false)
 	
 	_is_phasing = false
-	collision_mask = _saved_mask
 	
 func player_touching_laser() -> bool:
 	var tilemap: TileMapLayer = RoomContext.current_tilemap
