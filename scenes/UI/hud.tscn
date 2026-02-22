@@ -7,17 +7,19 @@
 script = ExtResource("1_ahhtf")
 
 [node name="AbilityLabel" type="Label" parent="." unique_id=1730315417]
-offset_left = 4.0
+offset_left = 14.0
 offset_top = 7.0
-offset_right = 104.0
+offset_right = 126.0
 offset_bottom = 30.0
 theme_override_fonts/font = ExtResource("2_rd3kb")
+theme_override_font_sizes/font_size = 18
 text = "Ability: NONE"
 
 [node name="ChargesLabel" type="Label" parent="." unique_id=1684807219]
-offset_left = 4.0
-offset_top = 27.0
-offset_right = 87.0
-offset_bottom = 50.0
+offset_left = 14.0
+offset_top = 31.0
+offset_right = 108.0
+offset_bottom = 54.0
 theme_override_fonts/font = ExtResource("2_rd3kb")
+theme_override_font_sizes/font_size = 18
 text = "Charges: 0"

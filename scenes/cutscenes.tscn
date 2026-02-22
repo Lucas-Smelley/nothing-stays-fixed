@@ -1,0 +1,241 @@
+[gd_scene format=3 uid="uid://7o7nrc72na8h"]
+
+[ext_resource type="Script" uid="uid://3dybaxp7iix6" path="res://scripts/cut_scene.gd" id="1_5khjm"]
+[ext_resource type="Texture2D" uid="uid://i1oeajcfurr5" path="res://assets/art/cutscenes/frame_00001.png" id="2_feyoj"]
+[ext_resource type="Texture2D" uid="uid://o3sbllvdudgt" path="res://assets/art/cutscenes/black.png" id="2_pfeoa"]
+[ext_resource type="Texture2D" uid="uid://cjhepivnjxlk8" path="res://assets/art/cutscenes/frame_00002.png" id="3_ght7f"]
+[ext_resource type="Texture2D" uid="uid://d114f7vafuqtg" path="res://assets/art/cutscenes/frame_00003.png" id="4_dc4pn"]
+[ext_resource type="Texture2D" uid="uid://6r21bc6t2xy5" path="res://assets/art/cutscenes/frame_00004.png" id="5_pfeoa"]
+[ext_resource type="PackedScene" uid="uid://dq5sxkaylqy8n" path="res://scenes/world.tscn" id="6_ght7f"]
+[ext_resource type="Shader" uid="uid://vo0shfgwve3g" path="res://shaders/PostFX.gdshader" id="7_dc4pn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pfeoa"]
+shader = ExtResource("7_dc4pn")
+shader_parameter/vignette_strength = 0.35
+shader_parameter/vignette_softness = 1.3
+shader_parameter/scanline_strength = 0.15
+shader_parameter/scanline_density = 250.000007125
+shader_parameter/noise_strength = 0.06
+shader_parameter/chroma_strength = 0.35
+shader_parameter/warp_strength = 0.02000000095
+shader_parameter/flicker_strength = 0.030000001425
+
+[node name="cutscenes2" type="Control" unique_id=174521916]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5khjm")
+cutscene_textures = Array[Texture2D]([ExtResource("2_pfeoa"), ExtResource("2_pfeoa"), ExtResource("2_feyoj"), ExtResource("3_ght7f"), ExtResource("4_dc4pn"), ExtResource("5_pfeoa"), ExtResource("2_pfeoa"), ExtResource("2_pfeoa")])
+world_scene = ExtResource("6_ght7f")
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=449161569]
+z_index = -2
+layout_mode = 0
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 648.0
+offset_bottom = 369.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=670463929]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 280.0
+offset_top = 140.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="Fade" type="ColorRect" parent="." unique_id=1076506067]
+layout_mode = 0
+offset_right = 651.0
+offset_bottom = 368.0
+color = Color(0, 0, 0, 1)
+
+[node name="labelshadow" type="ColorRect" parent="." unique_id=343690449]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 319.0
+offset_right = 632.0
+offset_bottom = 352.0
+color = Color(0.16745102, 0.16745102, 0.16745096, 0.56078434)
+
+[node name="Label" type="Label" parent="." unique_id=1013819438]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 329.0
+offset_right = 622.0
+offset_bottom = 345.0
+text = "Space to continue"
+
+[node name="labels" type="Node2D" parent="." unique_id=836084752]
+position = Vector2(320, 180)
+
+[node name="loading" type="Label" parent="labels" unique_id=1073764628]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LOADING..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClassicFight" type="Label" parent="labels" unique_id=1936434051]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ClassicFight.exe
+Version 1.04
+Initializing Match Data..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="settings" type="ColorRect" parent="labels" unique_id=51943094]
+visible = false
+offset_left = -131.0
+offset_top = -166.0
+offset_right = 184.0
+offset_bottom = -53.0
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="label" type="Label" parent="labels/settings" unique_id=731746001]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = 575.0
+offset_bottom = 115.0
+theme_override_font_sizes/font_size = 28
+text = "This match has been 
+preconfigured.
+Loser: YOU"
+
+[node name="welcome" type="ColorRect" parent="labels" unique_id=803648971]
+visible = false
+offset_left = -257.0
+offset_top = -166.0
+offset_right = 66.0
+offset_bottom = -77.0
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="label" type="Label" parent="labels/welcome" unique_id=579172278]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 318.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 32
+text = "WELCOME TO 
+THE MAIN EVENT"
+
+[node name="fall" type="ColorRect" parent="labels" unique_id=624377415]
+visible = false
+offset_left = -254.0
+offset_top = -3.0
+offset_right = -29.0
+offset_bottom = 165.0
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="Label" type="Label" parent="labels/fall" unique_id=1995686079]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 8.0
+offset_right = 209.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 27
+text = "But this time, 
+you dont fall
+
+An unexpected
+input occurs"
+
+[node name="breakdown" type="ColorRect" parent="labels" unique_id=31909623]
+visible = false
+offset_left = -165.0
+offset_top = -110.0
+offset_right = 155.0
+offset_bottom = -29.0
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="Label" type="Label" parent="labels/breakdown" unique_id=2122782890]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 20.0
+offset_right = 314.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 26
+text = "The game breaks down,
+but you do not.."
+
+[node name="alone" type="Label" parent="labels" unique_id=741099179]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -46.0
+offset_right = 79.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Now you alone stand.
+
+Resolve the bugs,
+
+Restore the match."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="unscripted" type="Label" parent="labels" unique_id=145011370]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.5
+offset_top = -8.0
+offset_right = 53.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "UNSCRIPTED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PostFX" type="CanvasLayer" parent="." unique_id=859595089]
+
+[node name="ColorRect" type="ColorRect" parent="PostFX" unique_id=482385849]
+material = SubResource("ShaderMaterial_pfeoa")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

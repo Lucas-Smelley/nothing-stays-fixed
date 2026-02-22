@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="nothing-stays-fixed"
-run/main_scene="uid://dq5sxkaylqy8n"
+run/main_scene="uid://cylpgqryeag22"
 config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 
 [autoload]
 

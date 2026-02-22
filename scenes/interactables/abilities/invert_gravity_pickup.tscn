@@ -46,7 +46,7 @@ offset_right = 28.0
 offset_bottom = -8.999996
 theme_override_font_sizes/font_size = 12
 text = "invert
-gravity"
+gravity (e)"
 horizontal_alignment = 1
 uppercase = true
 

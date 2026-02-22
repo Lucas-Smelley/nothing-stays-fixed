@@ -6,6 +6,7 @@ class_name RoomTransition
 var room_pool: Array[String] = []
 var target_spawn_name: String = ""
 
+
 var _busy := false
 var _last_room: String = ""
 
@@ -106,11 +107,6 @@ func go_to_end() -> void:
 	
 	await _fade_to(1.0, 0.18)
 	
-	var world := get_tree().current_scene
-	if world and world.has_method("_load_room"):
-		world.call("_load_room", "res://scenes/end_room.tscn", "spawn")
-	
-	await get_tree().process_frame
+	get_tree().change_scene_to_file("res://scenes/end_scene.tscn")	
 	await _fade_to(0.0, 0.18)
 	
-	_busy = false
