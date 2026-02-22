@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://duvypw4ls7o5v" path="res://scripts/world.gd" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://k58bh6t2maqu" path="res://scenes/UI/hud.tscn" id="2_4wyf3"]
 [ext_resource type="Shader" uid="uid://vo0shfgwve3g" path="res://shaders/PostFX.gdshader" id="4_k0juu"]
+[ext_resource type="AudioStream" uid="uid://n3lqb430sxpt" path="res://assets/audio/music/music.mp3" id="5_71j4m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71j4m"]
 shader = ExtResource("4_k0juu")
@@ -35,3 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=1063465716]
+stream = ExtResource("5_71j4m")
+autoplay = true

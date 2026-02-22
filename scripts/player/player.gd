@@ -70,6 +70,21 @@ var _is_dead := false
 
 signal ability_changed(ability_name: String, charges: int)
 
+@onready var sfx: AudioStreamPlayer2D = $SFX
+@export var jump: AudioStream
+@export var dash: AudioStream
+@export var death: AudioStream
+@export var gravity_sound: AudioStream
+
+@onready var run: AudioStreamPlayer2D = $run
+@export var phase: AudioStreamPlayer2D
+
+func play_sfx(stream: AudioStream) -> void:
+	if stream == null: return
+	sfx.stop()
+	sfx.stream = stream
+	sfx.play()
+
 func _ready() -> void:
 	
 	hurtbox.body_entered.connect(_on_hurtbox_body_entered)
@@ -100,7 +115,14 @@ func _physics_process(delta: float) -> void:
 		wall_check.target_position = Vector2(-10,0)
 
 	var grounded := is_on_floor() if _grav_sign == 1 else is_on_ceiling()
-
+	
+	if grounded and input_dir != 0:
+		if not run.playing:
+			run.play()
+	else:
+		if run.playing:
+			run.stop()
+		
 	# timers
 	_jump_buffer = maxf(_jump_buffer - delta, 0.0)
 	_coyote_timer = maxf(_coyote_timer - delta, 0.0)
@@ -120,14 +142,18 @@ func _physics_process(delta: float) -> void:
 	if _is_dashing:
 		_dash_timer -= delta
 		velocity.x = _facing_dir * dash_speed
-
+			
 		if _dash_timer <= 0:
 			_is_dashing = false
 			
 	if _is_phasing:
 		_phase_timer -= delta
+		if not phase.playing:
+			phase.play()
 		
 		if _phase_timer <= 0:
+			if phase.playing:
+				phase.stop()
 			_end_phase()
 	
 	# refresh coyote
@@ -191,6 +217,7 @@ func _physics_process(delta: float) -> void:
 			_consume_charge()
 			
 			lock_anim("double_jump")
+		play_sfx(jump)
 	
 	#Set checkpoint 
 	if Input.is_action_just_pressed("set_checkpoint"):
@@ -365,6 +392,7 @@ func _handle_ability_pressed() -> void:
 		Ability.INVERT_GRAVITY:
 			if _consume_charge():
 				_toggle_gravity()
+				play_sfx(gravity_sound)
 		Ability.DOUBLE_JUMP:
 			pass # jump key handles it
 		_:
@@ -374,6 +402,7 @@ func _start_dash() -> void:
 	_is_dashing = true
 	_dash_timer = dash_time
 	velocity.y = 0.0
+	play_sfx(dash)
 
 func _start_phase() -> void:
 	set_phase_enabled(true)
@@ -409,7 +438,6 @@ func _toggle_gravity() -> void:
 	lock_anim("rotate")
 
 	sprite.flip_v = (_grav_sign < 0)
-
 	
 	
 func set_checkpoint():
@@ -432,7 +460,7 @@ func _death_and_respawn() -> void:
 	if not has_checkpoint:
 		return
 	_is_dead = true
-	
+	play_sfx(death)
 	if _grav_sign == -1:
 		_toggle_gravity()
 	if _is_phasing:
@@ -455,7 +483,6 @@ func _death_and_respawn() -> void:
 
 	# respawn animation
 	await play_locked_anim_and_wait("respawn")
-
 	set_physics_process(true)
 	_is_dead = false
 	

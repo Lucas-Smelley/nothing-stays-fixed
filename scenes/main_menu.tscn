@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://7o7nrc72na8h" path="res://scenes/cutscenes.tscn" id="2_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://e22f1iqdv14f" path="res://assets/art/menu.png" id="3_bqqt6"]
 [ext_resource type="Shader" uid="uid://vo0shfgwve3g" path="res://shaders/PostFX.gdshader" id="4_wu84c"]
+[ext_resource type="AudioStream" uid="uid://n3lqb430sxpt" path="res://assets/audio/music/music.mp3" id="5_8ln24"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ln24"]
 shader = ExtResource("4_wu84c")
@@ -58,3 +59,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=1988458701]
+stream = ExtResource("5_8ln24")
+autoplay = true
