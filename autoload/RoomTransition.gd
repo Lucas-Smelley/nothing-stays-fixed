@@ -2,9 +2,13 @@ extends CanvasLayer
 
 class_name RoomTransition
 
-@export var rooms_folder := "res://scenes/rooms"
-var room_pool: Array[String] = []
 var target_spawn_name: String = ""
+
+@export var room_scenes: Array[PackedScene] = []
+@export var end_scene: PackedScene
+var _last_scene: PackedScene = null
+
+var recent_rooms: Array[PackedScene] = []
 
 
 var _busy := false
@@ -21,57 +25,57 @@ func _ready() -> void:
 	fade.anchor_bottom = 1
 	add_child(fade)
 	
-	_build_room_pool()
 
-func _build_room_pool() -> void:
-	room_pool.clear()
-
-	var dir := DirAccess.open(rooms_folder)
-	if dir == null:
-		push_error("Could not open rooms folder: " + rooms_folder)
-		return
-
-	dir.list_dir_begin()
-	var file := dir.get_next()
-	while file != "":
-		if not dir.current_is_dir() and file.ends_with(".tscn"):
-			room_pool.append(rooms_folder + "/" + file)
-		file = dir.get_next()
-	dir.list_dir_end()
-
-	if room_pool.is_empty():
-		push_warning("No rooms found in: " + rooms_folder)
-		
 func go_random(spawn_name: String) -> void:
-	if _busy: 
+	if _busy:
 		return
-	target_spawn_name = spawn_name
-	
 	_busy = true
-	
-	var next_room = _pick_random_room()
-	
+
+	target_spawn_name = spawn_name
+
+	var next_scene: PackedScene = _pick_random_room()
+	if next_scene == null:
+		push_error("No rooms assigned in RoomTransition!")
+		_busy = false
+		return
+
 	await _fade_to(1.0, 0.18)
-	
+
 	var world := get_tree().current_scene
-	if world and world.has_method("_load_room"):
-		world.call("_load_room", next_room, target_spawn_name)
-	
+	if world and world.has_method("_load_room_packed"):
+		world.call("_load_room_packed", next_scene, target_spawn_name)
+
 	await get_tree().process_frame
 	await _fade_to(0.0, 0.18)
-	
+
 	_busy = false
 	
-func _pick_random_room() -> String:
-	if room_pool.size() == 1:
-		return room_pool[0]
-		
-	var candidates = room_pool.duplicate()
-	candidates.erase(_last_room)
-	
-	var choice = candidates[randi() % candidates.size()]
-	
-	_last_room = choice
+func _pick_random_room() -> PackedScene:
+	if room_scenes.is_empty():
+		return null
+
+	if room_scenes.size() == 1:
+		_last_scene = room_scenes[0]
+		return room_scenes[0]
+
+	var candidates: Array[PackedScene] = room_scenes.duplicate()
+	candidates.erase(_last_scene)
+
+	for room in recent_rooms:
+		candidates.erase(room)
+
+	if candidates.is_empty():
+		candidates = room_scenes.duplicate()
+		candidates.erase(_last_scene) # optional but recommended
+
+	var choice: PackedScene = candidates[randi() % candidates.size()]
+
+	# keep last 3 rooms
+	if recent_rooms.size() >= 3:
+		recent_rooms.pop_front()
+	recent_rooms.append(choice)
+
+	_last_scene = choice
 	return choice
 	
 func _fade_to(alpha: float, time: float) -> void:
@@ -104,9 +108,14 @@ func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 	_busy = false
 
 func go_to_end() -> void:
-	
+	if end_scene == null:
+		push_error("end_scene is not assigned in RoomTransition!")
+		return
+
 	await _fade_to(1.0, 0.18)
-	
-	get_tree().change_scene_to_file("res://scenes/end_scene.tscn")	
+
+	get_tree().change_scene_to_packed(end_scene)
+
+	await get_tree().process_frame
 	await _fade_to(0.0, 0.18)
 	

@@ -12,7 +12,6 @@ func unlock_door(door_id: String) -> void:
 	unlocked_doors[door_id] = true
 	
 	if unlocked_doors.size() == 4:
-		print("done")
 		game_clear()
 
 func reset_run() -> void:

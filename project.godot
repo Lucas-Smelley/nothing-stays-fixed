@@ -17,10 +17,10 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 
 [autoload]
 
-Transition="*uid://b1wpbw8fxhqg7"
 RoomContext="*uid://c6lopom5wunc8"
 Inventory="*uid://dnu8h516uiosj"
 Progress="*uid://dmrmteyabp61j"
+Transition="*uid://bf787nm6yegls"
 
 [display]
 
