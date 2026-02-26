@@ -4,8 +4,6 @@ class_name Player
 
 @onready var hurtbox: Area2D = $Hurtbox
 const HAZARD_LAYER := 6
-var ceiling_layer := 9
-var up_dir := Vector2.UP
 
 @export var move_speed: float = 140.0
 
@@ -121,9 +119,7 @@ func _physics_process(delta: float) -> void:
 		if run.playing:
 			run.stop()
 			
-	var moving_against_up := velocity.dot(up_dir) > 0.0
-	set_collision_mask_value(ceiling_layer, moving_against_up)
-		
+			
 	# timers
 	_jump_buffer = maxf(_jump_buffer - delta, 0.0)
 	_coyote_timer = maxf(_coyote_timer - delta, 0.0)
@@ -206,11 +202,13 @@ func _physics_process(delta: float) -> void:
 			velocity.y += -jump_speed * _grav_sign
 			_jump_buffer = 0.0
 			_coyote_timer = 0.0
+			play_sfx(jump)
 		elif on_climb_wall:
 			velocity.y = -jump_speed * _grav_sign
 			velocity.x = wall_normal.x * wall_jump_x
 			_jump_buffer = 0.0
 			_wall_jump_lock = wall_jump_lock_time
+			play_sfx(jump)
 		elif equipped_ability == Ability.DOUBLE_JUMP and ability_charges > 0 and not _air_jumped:
 			velocity.y = 0.0
 			velocity.y += -jump_speed * _grav_sign
@@ -218,7 +216,7 @@ func _physics_process(delta: float) -> void:
 			_consume_charge()
 			
 			lock_anim("double_jump")
-		play_sfx(jump)
+			play_sfx(jump)
 		
 	_was_on_wall = on_climb_wall
 

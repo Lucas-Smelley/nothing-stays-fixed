@@ -45,8 +45,11 @@ func _ready() -> void:
 	if room_base_weights.size() != room_scenes.size():
 		room_base_weights.resize(room_scenes.size())
 		for i in range(room_base_weights.size()):
-			room_base_weights[i] = 1.0
-
+			if room_scenes[i] == setup_room:
+				room_base_weights[i] = 2.0
+			else:
+				room_base_weights[i] = 1.0
+			
 	room_weights = room_base_weights.duplicate()
 
 func _on_key_added(key_id: String) -> void:

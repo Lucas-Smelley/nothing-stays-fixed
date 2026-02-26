@@ -18,11 +18,9 @@ exit_side = "right"
 
 [node name="ChargePickup" parent="." index="7" unique_id=19352073 instance=ExtResource("2_5phkd")]
 position = Vector2(70, 261)
-amount = 5
 
 [node name="ChargePickup2" parent="." index="8" unique_id=1140980214 instance=ExtResource("2_5phkd")]
 position = Vector2(567, 261)
-amount = 5
 
 [node name="DashPickup" parent="." index="9" unique_id=549324008 instance=ExtResource("3_d1oky")]
 position = Vector2(152, 261)
@@ -57,3 +55,27 @@ text = "Shift to use ability"
 
 [node name="StaticBody2D" parent="." index="18" unique_id=780003050 instance=ExtResource("7_d1oky")]
 position = Vector2(392, 104)
+
+[node name="ChargePickup7" parent="." index="19" unique_id=201090677 instance=ExtResource("2_5phkd")]
+position = Vector2(553, 262)
+
+[node name="ChargePickup8" parent="." index="20" unique_id=1081162847 instance=ExtResource("2_5phkd")]
+position = Vector2(560, 252)
+
+[node name="ChargePickup9" parent="." index="21" unique_id=501643376 instance=ExtResource("2_5phkd")]
+position = Vector2(539, 262)
+
+[node name="ChargePickup10" parent="." index="22" unique_id=977259409 instance=ExtResource("2_5phkd")]
+position = Vector2(547, 252)
+
+[node name="ChargePickup11" parent="." index="23" unique_id=1252232288 instance=ExtResource("2_5phkd")]
+position = Vector2(84, 261)
+
+[node name="ChargePickup12" parent="." index="24" unique_id=1007406070 instance=ExtResource("2_5phkd")]
+position = Vector2(99, 261)
+
+[node name="ChargePickup13" parent="." index="25" unique_id=2101126223 instance=ExtResource("2_5phkd")]
+position = Vector2(77, 251)
+
+[node name="ChargePickup14" parent="." index="26" unique_id=2058936117 instance=ExtResource("2_5phkd")]
+position = Vector2(92, 251)

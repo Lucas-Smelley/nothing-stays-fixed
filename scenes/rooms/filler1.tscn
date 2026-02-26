@@ -9,5 +9,49 @@
 tile_map_data = PackedByteArray("AAAEABEAAAAAAAAAAAAjABEAAAAAAAAAAAAHAA8AAAAAAAAAAAAHAA4AAAAAAAAAAAAHAA0AAAAAAAAAAAAHAAwAAAAAAAAAAAAHAAsAAAAAAAAAAAAPAA8AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA0AAAAAAAAAAAAPAAwAAAAAAAAAAAAPAAsAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAgAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAYAAAAAAAAAAAAHAAoAAAAAAAIAAAAPAAUAAAAAAAIAAAAgAA8AAAAAAAAAAAAgAA4AAAAAAAAAAAAgAA0AAAAAAAAAAAAgAAwAAAAAAAAAAAAgAAsAAAAAAAAAAAAcAA8AAAAAAAAAAAAcAA4AAAAAAAAAAAAcAA0AAAAAAAAAAAAcAAwAAAAAAAAAAAAcAAsAAAAAAAAAAAAcAAoAAAAAAAAAAAAcAAkAAAAAAAAAAAAcAAgAAAAAAAAAAAAYAA8AAAAAAAAAAAAYAA4AAAAAAAAAAAAYAA0AAAAAAAAAAAAYAAwAAAAAAAAAAAAYAAsAAAAAAAAAAAAYAAoAAAAAAAAAAAAYAAkAAAAAAAAAAAAYAAgAAAAAAAAAAAAYAAcAAAAAAAAAAAAYAAYAAAAAAAAAAAALAAcAAAAAAAIAAAALAAgAAAAAAAAAAAALAAkAAAAAAAAAAAALAAoAAAAAAAAAAAALAAsAAAAAAAAAAAALAAwAAAAAAAAAAAALAA0AAAAAAAAAAAALAA4AAAAAAAAAAAALAA8AAAAAAAAAAAATAAUAAAAAAAAAAAAUAAUAAAAAAAAAAAATAAYAAAAAAAAAAAATAAcAAAAAAAAAAAATAAgAAAAAAAAAAAATAAkAAAAAAAAAAAATAAoAAAAAAAAAAAATAAsAAAAAAAAAAAATAAwAAAAAAAAAAAATAA0AAAAAAAAAAAATAA4AAAAAAAAAAAATAA8AAAAAAAAAAAAUAA8AAAAAAAAAAAAUAA4AAAAAAAAAAAAUAA0AAAAAAAAAAAAUAAwAAAAAAAAAAAAUAAsAAAAAAAAAAAAUAAoAAAAAAAAAAAAUAAkAAAAAAAAAAAAUAAgAAAAAAAAAAAAUAAcAAAAAAAAAAAAUAAYAAAAAAAAAAAAYAAUAAAAAAAIAAAAcAAcAAAAAAAIAAAAgAAoAAAAAAAIAAAA=")
 
 [node name="ChargePickup" parent="." index="7" unique_id=19352073 instance=ExtResource("2_8fc3t")]
-position = Vector2(319, 68)
-amount = 10
+position = Vector2(309, 72)
+
+[node name="ChargePickup2" parent="." index="8" unique_id=585621516 instance=ExtResource("2_8fc3t")]
+position = Vector2(317, 72)
+
+[node name="ChargePickup3" parent="." index="9" unique_id=1419528872 instance=ExtResource("2_8fc3t")]
+position = Vector2(407, 125)
+
+[node name="ChargePickup4" parent="." index="10" unique_id=704521169 instance=ExtResource("2_8fc3t")]
+position = Vector2(407, 112)
+
+[node name="ChargePickup5" parent="." index="11" unique_id=559800293 instance=ExtResource("2_8fc3t")]
+position = Vector2(233, 125)
+
+[node name="ChargePickup6" parent="." index="12" unique_id=957073324 instance=ExtResource("2_8fc3t")]
+position = Vector2(233, 112)
+
+[node name="ChargePickup7" parent="." index="13" unique_id=2062414510 instance=ExtResource("2_8fc3t")]
+position = Vector2(170, 160)
+
+[node name="ChargePickup8" parent="." index="14" unique_id=516166464 instance=ExtResource("2_8fc3t")]
+position = Vector2(170, 146)
+
+[node name="ChargePickup9" parent="." index="15" unique_id=972207747 instance=ExtResource("2_8fc3t")]
+position = Vector2(470, 156)
+
+[node name="ChargePickup10" parent="." index="16" unique_id=2014902437 instance=ExtResource("2_8fc3t")]
+position = Vector2(470, 143)
+
+[node name="ChargePickup11" parent="." index="17" unique_id=1627595694 instance=ExtResource("2_8fc3t")]
+position = Vector2(105, 191)
+
+[node name="ChargePickup12" parent="." index="18" unique_id=225820818 instance=ExtResource("2_8fc3t")]
+position = Vector2(105, 204)
+
+[node name="ChargePickup13" parent="." index="19" unique_id=220167900 instance=ExtResource("2_8fc3t")]
+position = Vector2(535, 190)
+
+[node name="ChargePickup14" parent="." index="20" unique_id=1338765761 instance=ExtResource("2_8fc3t")]
+position = Vector2(535, 203)
+
+[node name="ChargePickup15" parent="." index="21" unique_id=857009572 instance=ExtResource("2_8fc3t")]
+position = Vector2(325, 72)
+
+[node name="ChargePickup16" parent="." index="22" unique_id=212182480 instance=ExtResource("2_8fc3t")]
+position = Vector2(332, 72)
