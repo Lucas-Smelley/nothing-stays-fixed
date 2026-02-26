@@ -16,66 +16,68 @@ tile_map_data = PackedByteArray("AAAEABEAAAAAAAAAAAAjABEAAAAAAAAAAAD//xEAAAABAAA
 [node name="RightDoor" parent="." index="4" unique_id=616434566]
 exit_side = "right"
 
-[node name="ChargePickup" parent="." index="7" unique_id=19352073 instance=ExtResource("2_5phkd")]
-position = Vector2(70, 261)
-
-[node name="ChargePickup2" parent="." index="8" unique_id=1140980214 instance=ExtResource("2_5phkd")]
-position = Vector2(567, 261)
-
-[node name="DashPickup" parent="." index="9" unique_id=549324008 instance=ExtResource("3_d1oky")]
+[node name="DashPickup" parent="." index="7" unique_id=549324008 instance=ExtResource("3_d1oky")]
 position = Vector2(152, 261)
 
-[node name="DoubleJumpPickup" parent="." index="10" unique_id=923975689 instance=ExtResource("4_ios0r")]
+[node name="DoubleJumpPickup" parent="." index="8" unique_id=923975689 instance=ExtResource("4_ios0r")]
 position = Vector2(240, 261)
 
-[node name="InvertGravityPickup" parent="." index="11" unique_id=1416035168 instance=ExtResource("5_nfquk")]
+[node name="InvertGravityPickup" parent="." index="9" unique_id=1416035168 instance=ExtResource("5_nfquk")]
 position = Vector2(400, 261)
 
-[node name="PhasePickup" parent="." index="12" unique_id=93309844 instance=ExtResource("6_s0nb4")]
+[node name="PhasePickup" parent="." index="10" unique_id=93309844 instance=ExtResource("6_s0nb4")]
 position = Vector2(489, 261)
 
-[node name="ChargePickup3" parent="." index="13" unique_id=1944004857 instance=ExtResource("2_5phkd")]
-position = Vector2(399, 11)
-
-[node name="ChargePickup4" parent="." index="14" unique_id=1163715850 instance=ExtResource("2_5phkd")]
-position = Vector2(240, 197)
-
-[node name="ChargePickup5" parent="." index="15" unique_id=1466742493 instance=ExtResource("2_5phkd")]
-position = Vector2(488, 177)
-
-[node name="ChargePickup6" parent="." index="16" unique_id=2034838736 instance=ExtResource("2_5phkd")]
-position = Vector2(16, 164)
-
-[node name="Label" type="Label" parent="." index="17" unique_id=1297858075]
+[node name="Label" type="Label" parent="." index="11" unique_id=1297858075]
 offset_left = 120.0
 offset_top = 108.0
 offset_right = 258.0
 offset_bottom = 124.0
 text = "Shift to use ability"
 
-[node name="StaticBody2D" parent="." index="18" unique_id=780003050 instance=ExtResource("7_d1oky")]
+[node name="StaticBody2D" parent="." index="12" unique_id=780003050 instance=ExtResource("7_d1oky")]
 position = Vector2(392, 104)
 
-[node name="ChargePickup7" parent="." index="19" unique_id=201090677 instance=ExtResource("2_5phkd")]
+[node name="chargesContainer" type="Node2D" parent="." index="13" unique_id=1884405996]
+
+[node name="ChargePickup" parent="chargesContainer" index="0" unique_id=19352073 instance=ExtResource("2_5phkd")]
+position = Vector2(70, 261)
+
+[node name="ChargePickup2" parent="chargesContainer" index="1" unique_id=1140980214 instance=ExtResource("2_5phkd")]
+position = Vector2(567, 261)
+
+[node name="ChargePickup3" parent="chargesContainer" index="2" unique_id=1944004857 instance=ExtResource("2_5phkd")]
+position = Vector2(399, 11)
+
+[node name="ChargePickup4" parent="chargesContainer" index="3" unique_id=1163715850 instance=ExtResource("2_5phkd")]
+position = Vector2(240, 197)
+
+[node name="ChargePickup5" parent="chargesContainer" index="4" unique_id=1466742493 instance=ExtResource("2_5phkd")]
+position = Vector2(488, 177)
+
+[node name="ChargePickup6" parent="chargesContainer" index="5" unique_id=2034838736 instance=ExtResource("2_5phkd")]
+position = Vector2(16, 164)
+
+[node name="ChargePickup7" parent="chargesContainer" index="6" unique_id=201090677 instance=ExtResource("2_5phkd")]
 position = Vector2(553, 262)
 
-[node name="ChargePickup8" parent="." index="20" unique_id=1081162847 instance=ExtResource("2_5phkd")]
+[node name="ChargePickup8" parent="chargesContainer" index="7" unique_id=1081162847 instance=ExtResource("2_5phkd")]
 position = Vector2(560, 252)
 
-[node name="ChargePickup9" parent="." index="21" unique_id=501643376 instance=ExtResource("2_5phkd")]
+[node name="ChargePickup9" parent="chargesContainer" index="8" unique_id=501643376 instance=ExtResource("2_5phkd")]
 position = Vector2(539, 262)
 
-[node name="ChargePickup10" parent="." index="22" unique_id=977259409 instance=ExtResource("2_5phkd")]
+[node name="ChargePickup10" parent="chargesContainer" index="9" unique_id=977259409 instance=ExtResource("2_5phkd")]
 position = Vector2(547, 252)
 
-[node name="ChargePickup11" parent="." index="23" unique_id=1252232288 instance=ExtResource("2_5phkd")]
+[node name="ChargePickup11" parent="chargesContainer" index="10" unique_id=1252232288 instance=ExtResource("2_5phkd")]
 position = Vector2(84, 261)
 
-[node name="ChargePickup12" parent="." index="24" unique_id=1007406070 instance=ExtResource("2_5phkd")]
+[node name="ChargePickup12" parent="chargesContainer" index="11" unique_id=1007406070 instance=ExtResource("2_5phkd")]
 position = Vector2(99, 261)
 
-[node name="ChargePickup13" parent="." index="25" unique_id=2101126223 instance=ExtResource("2_5phkd")]
+[node name="ChargePickup13" parent="chargesContainer" index="12" unique_id=2101126223 instance=ExtResource("2_5phkd")]
 position = Vector2(77, 251)
 
-[node name="ChargePickup14" parent="." index="26" unique_id=2058936117 instance=ExtResource("2_5phkd")]
+[node name="ChargePickup14" parent="chargesContainer" index="13" unique_id=2058936117 instance=ExtResource("2_5phkd")]
 position = Vector2(92, 251)

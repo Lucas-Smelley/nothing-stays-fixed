@@ -1,7 +1,8 @@
 extends Area2D
 
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 @export var required_key_id: String = "KEY"
-@export var is_final_door := false
 @export var door_id: String = ""
 
 var _player_inside := false
@@ -13,13 +14,12 @@ func _ready() -> void:
 
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-	Inventory.key_added.connect(_on_key_added)
+	
+	animated_sprite.play("idle")
 
-	_refresh_visual_state()
 
 func set_door_id(id: String) -> void:
 	door_id = id
-	_refresh_visual_state()
 
 func _on_body_entered(body: Node) -> void:
 	if not body.is_in_group("player"):
@@ -31,9 +31,7 @@ func _on_body_exited(body: Node) -> void:
 	if body.is_in_group("player"):
 		_player_inside = false
 
-func _on_key_added(_key_id: String) -> void:
-	# visuals only, no opening here
-	_refresh_visual_state()
+
 
 func _is_unlocked_now() -> bool:
 	# already permanently unlocked?
@@ -42,9 +40,6 @@ func _is_unlocked_now() -> bool:
 	# otherwise must have the key
 	return Inventory.has_key(required_key_id)
 
-func _refresh_visual_state() -> void:
-	var unlocked := _is_unlocked_now()
-	# TODO: update visuals (locked/unlocked animation)
 
 func _try_open() -> void:
 	if _opened:
@@ -52,7 +47,6 @@ func _try_open() -> void:
 	if not _player_inside:
 		return
 	if not _is_unlocked_now():
-		# TODO: locked feedback
 		return
 
 	_opened = true
@@ -69,10 +63,9 @@ func _try_open() -> void:
 
 	# 3) Destroy the carried key node attached to the player (visual)
 	_destroy_carried_key_node(required_key_id)
-
-	# Cleanup and destroy door
-	if Inventory.key_added.is_connected(_on_key_added):
-		Inventory.key_added.disconnect(_on_key_added)
+	
+	animated_sprite.play("clear")
+	await animated_sprite.animation_finished
 
 	call_deferred("queue_free")
 

@@ -8,38 +8,40 @@
 [node name="TileMap_Room" parent="." index="2" unique_id=452897678]
 tile_map_data = PackedByteArray("AAAEABEAAAAAAAAAAAAjABEAAAAAAAAAAAAIAA8AAAAAAAAAAAAJAA8AAAAAAAAAAAAJABAAAAAAAAAAAAAIABAAAAAAAAAAAAAfABAAAAAAAAAAAAAfAA8AAAAAAAAAAAAeAA8AAAAAAAAAAAAeABAAAAAAAAAAAAAHAA8AAAAAAAQAAAAHABAAAAAAAAQAAAAgAA8AAAAAAAQAABAgABAAAAAAAAQAABAKAA8AAAAAAAAAAAAKABAAAAAAAAAAAAAdAA8AAAAAAAAAAAAdABAAAAAAAAAAAAATAA8AAAAAAAAAAAAUAA8AAAAAAAAAAAAUABAAAAAAAAAAAAATABAAAAAAAAAAAAAVAA8AAAAAAAAAAAAVABAAAAAAAAAAAAASAA8AAAAAAAAAAAASABAAAAAAAAAAAAASAA4AAAAAAAIAAAAVAA4AAAAAAAIAAAANAA8AAAAAAAAAAAAOAA8AAAAAAAAAAAAPAA8AAAAAAAAAAAAPABAAAAAAAAAAAAAOABAAAAAAAAAAAAANABAAAAAAAAAAAAAYAA8AAAAAAAAAAAAZAA8AAAAAAAAAAAAaAA8AAAAAAAAAAAAaABAAAAAAAAAAAAAZABAAAAAAAAAAAAAYABAAAAAAAAAAAAAKAA4AAAAAAAIAAAANAA4AAAAAAAIAAAAaAA4AAAAAAAIAAAAdAA4AAAAAAAIAAAARAA8AAAAAAAQAAAARABAAAAAAAAQAAAAWAA8AAAAAAAQAABAWABAAAAAAAAQAABA=")
 
-[node name="ChargePickup" parent="." index="7" unique_id=19352073 instance=ExtResource("2_bvtch")]
+[node name="chargesContainer" type="Node2D" parent="." index="7" unique_id=108651947]
+
+[node name="ChargePickup" parent="chargesContainer" index="0" unique_id=19352073 instance=ExtResource("2_bvtch")]
 position = Vector2(315, 231)
 
-[node name="ChargePickup2" parent="." index="8" unique_id=247175032 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup2" parent="chargesContainer" index="1" unique_id=247175032 instance=ExtResource("2_bvtch")]
 position = Vector2(325, 231)
 
-[node name="ChargePickup3" parent="." index="9" unique_id=1469113312 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup3" parent="chargesContainer" index="2" unique_id=1469113312 instance=ExtResource("2_bvtch")]
 position = Vector2(235, 232)
 
-[node name="ChargePickup4" parent="." index="10" unique_id=1181232176 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup4" parent="chargesContainer" index="3" unique_id=1181232176 instance=ExtResource("2_bvtch")]
 position = Vector2(246, 232)
 
-[node name="ChargePickup5" parent="." index="11" unique_id=1758811601 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup5" parent="chargesContainer" index="4" unique_id=1758811601 instance=ExtResource("2_bvtch")]
 position = Vector2(394, 231)
 
-[node name="ChargePickup6" parent="." index="12" unique_id=1949689020 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup6" parent="chargesContainer" index="5" unique_id=1949689020 instance=ExtResource("2_bvtch")]
 position = Vector2(403, 231)
 
-[node name="ChargePickup7" parent="." index="13" unique_id=1300560198 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup7" parent="chargesContainer" index="6" unique_id=1300560198 instance=ExtResource("2_bvtch")]
 position = Vector2(315, 224)
 
-[node name="ChargePickup8" parent="." index="14" unique_id=271774530 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup8" parent="chargesContainer" index="7" unique_id=271774530 instance=ExtResource("2_bvtch")]
 position = Vector2(325, 224)
 
-[node name="ChargePickup9" parent="." index="15" unique_id=1018415475 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup9" parent="chargesContainer" index="8" unique_id=1018415475 instance=ExtResource("2_bvtch")]
 position = Vector2(491, 232)
 
-[node name="ChargePickup10" parent="." index="16" unique_id=1277549237 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup10" parent="chargesContainer" index="9" unique_id=1277549237 instance=ExtResource("2_bvtch")]
 position = Vector2(503, 232)
 
-[node name="ChargePickup11" parent="." index="17" unique_id=403123183 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup11" parent="chargesContainer" index="10" unique_id=403123183 instance=ExtResource("2_bvtch")]
 position = Vector2(138, 233)
 
-[node name="ChargePickup12" parent="." index="18" unique_id=456789552 instance=ExtResource("2_bvtch")]
+[node name="ChargePickup12" parent="chargesContainer" index="11" unique_id=456789552 instance=ExtResource("2_bvtch")]
 position = Vector2(149, 233)

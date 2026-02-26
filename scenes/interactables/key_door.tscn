@@ -9,8 +9,10 @@ radius = 12.0415945
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_nnqql")
+required_key_id = null
+door_id = null
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=660292665]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=970611559]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1607898899]
 position = Vector2(0, 1)

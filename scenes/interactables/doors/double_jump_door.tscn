@@ -1,11 +1,61 @@
 [gd_scene format=3 uid="uid://vlm0ue3sb2qr"]
 
 [ext_resource type="PackedScene" uid="uid://dfg6mj66w5sep" path="res://scenes/interactables/key_door.tscn" id="1_l5vr3"]
-[ext_resource type="Texture2D" uid="uid://djyqh2qbq5k56" path="res://assets/art/doors/double_jump_door.png" id="2_btq7b"]
+[ext_resource type="Texture2D" uid="uid://kineveuvcpk6" path="res://assets/art/doors/doors_spritesheet.png" id="2_btq7b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrj1e"]
+atlas = ExtResource("2_btq7b")
+region = Rect2(40, 20, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_817gc"]
+atlas = ExtResource("2_btq7b")
+region = Rect2(60, 20, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8quv"]
+atlas = ExtResource("2_btq7b")
+region = Rect2(80, 20, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut547"]
+atlas = ExtResource("2_btq7b")
+region = Rect2(100, 20, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yxwp"]
+atlas = ExtResource("2_btq7b")
+region = Rect2(0, 20, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y2bpx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrj1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_817gc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8quv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut547")
+}],
+"loop": false,
+"name": &"clear",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yxwp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="DoubleJumpDoor" unique_id=2002614816 instance=ExtResource("1_l5vr3")]
 required_key_id = "DOUBLE_JUMP_KEY"
 door_id = "DOUBLE_JUMP_DOOR"
 
-[node name="Sprite2D" parent="." index="0" unique_id=660292665]
-texture = ExtResource("2_btq7b")
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=970611559]
+sprite_frames = SubResource("SpriteFrames_y2bpx")
+animation = &"idle"
+autoplay = "idle"

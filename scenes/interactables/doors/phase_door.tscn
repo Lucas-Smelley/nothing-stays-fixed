@@ -1,11 +1,61 @@
 [gd_scene format=3 uid="uid://cnyydjjv1xnod"]
 
 [ext_resource type="PackedScene" uid="uid://dfg6mj66w5sep" path="res://scenes/interactables/key_door.tscn" id="1_2f1i4"]
-[ext_resource type="Texture2D" uid="uid://bhmp4648f1mtj" path="res://assets/art/doors/phase_door.png" id="2_my0e8"]
+[ext_resource type="Texture2D" uid="uid://kineveuvcpk6" path="res://assets/art/doors/doors_spritesheet.png" id="2_my0e8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_si0wj"]
+atlas = ExtResource("2_my0e8")
+region = Rect2(40, 60, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p5yk"]
+atlas = ExtResource("2_my0e8")
+region = Rect2(60, 60, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtvfg"]
+atlas = ExtResource("2_my0e8")
+region = Rect2(80, 60, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5jkc"]
+atlas = ExtResource("2_my0e8")
+region = Rect2(100, 60, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23g58"]
+atlas = ExtResource("2_my0e8")
+region = Rect2(0, 60, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oa7ym"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_si0wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8p5yk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtvfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5jkc")
+}],
+"loop": false,
+"name": &"clear",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23g58")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="PhaseDoor" unique_id=2002614816 instance=ExtResource("1_2f1i4")]
 required_key_id = "PHASE_KEY"
 door_id = "PHASE_DOOR"
 
-[node name="Sprite2D" parent="." index="0" unique_id=660292665]
-texture = ExtResource("2_my0e8")
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=970611559]
+sprite_frames = SubResource("SpriteFrames_oa7ym")
+animation = &"clear"
+autoplay = "idle"
