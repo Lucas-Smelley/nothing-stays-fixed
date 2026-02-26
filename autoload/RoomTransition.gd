@@ -179,36 +179,34 @@ func _track_recent(choice: PackedScene) -> void:
 		recent_rooms.pop_front()
 	recent_rooms.append(choice)
 
-func go_random(spawn_name: String) -> void:
+
+func go_random(spawn_name: String) -> bool:
 	if _busy:
-		return
+		return false
+
 	_busy = true
 
 	var next_scene := _pick_weighted_room()
 	if next_scene == null:
 		_busy = false
-		return
+		return false
 
-	# Fade out
+	call_deferred("_go_random_impl", next_scene, spawn_name)
+	return true
+
+func _go_random_impl(next_scene: PackedScene, spawn_name: String) -> void:
 	await _fade_to(1.0, 0.18)
 
-	# Load new room through World
 	var world := get_tree().current_scene
 	if world and world.has_method("_load_room_packed"):
 		world.call("_load_room_packed", next_scene, spawn_name)
 	else:
 		push_warning("World missing _load_room_packed")
+		_busy = false
+		return
 
-	# Give one frame for scene to fully instantiate
 	await get_tree().process_frame
-
-	# Reset setup weight if we entered setup
-	if next_scene == setup_room:
-		set_weight_by_scene(setup_room, 1.0)
-
-	# Fade back in
 	await _fade_to(0.0, 0.18)
-
 	_busy = false
 	
 	

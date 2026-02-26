@@ -178,6 +178,7 @@ position = Vector2(645, 259)
 collision_layer = 64
 collision_mask = 2
 script = ExtResource("8_b5txi")
+exit_side = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightDoor" unique_id=196717002]
 position = Vector2(12.75, 5)
