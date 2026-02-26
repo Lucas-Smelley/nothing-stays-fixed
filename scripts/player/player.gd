@@ -452,6 +452,22 @@ func _death_and_respawn() -> void:
 		return
 	_is_dead = true
 	play_sfx(death)
+
+	# stop movement
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+	# 1) death animation
+	await play_locked_anim_and_wait("die")
+	
+	# fade out, scene move/load, fade in
+	await Transition.respawn_to_checkpoint(checkpoint_room_scene, checkpoint_position)
+	reset_on_death()
+	# respawn animation
+	await play_locked_anim_and_wait("respawn")
+	set_physics_process(true)
+	_is_dead = false
+	
+func reset_on_death() -> void:
 	if _grav_sign == -1:
 		_toggle_gravity()
 	if _is_phasing:
@@ -462,21 +478,6 @@ func _death_and_respawn() -> void:
 		_dash_timer = 0.0
 		
 	_clear_carried_keys_on_death()
-
-	# stop movement
-	velocity = Vector2.ZERO
-	set_physics_process(false)
-	# 1) death animation
-	await play_locked_anim_and_wait("die")
-	
-	# fade out, scene move/load, fade in
-	await Transition.respawn_to_checkpoint(checkpoint_room_scene, checkpoint_position)
-
-	# respawn animation
-	await play_locked_anim_and_wait("respawn")
-	set_physics_process(true)
-	_is_dead = false
-	
 
 
 	
