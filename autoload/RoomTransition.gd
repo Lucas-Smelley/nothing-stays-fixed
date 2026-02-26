@@ -51,13 +51,16 @@ func _ready() -> void:
 
 func _on_key_added(key_id: String) -> void:
 	set_weight_by_scene(door_room, increased_weight)
+	debug_weights()
 
 func _on_key_removed(key_id: String) -> void:
 	if Inventory.keys.is_empty():
-		set_weight_by_scene(door_room, increased_weight)
+		set_weight_by_scene(door_room, 1.0)
+		debug_weights()
 
 func _on_keys_cleared() -> void:
 	set_weight_by_scene(door_room, 1.0)
+	debug_weights()
 
 func _on_door_unlocked(door_id: String) -> void:
 	var scene = match_id_to_scene(door_id)
@@ -66,24 +69,46 @@ func _on_door_unlocked(door_id: String) -> void:
 		set_weight_by_scene(scene, 0.0)
 
 	set_weight_by_scene(setup_room, increased_weight)
-
+	debug_weights() 
+		
+func debug_weights():
+	print("---- WEIGHTS ----")
+	for i in range(room_scenes.size()):
+		print(room_scenes[i], ":", room_weights[i])
+		
 func _on_ability_switched(a: int) -> void:
-	set_weight_by_scene(dash_scene, 1.0)
-	set_weight_by_scene(double_jump_scene, 1.0)
-	set_weight_by_scene(inverse_gravity_scene, 1.0)
-	set_weight_by_scene(phase_scene, 1.0)
-	
+	# reset all ability rooms (but don't re-enable disabled ones)
+	_set_weight_if_not_disabled(dash_scene, 1.0)
+	_set_weight_if_not_disabled(double_jump_scene, 1.0)
+	_set_weight_if_not_disabled(inverse_gravity_scene, 1.0)
+	_set_weight_if_not_disabled(phase_scene, 1.0)
+
+	# boost selected one (also don't re-enable disabled)
 	match a:
 		Player.Ability.DASH:
-			set_weight_by_scene(dash_scene, increased_weight)
+			_set_weight_if_not_disabled(dash_scene, increased_weight)
 		Player.Ability.DOUBLE_JUMP:
-			set_weight_by_scene(double_jump_scene, increased_weight)
+			_set_weight_if_not_disabled(double_jump_scene, increased_weight)
 		Player.Ability.INVERT_GRAVITY:
-			set_weight_by_scene(inverse_gravity_scene, increased_weight)
+			_set_weight_if_not_disabled(inverse_gravity_scene, increased_weight)
 		Player.Ability.PHASE:
-			set_weight_by_scene(phase_scene, increased_weight)
+			_set_weight_if_not_disabled(phase_scene, increased_weight)
 		_:
 			push_warning("Unknown ability enum value: %s" % str(a))
+
+	debug_weights()
+	
+func _set_weight_if_not_disabled(scene: PackedScene, w: float) -> void:
+	var idx := room_scenes.find(scene)
+	if idx == -1:
+		push_warning("Scene not found in room_scenes")
+		return
+
+	# If disabled, keep it disabled
+	if room_weights[idx] <= 0.0:
+		return
+
+	room_weights[idx] = w
 						
 func match_id_to_scene(id: String) -> PackedScene:
 	var _scene: PackedScene = null

@@ -22,4 +22,3 @@ func _on_body_entered(body: Node) -> void:
 		return
 
 	_used = true
-	print("continue from door:", get_path())
