@@ -93,8 +93,9 @@ texture = ExtResource("7_1jl1u")
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.4809704, -8, -2.579893)
 0:1/0/physics_layer_0/polygon_0/one_way = true
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.0073886, 8, 2.0657883, 8, 8, -8, 8)
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.71943474, -0.35971832, 0.71943474, 8, 0.71943474, 8, 8, -8, 8)
 1:1/0/physics_layer_0/polygon_0/one_way = true
+1:1/0/physics_layer_0/polygon_0/one_way_margin = 2.0
 
 [sub_resource type="TileSet" id="TileSet_ucwnb"]
 physics_layer_0/collision_layer = 1
@@ -110,10 +111,10 @@ custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_q3yio")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhjnj"]
-size = Vector2(8, 26)
+size = Vector2(38, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xp0a8"]
-size = Vector2(9, 25.5)
+size = Vector2(34.5, 48)
 
 [node name="BaseRoom" type="Node2D" unique_id=920769205]
 script = ExtResource("1_q3yio")
@@ -169,6 +170,7 @@ script = ExtResource("8_b5txi")
 exit_side = "left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftDoor" unique_id=1188140453]
+position = Vector2(-15, 5)
 shape = SubResource("RectangleShape2D_mhjnj")
 
 [node name="RightDoor" type="Area2D" parent="." unique_id=616434566]
@@ -178,6 +180,7 @@ collision_mask = 2
 script = ExtResource("8_b5txi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightDoor" unique_id=196717002]
+position = Vector2(12.75, 5)
 shape = SubResource("RectangleShape2D_xp0a8")
 
 [node name="Spawn_Left" type="Marker2D" parent="." unique_id=643750624]

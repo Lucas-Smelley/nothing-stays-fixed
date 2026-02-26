@@ -70,11 +70,6 @@ func _try_open() -> void:
 	# 3) Destroy the carried key node attached to the player (visual)
 	_destroy_carried_key_node(required_key_id)
 
-	# 4) Final door special behavior (optional)
-	if is_final_door:
-		# TODO: trigger win / end cutscene / transition
-		pass
-
 	# Cleanup and destroy door
 	if Inventory.key_added.is_connected(_on_key_added):
 		Inventory.key_added.disconnect(_on_key_added)

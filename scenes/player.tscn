@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://yk1gsaj21567" path="res://scripts/player/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://bqcw61wg5wp5v" path="res://assets/art/player_spritesheet.png" id="2_g2els"]
-[ext_resource type="Shader" path="res://shaders/player_fade.gdshader" id="2_qhqgy"]
+[ext_resource type="Shader" uid="uid://bxmhtqjvkv4am" path="res://shaders/player_fade.gdshader" id="2_qhqgy"]
 [ext_resource type="AudioStream" uid="uid://dry13k57rgqe1" path="res://assets/audio/soundfx/jump.wav" id="2_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://d4x5m6crvn5o" path="res://assets/audio/soundfx/dash.wav" id="3_fjrip"]
 [ext_resource type="AudioStream" uid="uid://c0yxgl8s0v8a5" path="res://assets/audio/soundfx/die.wav" id="4_smehm"]
@@ -279,6 +279,21 @@ size = Vector2(8, 18)
 collision_layer = 2
 collision_mask = 69
 script = ExtResource("1_3vyb7")
+move_speed = null
+gravity = null
+max_fall_speed = null
+jump_speed = null
+wall_slide_speed = null
+wall_jump_x = null
+wall_jump_y = null
+wall_jump_lock_time = null
+wall_stick_time = null
+coyote_time = null
+jump_buffer_time = null
+dash_speed = null
+dash_time = null
+phase_time = null
+laser_layer = null
 jump = ExtResource("2_tuyoq")
 dash = ExtResource("3_fjrip")
 death = ExtResource("4_smehm")

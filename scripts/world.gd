@@ -6,52 +6,30 @@ class_name World
 
 var current_room: Node = null
 
+@export var initial_room: PackedScene
+
 func _ready() -> void:
-	# load an initial room
-	_load_room("res://scenes/rooms/setup_room.tscn", "Spawn_Left")
+	if player.has_signal("ability_switched"):
+		if not player.ability_switched.is_connected(Transition._on_ability_switched):
+			player.ability_switched.connect(Transition._on_ability_switched)
+			
+	_load_room_packed(initial_room, "Spawn_Left")
 
-func _load_room(room_path: String, spawn_name: String) -> void:
+
+func _load_room_checkpoint(packed: PackedScene, spawn_pos: Vector2) -> void:
+	if packed == null:
+		push_error("Checkpoint packed scene is null")
+		return
+
 	if current_room:
 		current_room.queue_free()
 		current_room = null
 
-	var packed := load(room_path)
-	if packed == null or not (packed is PackedScene):
-		push_error("FAILED TO LOAD ROOM: " + room_path)
-		return
-
-	current_room = (packed as PackedScene).instantiate()
+	current_room = packed.instantiate()
 	room_container.add_child(current_room)
 
 	var tilemap := current_room.get_node_or_null("TileMap_Room")
-
-	var spawn := current_room.get_node_or_null(spawn_name)
-	if spawn and spawn is Node2D:
-		player.global_position = (spawn as Node2D).global_position
-	else:
-		push_warning("Missing spawn (or not Node2D): %s in %s" % [spawn_name, room_path])
-
-	RoomContext.set_room(current_room, tilemap, room_path)
-
-	if player.has_method("set_checkpoint"):
-		player.call("set_checkpoint")
-
-
-func _load_room_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
-	if current_room:
-		current_room.queue_free()
-		current_room = null
-
-	var packed := load(room_path)
-	if packed == null or not (packed is PackedScene):
-		push_error("FAILED TO LOAD CHECKPOINT ROOM: " + room_path)
-		return
-
-	current_room = (packed as PackedScene).instantiate()
-	room_container.add_child(current_room)
-
-	var tilemap := current_room.get_node_or_null("TileMap_Room")
-	RoomContext.set_room(current_room, tilemap, room_path)
+	RoomContext.set_room(packed, current_room, tilemap)
 
 	player.global_position = spawn_pos
 
@@ -71,13 +49,13 @@ func _load_room_packed(packed: PackedScene, spawn_name: String) -> void:
 	room_container.add_child(current_room)
 
 	var tilemap := current_room.get_node_or_null("TileMap_Room")
-	RoomContext.set_room(current_room, tilemap, packed.resource_path)
+	RoomContext.set_room(packed, current_room, tilemap)
 
 	var spawn := current_room.get_node_or_null(spawn_name)
 	if spawn and spawn is Node2D:
 		player.global_position = (spawn as Node2D).global_position
 	else:
-		push_warning("Missing spawn (or not Node2D): %s in %s" % [spawn_name, packed.resource_path])
+		push_warning("Missing spawn (or not Node2D): %s" % spawn_name)
 
 	if player.has_method("set_checkpoint"):
 		player.call("set_checkpoint")

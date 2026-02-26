@@ -40,10 +40,10 @@ autoplay = "default"
 script = ExtResource("3_ko752")
 
 [node name="Label" type="Label" parent="AnimatedSprite2D" unique_id=1800642280]
-offset_left = -28.0
-offset_top = -35.999996
-offset_right = 28.0
-offset_bottom = -8.999996
+offset_left = -37.0
+offset_top = -37.999996
+offset_right = 42.0
+offset_bottom = 4.000004
 theme_override_font_sizes/font_size = 12
 text = "invert
 gravity (e)"

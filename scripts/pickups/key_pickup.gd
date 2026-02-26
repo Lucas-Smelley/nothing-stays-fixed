@@ -23,7 +23,6 @@ func _on_body_entered(body: Node) -> void:
 
 	Inventory.add_key(key_id)
 
-	# IMPORTANT: defer any removal/reparent/shape disabling
 	call_deferred("_finish_collect")
 
 func _finish_collect() -> void:

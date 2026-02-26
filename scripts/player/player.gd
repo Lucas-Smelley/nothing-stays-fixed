@@ -4,6 +4,8 @@ class_name Player
 
 @onready var hurtbox: Area2D = $Hurtbox
 const HAZARD_LAYER := 6
+var ceiling_layer := 9
+var up_dir := Vector2.UP
 
 @export var move_speed: float = 140.0
 
@@ -23,6 +25,7 @@ const HAZARD_LAYER := 6
 enum Ability { NONE, DOUBLE_JUMP, DASH, PHASE, INVERT_GRAVITY }
 var equipped_ability: Ability = Ability.NONE
 var ability_charges: int = 0
+signal ability_switched(ability: Ability)
 
 @export var dash_speed := 350.0
 @export var dash_time := 0.22
@@ -32,7 +35,7 @@ var ability_charges: int = 0
 var _is_phasing := false
 var _phase_timer := 0.0
 
-var checkpoint_room_path: String = ""
+var checkpoint_room_scene: PackedScene
 var checkpoint_position: Vector2 = Vector2.ZERO
 var has_checkpoint := false
 
@@ -56,8 +59,6 @@ var _facing_dir: int = 1
 var _interact_offset_x: float = 12
 var nearby_interactables: Array[Node2D] = []
 
-@onready var checkpoint_area: Area2D = $CheckpointArea
-var can_set_checkpoint := false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 var _anim_locked := false
@@ -89,9 +90,6 @@ func _ready() -> void:
 	
 	hurtbox.body_entered.connect(_on_hurtbox_body_entered)
 	
-	checkpoint_area.body_entered.connect(_on_checkpoint_body_entered)
-	checkpoint_area.body_exited.connect(_on_checkpoint_body_exited)
-	
 	sprite.animation_finished.connect(_on_anim_finished)
 	
 	_emit_ability_ui()
@@ -122,6 +120,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		if run.playing:
 			run.stop()
+			
+	var moving_against_up := velocity.dot(up_dir) > 0.0
+	set_collision_mask_value(ceiling_layer, moving_against_up)
 		
 	# timers
 	_jump_buffer = maxf(_jump_buffer - delta, 0.0)
@@ -218,11 +219,6 @@ func _physics_process(delta: float) -> void:
 			
 			lock_anim("double_jump")
 		play_sfx(jump)
-	
-	#Set checkpoint 
-	if Input.is_action_just_pressed("set_checkpoint"):
-		if can_set_checkpoint:
-			set_checkpoint()
 		
 	_was_on_wall = on_climb_wall
 
@@ -251,7 +247,7 @@ func _physics_process(delta: float) -> void:
 
 func init_default_checkpoint() -> void:
 	checkpoint_position = global_position
-	checkpoint_room_path = RoomContext.current_room_path
+	checkpoint_room_scene = RoomContext.current_room_scene
 	has_checkpoint = true
 
 
@@ -329,11 +325,6 @@ func play_locked_anim_and_wait(anim_name: String) -> void:
 	# while sprite.animation == anim_name:
 	#     await sprite.animation_finished
 
-func _on_checkpoint_body_entered(body: Node) -> void:
-	can_set_checkpoint = true
-		
-func _on_checkpoint_body_exited(body: Node) -> void:
-	can_set_checkpoint = false
 
 func _on_interaction_area_entered(body: Node) -> void:
 	if body.is_in_group("interactable"):
@@ -365,7 +356,7 @@ func _get_best_interactable() -> Node2D:
 func switch_ability(a: Ability) -> void:
 	equipped_ability = a
 	_emit_ability_ui()
-	
+	ability_switched.emit(a)
 	
 func _emit_ability_ui() -> void:
 	ability_changed.emit(Ability.keys()[equipped_ability], ability_charges)
@@ -441,7 +432,7 @@ func _toggle_gravity() -> void:
 	
 	
 func set_checkpoint():
-	checkpoint_room_path = RoomContext.current_room_path
+	checkpoint_room_scene = RoomContext.current_room_scene
 	checkpoint_position = global_position
 	has_checkpoint = true
 	
@@ -479,7 +470,7 @@ func _death_and_respawn() -> void:
 	await play_locked_anim_and_wait("die")
 	
 	# fade out, scene move/load, fade in
-	await Transition.respawn_to_checkpoint(checkpoint_room_path, checkpoint_position)
+	await Transition.respawn_to_checkpoint(checkpoint_room_scene, checkpoint_position)
 
 	# respawn animation
 	await play_locked_anim_and_wait("respawn")

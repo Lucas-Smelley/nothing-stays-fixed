@@ -1,22 +1,39 @@
 extends CanvasLayer
 
-class_name RoomTransition
-
 var target_spawn_name: String = ""
 
 @export var room_scenes: Array[PackedScene] = []
+
 @export var end_scene: PackedScene
 var _last_scene: PackedScene = null
-
 var recent_rooms: Array[PackedScene] = []
 
+@export var room_base_weights: Array[float] = [] # same length as room_scenes
+
+var room_weights: Array[float] = [] # runtime copy that you modify
+var increased_weight: float = 5.0
+
+@export var recent_limit := 3
 
 var _busy := false
-var _last_room: String = ""
 
 @onready var fade: ColorRect = ColorRect.new()
 
+@export var setup_room: PackedScene
+@export var door_room: PackedScene
+
+@export var dash_scene: PackedScene
+@export var double_jump_scene: PackedScene
+@export var inverse_gravity_scene: PackedScene
+@export var phase_scene: PackedScene
+
 func _ready() -> void:
+	Inventory.key_added.connect(_on_key_added)
+	Inventory.key_removed.connect(_on_key_removed)
+	Inventory.keys_cleared.connect(_on_keys_cleared)
+	Progress.door_unlocked.connect(_on_door_unlocked)
+
+			
 	fade.color = Color(0, 0, 0, 0)
 	fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	fade.anchor_left = 0
@@ -24,66 +41,183 @@ func _ready() -> void:
 	fade.anchor_right = 1
 	fade.anchor_bottom = 1
 	add_child(fade)
+		
+	if room_base_weights.size() != room_scenes.size():
+		room_base_weights.resize(room_scenes.size())
+		for i in range(room_base_weights.size()):
+			room_base_weights[i] = 1.0
+
+	room_weights = room_base_weights.duplicate()
+
+func _on_key_added(key_id: String) -> void:
+	set_weight_by_scene(door_room, increased_weight)
+
+func _on_key_removed(key_id: String) -> void:
+	if Inventory.keys.is_empty():
+		set_weight_by_scene(door_room, increased_weight)
+
+func _on_keys_cleared() -> void:
+	set_weight_by_scene(door_room, 1.0)
+
+func _on_door_unlocked(door_id: String) -> void:
+	var scene = match_id_to_scene(door_id)
+
+	if scene != null:
+		set_weight_by_scene(scene, 0.0)
+
+	set_weight_by_scene(setup_room, increased_weight)
+
+func _on_ability_switched(a: int) -> void:
+	set_weight_by_scene(dash_scene, 1.0)
+	set_weight_by_scene(double_jump_scene, 1.0)
+	set_weight_by_scene(inverse_gravity_scene, 1.0)
+	set_weight_by_scene(phase_scene, 1.0)
 	
+	match a:
+		Player.Ability.DASH:
+			set_weight_by_scene(dash_scene, increased_weight)
+		Player.Ability.DOUBLE_JUMP:
+			set_weight_by_scene(double_jump_scene, increased_weight)
+		Player.Ability.INVERT_GRAVITY:
+			set_weight_by_scene(inverse_gravity_scene, increased_weight)
+		Player.Ability.PHASE:
+			set_weight_by_scene(phase_scene, increased_weight)
+		_:
+			push_warning("Unknown ability enum value: %s" % str(a))
+						
+func match_id_to_scene(id: String) -> PackedScene:
+	var _scene: PackedScene = null
+
+	match id:
+		"DASH_DOOR":
+			_scene = dash_scene
+
+		"DOUBLE_JUMP_DOOR":
+			_scene = double_jump_scene
+
+		"INVERSE_GRAVITY_DOOR":
+			_scene = inverse_gravity_scene
+
+		"PHASE_DOOR":
+			_scene = phase_scene
+
+		_:
+			push_warning("match_id_to_scene(): unknown id '%s'" % id)
+
+	return _scene
+	
+func set_weight_by_scene(scene: PackedScene, w: float) -> void:
+	var index := room_scenes.find(scene)
+	if index == -1:
+		push_warning("Scene not found in room_scenes")
+		return
+
+	room_weights[index] = w
+
+
+func _pick_weighted_room() -> PackedScene:
+	if room_scenes.is_empty():
+		return null
+
+	# Build candidate indices
+	var candidates: Array[int] = []
+	for i in range(room_scenes.size()):
+		var s := room_scenes[i]
+		if s == null:
+			continue
+		if s == _last_scene:
+			continue
+		if recent_rooms.has(s):
+			continue
+		if room_weights[i] <= 0.0:
+			continue
+		candidates.append(i)
+
+	# fallback: allow recent rooms but still avoid immediate repeat if possible
+	if candidates.is_empty():
+		for i in range(room_scenes.size()):
+			var s := room_scenes[i]
+			if s == null:
+				continue
+			if s == _last_scene:
+				continue
+			if room_weights[i] <= 0.0:
+				continue
+			candidates.append(i)
+
+	# last fallback: anything with weight > 0
+	if candidates.is_empty():
+		for i in range(room_scenes.size()):
+			if room_scenes[i] != null and room_weights[i] > 0.0:
+				candidates.append(i)
+
+	if candidates.is_empty():
+		return null
+
+	# Weighted roll
+	var total := 0.0
+	for i in candidates:
+		total += room_weights[i]
+
+	var r := randf() * total
+	for i in candidates:
+		r -= room_weights[i]
+		if r <= 0.0:
+			var choice := room_scenes[i]
+			_track_recent(choice)
+			_last_scene = choice
+			return choice
+
+	# safety fallback
+	var choice := room_scenes[candidates.back()]
+	_track_recent(choice)
+	_last_scene = choice
+	return choice
+
+func _track_recent(choice: PackedScene) -> void:
+	if recent_rooms.size() >= recent_limit:
+		recent_rooms.pop_front()
+	recent_rooms.append(choice)
 
 func go_random(spawn_name: String) -> void:
 	if _busy:
 		return
 	_busy = true
 
-	target_spawn_name = spawn_name
-
-	var next_scene: PackedScene = _pick_random_room()
+	var next_scene := _pick_weighted_room()
 	if next_scene == null:
-		push_error("No rooms assigned in RoomTransition!")
 		_busy = false
 		return
 
+	# Fade out
 	await _fade_to(1.0, 0.18)
 
+	# Load new room through World
 	var world := get_tree().current_scene
 	if world and world.has_method("_load_room_packed"):
-		world.call("_load_room_packed", next_scene, target_spawn_name)
+		world.call("_load_room_packed", next_scene, spawn_name)
+	else:
+		push_warning("World missing _load_room_packed")
 
+	# Give one frame for scene to fully instantiate
 	await get_tree().process_frame
+
+	# Reset setup weight if we entered setup
+	if next_scene == setup_room:
+		set_weight_by_scene(setup_room, 1.0)
+
+	# Fade back in
 	await _fade_to(0.0, 0.18)
 
 	_busy = false
 	
-func _pick_random_room() -> PackedScene:
-	if room_scenes.is_empty():
-		return null
-
-	if room_scenes.size() == 1:
-		_last_scene = room_scenes[0]
-		return room_scenes[0]
-
-	var candidates: Array[PackedScene] = room_scenes.duplicate()
-	candidates.erase(_last_scene)
-
-	for room in recent_rooms:
-		candidates.erase(room)
-
-	if candidates.is_empty():
-		candidates = room_scenes.duplicate()
-		candidates.erase(_last_scene) # optional but recommended
-
-	var choice: PackedScene = candidates[randi() % candidates.size()]
-
-	# keep last 3 rooms
-	if recent_rooms.size() >= 3:
-		recent_rooms.pop_front()
-	recent_rooms.append(choice)
-
-	_last_scene = choice
-	return choice
 	
 func _fade_to(alpha: float, time: float) -> void:
 	var t := create_tween()
 	t.tween_property(fade, "color:a", alpha, time)
 	await t.finished
 	
-func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
+func respawn_to_checkpoint(room_scene: PackedScene, spawn_pos: Vector2) -> void:
 	if _busy:
 		return
 	_busy = true
@@ -95,9 +229,9 @@ func respawn_to_checkpoint(room_path: String, spawn_pos: Vector2) -> void:
 	if world:
 			## different room: reload the checkpoint room
 			if world.has_method("_load_room_checkpoint"):
-				world.call("_load_room_checkpoint", room_path, spawn_pos)
+				world.call("_load_room_checkpoint", room_scene, spawn_pos)
 			else:
-				push_warning("World missing _load_room_checkpoint(room_path, pos)")
+				push_warning("World missing _load_room_checkpoint(room_scene, pos)")
 
 	# give one frame for transforms/scene changes to Ftle
 	await get_tree().process_frame

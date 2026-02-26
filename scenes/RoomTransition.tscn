@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bf787nm6yegls"]
+
+[ext_resource type="Script" uid="uid://b1wpbw8fxhqg7" path="res://autoload/RoomTransition.gd" id="1_cj7l6"]
+[ext_resource type="PackedScene" uid="uid://c2rqv0qu6s0n7" path="res://scenes/rooms/dash_room.tscn" id="2_qmain"]
+[ext_resource type="PackedScene" uid="uid://wtvsfj34f5du" path="res://scenes/rooms/door_room.tscn" id="3_rx62r"]
+[ext_resource type="PackedScene" uid="uid://c57wdlhg37vlp" path="res://scenes/rooms/double_jump_room.tscn" id="4_ag1la"]
+[ext_resource type="PackedScene" uid="uid://cexy0ke8sldd3" path="res://scenes/rooms/filler1.tscn" id="5_behfc"]
+[ext_resource type="PackedScene" uid="uid://dhdp8el5v0mom" path="res://scenes/rooms/filler2.tscn" id="6_2efxa"]
+[ext_resource type="PackedScene" uid="uid://fnts3nvfb5ym" path="res://scenes/rooms/filler3.tscn" id="7_h3114"]
+[ext_resource type="PackedScene" uid="uid://dwa788o2pg0pg" path="res://scenes/rooms/filler4.tscn" id="8_402ki"]
+[ext_resource type="PackedScene" uid="uid://cskptykdmr1r" path="res://scenes/rooms/inverse_gravity_room.tscn" id="9_ii2mx"]
+[ext_resource type="PackedScene" uid="uid://clch0xkac6kgh" path="res://scenes/rooms/phase_room.tscn" id="10_88qf2"]
+[ext_resource type="PackedScene" uid="uid://y7u5xj0xsmql" path="res://scenes/rooms/setup_room.tscn" id="11_rugtg"]
+[ext_resource type="PackedScene" uid="uid://chp41joohrbma" path="res://scenes/end_scene.tscn" id="12_j48k4"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=975861253]
+script = ExtResource("1_cj7l6")
+room_scenes = Array[PackedScene]([ExtResource("2_qmain"), ExtResource("3_rx62r"), ExtResource("4_ag1la"), ExtResource("5_behfc"), ExtResource("6_2efxa"), ExtResource("7_h3114"), ExtResource("8_402ki"), ExtResource("9_ii2mx"), ExtResource("10_88qf2"), ExtResource("11_rugtg")])
+end_scene = ExtResource("12_j48k4")
+setup_room = ExtResource("11_rugtg")
+door_room = ExtResource("3_rx62r")
+dash_scene = ExtResource("2_qmain")
+double_jump_scene = ExtResource("4_ag1la")
+inverse_gravity_scene = ExtResource("9_ii2mx")
+phase_scene = ExtResource("10_88qf2")

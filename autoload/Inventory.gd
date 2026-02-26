@@ -15,13 +15,13 @@ func add_key(key_id: String) -> void:
 		return
 	keys[key_id] = true
 	key_added.emit(key_id)
-
+	
 func remove_key(key_id: String) -> void:
 	if not keys.has(key_id):
 		return
 	keys.erase(key_id)
 	key_removed.emit(key_id)
-
+	
 func clear_keys() -> void:
 	if keys.is_empty():
 		return
