@@ -27,3 +27,7 @@ func clear_keys() -> void:
 		return
 	keys.clear()
 	keys_cleared.emit()
+
+func reset_all() -> void:
+	keys.clear()
+	keys_cleared.emit()

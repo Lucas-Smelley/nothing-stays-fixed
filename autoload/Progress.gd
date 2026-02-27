@@ -24,3 +24,6 @@ func reset_run() -> void:
 
 func game_clear() -> void:
 	Transition.go_to_end()
+
+func reset_all() -> void:
+	unlocked_doors.clear()

@@ -25,10 +25,11 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_play_again_pressed() -> void:
+	# reset everything FIRST (autoloads persist otherwise)
+	Transition.reset_run()
+
 	if intro_scene:
 		get_tree().change_scene_to_packed(intro_scene)
-	else:
-		return
 		
 func _show_frame(index: int) -> void:
 	image.texture = cutscene_textures[index]

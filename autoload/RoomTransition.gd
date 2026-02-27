@@ -6,6 +6,8 @@ var step_index: int = 0
 
 signal set_seed(seed: int)
 
+signal run_reset()
+
 func start_new_run(seed_value: int) -> void:
 	run_seed = seed_value
 	step_index = 0
@@ -71,16 +73,14 @@ func _ready() -> void:
 
 func _on_key_added(key_id: String) -> void:
 	set_weight_by_scene(door_room, increased_weight)
-	debug_weights()
 
 func _on_key_removed(key_id: String) -> void:
 	if Inventory.keys.is_empty():
 		set_weight_by_scene(door_room, 1.0)
-		debug_weights()
 
 func _on_keys_cleared() -> void:
 	set_weight_by_scene(door_room, 1.0)
-	debug_weights()
+
 
 func _on_door_unlocked(door_id: String) -> void:
 	var scene = match_id_to_scene(door_id)
@@ -89,7 +89,6 @@ func _on_door_unlocked(door_id: String) -> void:
 		set_weight_by_scene(scene, 0.0)
 
 	set_weight_by_scene(setup_room, increased_weight)
-	debug_weights() 
 		
 func debug_weights():
 	print("---- WEIGHTS ----")
@@ -300,4 +299,19 @@ func go_to_end() -> void:
 
 	await get_tree().process_frame
 	await _fade_to(0.0, 0.18)
+	
+func reset_run(seed_value: int = 0) -> void:
+	# If you want a fresh seed each run, you can set it here
+	run_seed = seed_value if seed_value != 0 else Time.get_unix_time_from_system()
+	step_index = 0
+	rng_rooms.seed = run_seed
+	
+	room_weights = room_base_weights
+
+	# reset other global systems
+	Inventory.reset_all()
+	Progress.reset_all()
+	RoomContext.reset_all()
+
+	run_reset.emit()
 	
