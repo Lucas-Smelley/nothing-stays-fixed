@@ -4,13 +4,16 @@ var run_seed: int = 0
 var rng_rooms := RandomNumberGenerator.new()
 var step_index: int = 0
 
+signal set_seed(seed: int)
+
 func start_new_run(seed_value: int) -> void:
 	run_seed = seed_value
 	step_index = 0
 	rng_rooms.seed = run_seed
-	print(run_seed)
-	
-	
+	set_seed.emit(run_seed)
+	print("emmited")
+
+
 func seed_from_string(s: String) -> int:
 	return hash(s.strip_edges())
 	
