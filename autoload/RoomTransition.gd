@@ -11,7 +11,6 @@ func start_new_run(seed_value: int) -> void:
 	step_index = 0
 	rng_rooms.seed = run_seed
 	set_seed.emit(run_seed)
-	print("emmited")
 
 
 func seed_from_string(s: String) -> int:

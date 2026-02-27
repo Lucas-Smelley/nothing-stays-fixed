@@ -135,6 +135,8 @@ func _physics_process(delta: float) -> void:
 		var target = _get_best_interactable()
 		if target:
 			target.interact(self)
+			
+		
 
 	if _is_dashing:
 		_dash_timer -= delta

@@ -83,7 +83,7 @@ offset_right = 653.0
 offset_bottom = 359.0
 texture = ExtResource("4_ojf8p")
 
-[node name="Start" type="Button" parent="." unique_id=1570499995]
+[node name="PlayAgain" type="Button" parent="." unique_id=1570499995]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 278.0
