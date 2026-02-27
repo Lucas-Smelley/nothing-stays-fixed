@@ -43,11 +43,29 @@ text = "START"
 [node name="Quit" type="Button" parent="." unique_id=690581172]
 layout_mode = 0
 offset_left = 163.0
-offset_top = 196.0
+offset_top = 243.0
 offset_right = 248.0
-offset_bottom = 235.0
+offset_bottom = 282.0
 theme_override_font_sizes/font_size = 30
 text = "QUIT"
+
+[node name="seed" type="Label" parent="." unique_id=784722697]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 189.0
+offset_right = 229.0
+offset_bottom = 232.0
+theme_override_font_sizes/font_size = 20
+text = "seed
+"
+
+[node name="SeedInput" type="LineEdit" parent="." unique_id=1720953989]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 209.0
+offset_right = 272.0
+offset_bottom = 233.0
+theme_override_font_sizes/font_size = 16
 
 [node name="PostFX" type="CanvasLayer" parent="." unique_id=1399375266]
 

@@ -57,5 +57,5 @@ door_id = "DASH_DOOR"
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=970611559]
 sprite_frames = SubResource("SpriteFrames_o3tun")
-animation = &"clear"
+animation = &"idle"
 autoplay = "idle"

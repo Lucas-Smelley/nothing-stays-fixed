@@ -1,6 +1,6 @@
 extends Node
-signal door_unlocked(door_id: String)
 
+signal door_unlocked(door_id: String)
 var unlocked_doors: Dictionary = {}
 
 func is_door_unlocked(door_id: String) -> bool:

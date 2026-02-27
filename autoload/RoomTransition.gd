@@ -1,7 +1,21 @@
 extends CanvasLayer
 
-var target_spawn_name: String = ""
+var run_seed: int = 0
+var rng_rooms := RandomNumberGenerator.new()
+var step_index: int = 0
 
+func start_new_run(seed_value: int) -> void:
+	run_seed = seed_value
+	step_index = 0
+	rng_rooms.seed = run_seed
+	print(run_seed)
+	
+	
+func seed_from_string(s: String) -> int:
+	return hash(s.strip_edges())
+	
+
+var target_spawn_name: String = ""
 @export var room_scenes: Array[PackedScene] = []
 
 @export var end_scene: PackedScene
@@ -28,6 +42,7 @@ var _busy := false
 @export var phase_scene: PackedScene
 
 func _ready() -> void:
+		
 	Inventory.key_added.connect(_on_key_added)
 	Inventory.key_removed.connect(_on_key_removed)
 	Inventory.keys_cleared.connect(_on_keys_cleared)
@@ -187,7 +202,12 @@ func _pick_weighted_room() -> PackedScene:
 	for i in candidates:
 		total += room_weights[i]
 
-	var r := randf() * total
+	# Seeded roll (step-based)
+	var step_rng := RandomNumberGenerator.new()
+	step_rng.seed = hash(str(run_seed) + ":" + str(step_index))
+	step_index += 1
+
+	var r := step_rng.randf() * total
 	for i in candidates:
 		r -= room_weights[i]
 		if r <= 0.0:
